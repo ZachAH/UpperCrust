@@ -4,6 +4,10 @@ export default function Hero() {
         className="relative bg-[url('/pizza-hero.jpg')] bg-cover bg-center h-screen flex items-center justify-center"
       >
         <div className="absolute inset-0 bg-black/60"></div>
+        <div className="bg-blue-600 text-white text-3xl font-bold text-center p-10">
+  Tailwind Test Box
+</div>
+
         <div className="relative z-10 text-center text-white px-4">
           <h2 className="text-5xl md:text-6xl font-extrabold mb-4 tracking-tight">
             Handcrafted. Local. Legendary.
