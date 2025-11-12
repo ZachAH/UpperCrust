@@ -39,10 +39,10 @@ export default function Header() {
           <Link to="/menu" className="hover:text-yellow-400 transition">
             Menu
           </Link>
-          <Link to="/#about" className="hover:text-yellow-400 transition">
-            About
+          <Link to="/hours" className="hover:text-yellow-400 transition">
+            Hours
           </Link>
-          <Link to="/#contact" className="hover:text-yellow-400 transition">
+          <Link to="/contact" className="hover:text-yellow-400 transition">
             Contact
           </Link>
         </nav>
