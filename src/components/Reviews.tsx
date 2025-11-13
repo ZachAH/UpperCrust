@@ -73,9 +73,9 @@ export default function Reviews() {
     responsive: [
       { breakpoint: 1400, settings: { slidesToShow: 3 } }, // very large desktops
       { breakpoint: 1200, settings: { slidesToShow: 2 } }, // laptops + tablets
-      { breakpoint: 992,  settings: { slidesToShow: 2 } }, // iPads + big phones in landscape
-      { breakpoint: 768,  settings: { slidesToShow: 2 } }, // real tablets
-      { breakpoint: 600,  settings: { slidesToShow: 1 } }, // MOST PHONES portrait
+      { breakpoint: 992, settings: { slidesToShow: 2 } }, // iPads + big phones in landscape
+      { breakpoint: 768, settings: { slidesToShow: 2 } }, // real tablets
+      { breakpoint: 600, settings: { slidesToShow: 1 } }, // MOST PHONES portrait
     ],
   };
 
@@ -92,9 +92,6 @@ export default function Reviews() {
       </div>
 
       <div className="relative">
-        {/* Fade edges */}
-        <div className="pointer-events-none absolute left-0 top-0 h-full w-10 bg-gradient-to-r from-black to-transparent z-10"></div>
-        <div className="pointer-events-none absolute right-0 top-0 h-full w-10 bg-gradient-to-l from-black to-transparent z-10"></div>
 
         <Slider {...settings}>
           {reviews.map((review, i) => {
@@ -155,6 +152,9 @@ export default function Reviews() {
             );
           })}
         </Slider>
+        {/* Fade edges */}
+        <div className="pointer-events-none absolute left-0 top-0 h-full w-10 bg-gradient-to-r from-black to-transparent z-10"></div>
+        <div className="pointer-events-none absolute right-0 top-0 h-full w-10 bg-gradient-to-l from-black to-transparent z-10"></div>
       </div>
     </section>
   );
