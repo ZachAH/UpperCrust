@@ -62,22 +62,23 @@ export default function Reviews() {
     setExpandedIndex(expandedIndex === index ? null : index);
   };
 
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
 
   const settings = {
     dots: true,
     infinite: true,
     autoplay: true,
     autoplaySpeed: 5000,
-    slidesToShow: 3, //default for desktop
+    slidesToShow: isMobile ? 2 : 3,
     slidesToScroll: 1,
     responsive: [
-      { breakpoint: 1400, settings: { slidesToShow: 3 } }, // very large desktops
-      { breakpoint: 1200, settings: { slidesToShow: 2 } }, // laptops + tablets
-      { breakpoint: 992, settings: { slidesToShow: 2 } }, // iPads + big phones in landscape
-      { breakpoint: 768, settings: { slidesToShow: 2 } }, // real tablets
-      { breakpoint: 600, settings: { slidesToShow: 1 } }, // MOST PHONES portrait
+      { breakpoint: 1200, settings: { slidesToShow: 2 } },
+      { breakpoint: 992,  settings: { slidesToShow: 2 } },
+      { breakpoint: 768,  settings: { slidesToShow: 2 } },
+      { breakpoint: 600,  settings: { slidesToShow: 1 } },
     ],
   };
+  
 
 
   return (
