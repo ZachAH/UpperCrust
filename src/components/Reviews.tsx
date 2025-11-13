@@ -70,7 +70,9 @@ export default function Reviews() {
   return (
     <section id="reviews" className="bg-black text-white py-20 px-6">
       <div className="max-w-6xl mx-auto text-center mb-10">
-        <h2 className="text-4xl font-extrabold mb-3 text-yellow-500">What People Are Saying</h2>
+        <h2 className="text-4xl font-extrabold mb-3 text-yellow-500">
+          What People Are Saying
+        </h2>
         <p className="text-gray-300">
           Real reviews from happy customers — straight from Google.
         </p>
@@ -78,14 +80,14 @@ export default function Reviews() {
 
       <Slider {...settings}>
         {reviews.map((review, i) => (
-          <div key={i} className="px-4">
-            <div className="bg-zinc-900 p-6 rounded-xl shadow-lg text-left h-full flex flex-col justify-between">
-              <p className="text-gray-200 mb-4 italic">
+          <div key={i} className="px-2 sm:px-4">
+            <div className="bg-zinc-900 p-4 sm:p-6 rounded-xl shadow-lg h-full flex flex-col justify-between">
+              <p className="text-gray-200 mb-4 italic text-sm sm:text-base leading-relaxed">
                 “{review.text}”
               </p>
-              <div className="flex items-center justify-between">
-                <p className="font-semibold">{review.name}</p>
-                <p className="text-yellow-400">
+              <div className="flex items-center justify-between mt-auto pt-2">
+                <p className="font-semibold text-sm sm:text-base">{review.name}</p>
+                <p className="text-yellow-400 text-sm sm:text-base">
                   {"⭐".repeat(review.rating)}
                 </p>
               </div>
