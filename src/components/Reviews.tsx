@@ -68,11 +68,14 @@ export default function Reviews() {
     infinite: true,
     autoplay: true,
     autoplaySpeed: 5000,
-    slidesToShow: 3,
+    slidesToShow: 3, //default for desktop
     slidesToScroll: 1,
     responsive: [
-      { breakpoint: 1280, settings: { slidesToShow: 2 } },
-      { breakpoint: 768, settings: { slidesToShow: 2 } }, // mobile now shows 2
+      { breakpoint: 1400, settings: { slidesToShow: 3 } }, // very large desktops
+      { breakpoint: 1200, settings: { slidesToShow: 2 } }, // laptops + tablets
+      { breakpoint: 992,  settings: { slidesToShow: 2 } }, // iPads + big phones in landscape
+      { breakpoint: 768,  settings: { slidesToShow: 2 } }, // real tablets
+      { breakpoint: 600,  settings: { slidesToShow: 1 } }, // MOST PHONES portrait
     ],
   };
 
