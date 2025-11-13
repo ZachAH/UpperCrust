@@ -55,8 +55,8 @@ export default function Menu() {
               key={cat.id}
               href={`#${cat.id}`}
               className={`transition-colors ${activeSection === cat.id
-                  ? "text-yellow-400"
-                  : "text-gray-300 hover:text-yellow-400"
+                ? "text-yellow-400"
+                : "text-gray-300 hover:text-yellow-400"
                 }`}
             >
               {cat.name}
@@ -68,10 +68,23 @@ export default function Menu() {
       {/* Header */}
       <div className="max-w-6xl mx-auto text-center mb-12 mt-8">
         <h2 className="text-4xl font-extrabold text-yellow-500 mb-4">Our Menu</h2>
-        <p className="text-gray-300 text-lg">
+        <p className="text-gray-300 text-lg mb-8">
           Build your perfect pie or choose from our signature favorites — plus all your other Upper Crust classics.
         </p>
+
+        {/* Order Now button */}
+        <div className="flex justify-center">
+          <a
+            href="https://uppercrust.hungerrush.com/Order/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-red-600 hover:bg-red-700 text-white font-semibold px-8 py-3 rounded-full transition animate-pulse-glow"
+          >
+            Order Now
+          </a>
+        </div>
       </div>
+
 
       {/* --- PIZZAS --- */}
       <div id="pizzas" className="max-w-5xl mx-auto bg-zinc-900 rounded-xl shadow-lg p-8 mb-16 scroll-mt-28">
@@ -333,6 +346,18 @@ export default function Menu() {
           </div>
         </div>
       </div>
+      <div className="max-w-6xl mx-auto text-center mt-20">
+        <a
+          href="https://uppercrust.hungerrush.com/Order/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-red-600 hover:bg-red-700 text-white font-semibold px-10 py-4 rounded-full transition text-lg animate-soft-glow"
+        >
+          Order Online Now
+        </a>
+
+      </div>
+
     </section>
   );
 }

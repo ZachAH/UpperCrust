@@ -1,4 +1,4 @@
-import Menu from "../components/menu";
+import Menu from "../components/Menu";
 import Footer from "../components/Footer";
 
 export default function MenuPage() {

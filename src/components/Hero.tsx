@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 
-
 export default function Hero() {
   return (
     <section
@@ -17,7 +16,8 @@ export default function Hero() {
         <h2 className="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight">
           Proudly serving Milwaukee’s best hand-tossed pizza — and so much more.
         </h2>
-        <p className="text-lg md:text-xl mb-8 text-gray-200 leading-relaxed">
+
+        <p className="text-lg md:text-xl mb-10 text-gray-200 leading-relaxed">
           Conveniently located where Milwaukee meets Whitefish Bay and Shorewood,
           Upper Crust Pizza has been a local favorite for years. From our signature
           pizzas and burgers to pastas, salads, and appetizers made fresh daily —
@@ -26,12 +26,25 @@ export default function Hero() {
           <br />
           Come hungry, leave happy — that’s the Upper Crust way.
         </p>
-        <Link
-          to="/menu"
-          className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-8 py-3 rounded-full transition"
-        >
-          View Menu
-        </Link>
+
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link
+            to="/menu"
+            className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-8 py-3 rounded-full transition"
+          >
+            View Menu
+          </Link>
+
+          <a
+            href="https://uppercrust.hungerrush.com/Order/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-red-600 hover:bg-red-700 text-white font-semibold px-8 py-3 rounded-full transition animate-pulse-glow"
+          >
+            Order Now
+          </a>
+        </div>
       </div>
 
       {/* Google Maps card */}
