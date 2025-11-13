@@ -101,7 +101,7 @@ export default function Reviews() {
             const isExpanded = expandedIndex === i;
 
             return (
-              <div key={i} className="px-3 sm:px-4 min-w-[50%]">
+              <div key={i} className="px-3 sm:px-4 w-full">
                 <div className="bg-zinc-900 p-5 sm:p-6 rounded-xl shadow-lg h-full flex flex-col review-card transition-all duration-300">
 
                   {/* Review text */}
