@@ -32,3 +32,58 @@
     animation: soft-glow 4s ease-in-out infinite;
   }
   
+  .bg-gradient-animated {
+    background: radial-gradient(circle at 20% 20%, rgba(255,0,0,0.2), transparent 60%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,0,0.2), transparent 60%);
+    animation: gradientMove 8s infinite alternate ease-in-out;
+  }
+  
+  @keyframes gradientMove {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 80% 80%;
+    }
+  }
+
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(25px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fadeInUp {
+    animation: fadeInUp 1s ease-out forwards;
+  }
+
+  @keyframes bounceOnce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  
+  .animate-bounce-once {
+    animation: bounceOnce 0.8s ease-out;
+  }
+
+  .review-card {
+    animation: reviewFadeUp 0.7s ease-out;
+  }
+  
+  @keyframes reviewFadeUp {
+    0% {
+      opacity: 0;
+      transform: translateY(25px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  
