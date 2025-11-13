@@ -15,7 +15,7 @@ export default function Hero() {
     <>
       {/* Sticky Tap-To-Call (Mobile only) */}
       <a
-        href="tel:+14144510900"
+        href="tel:+14143326820"
         className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 
         bg-red-600 text-white font-semibold px-6 py-3 rounded-full shadow-xl 
         animate-bounce-once sm:hidden"
