@@ -3,7 +3,7 @@ import { useState } from "react";
 
 export default function Reviews() {
 
-const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   const reviews = [
     {
@@ -61,7 +61,7 @@ const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const toggleExpand = (index: number) => {
     setExpandedIndex(expandedIndex === index ? null : index);
   };
-  
+
 
   const settings = {
     dots: true,
@@ -72,9 +72,10 @@ const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
     slidesToScroll: 1,
     responsive: [
       { breakpoint: 1280, settings: { slidesToShow: 2 } },
-      { breakpoint: 768, settings: { slidesToShow: 1 } } // mobile always 1 now
+      { breakpoint: 768, settings: { slidesToShow: 2 } }, // mobile now shows 2
     ],
   };
+
 
   return (
     <section id="reviews" className="bg-black text-white py-20 px-6">
@@ -97,7 +98,7 @@ const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
             const isExpanded = expandedIndex === i;
 
             return (
-              <div key={i} className="px-3 sm:px-4">
+              <div key={i} className="px-3 sm:px-4 min-w-[50%]">
                 <div className="bg-zinc-900 p-5 sm:p-6 rounded-xl shadow-lg h-full flex flex-col review-card transition-all duration-300">
 
                   {/* Review text */}
@@ -144,6 +145,7 @@ const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
                         </svg>
                       ))}
                     </div>
+
                   </div>
                 </div>
               </div>
