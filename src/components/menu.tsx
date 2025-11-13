@@ -101,7 +101,7 @@ export default function Menu() {
             +$2.30–$2.50 per additional topping
           </p>
           <p className="text-gray-400 text-sm mt-1">
-            Gluten Free available in 14" for an additional cost.
+            Gluten Free available in 14" for $17.99.
           </p>
           <div className="mt-10 bg-zinc-800 rounded-lg p-6 text-center border border-zinc-700">
             <h4 className="text-2xl font-bold text-yellow-400 mb-3">
@@ -206,21 +206,21 @@ export default function Menu() {
           <h3 className="text-3xl font-bold text-yellow-400 mb-6 text-center">Signature Pies</h3>
           <div className="grid md:grid-cols-2 gap-8 text-left">
             {[
-              { name: "Upper Crust Special", desc: "Italian Sausage, Fresh Mushrooms, and White Onions.", price: "$17.49–$21.49" },
-              { name: "Deluxe", desc: "Sausage, Pepperoni, Mushrooms, Onions, and Green Peppers.", price: "$19.49–$23.49" },
-              { name: "Carne", desc: "Sausage, Pepperoni, Bacon, and Ham.", price: "$19.49–$23.49" },
-              { name: "Pepperoni Plus", desc: "Double the Pepperoni and Mozzarella.", price: "$18.49–$22.49" },
-              { name: "Buffalo Chicken", desc: "Buffalo Ranch sauce, Chicken, Bacon, Red Onion, and Jalapeño.", price: "$19.49–$23.49" },
-              { name: "BBQ Chicken", desc: "Sweet Baby Ray’s BBQ sauce, Chicken, Bacon, and Red Onion.", price: "$19.49–$23.49" },
-              { name: "Chicken Alfredo", desc: "Alfredo sauce, Chicken, Mushrooms, Spinach, Bacon, and Red Onion.", price: "$19.49–$23.49" },
-              { name: "Chicken Bacon Ranch", desc: "Chicken, Bacon, and Ranch sauce.", price: "$18.49–$20.49" },
-              { name: "Mediterranean", desc: "Chicken, Black & Green Olives, Red Onions, and Feta.", price: "$19.49–$23.49" },
-              { name: "Hawaiian", desc: "Ham and Pineapple.", price: "$17.99–$21.99" },
-              { name: "Veggie", desc: "Mushrooms, Onions, Green Peppers, and Black Olives.", price: "$17.99–$21.99" },
-              { name: "Garden", desc: "Mushrooms, Spinach, Red Onion, Tomato, and Garlic.", price: "$18.49–$22.49" },
-              { name: "GSM", desc: "Garlic Sauce, Spinach, and Fresh Mushrooms.", price: "$17.99–$21.99" },
-              { name: "BLT", desc: "Bacon, Lettuce, Tomato, and Mayo.", price: "$18.49–$23.49" },
-              { name: "Philly Cheese Steak", desc: "Philly Steak, Mushrooms, Onion, and Green Peppers.", price: "$19.49–$23.49" },
+              { name: "Upper Crust Special", desc: "Italian Sausage, Fresh Mushrooms, and White Onions.", price: "$18.49-$36.99" },
+              { name: "Deluxe", desc: "Sausage, Pepperoni, Mushrooms, Onions, and Green Peppers.", price: "$19.99-$36.99" },
+              { name: "Carne", desc: "Sausage, Pepperoni, Bacon, and Ham.", price: "$19.99-$39.99" },
+              { name: "Pepperoni Plus", desc: "Double the Pepperoni and Mozzarella.", price: "$18.49-$38.99" },
+              { name: "Buffalo Chicken", desc: "Buffalo Ranch sauce, Chicken, Bacon, Red Onion, and Jalapeño.", price: "$19.49–$39.99" },
+              { name: "BBQ Chicken", desc: "Sweet Baby Ray’s BBQ sauce, Chicken, Bacon, and Red Onion.", price: "$19.49–$39.99" },
+              { name: "Chicken Alfredo", desc: "Alfredo sauce, Chicken, Mushrooms, Spinach, Bacon, and Red Onion.", price: "$19.99–$39.99" },
+              { name: "Chicken Bacon Ranch", desc: "Chicken, Bacon, and Ranch sauce.", price: "$18.49–$34.99" },
+              { name: "Mediterranean", desc: "Chicken, Black & Green Olives, Red Onions, and Feta.", price: "$19.49–$39.99" },
+              { name: "Hawaiian", desc: "Ham and Pineapple.", price: "$17.99–$34.99" },
+              { name: "Veggie", desc: "Mushrooms, Onions, Green Peppers, and Black Olives.", price: "$17.99–$34.99" },
+              { name: "Garden Harvest", desc: "Mushrooms, Spinach, Red Onion, Tomato, and Garlic.", price: "$18.49–$38.99" },
+              { name: "GSM", desc: "Garlic Sauce, Spinach, and Fresh Mushrooms.", price: "$17.99–$35.99" },
+              { name: "BLT", desc: "Bacon, Lettuce, Tomato, and Mayo.", price: "$18.49–$34.99" },
+              { name: "Philly Cheese Steak", desc: "Philly Steak, Mushrooms, Onion, and Green Peppers.", price: "$20.99–$41.99" },
             ].map((pizza) => (
               <div key={pizza.name} className="bg-zinc-900 p-5 rounded-lg shadow-md">
                 <h4 className="text-xl font-semibold text-yellow-400">{pizza.name}</h4>
@@ -237,20 +237,21 @@ export default function Menu() {
         <h3 className="text-3xl font-bold text-yellow-400 mb-6">Appetizers</h3>
         <div className="grid md:grid-cols-2 gap-8 text-left text-gray-200">
           {[
-            "Cheesy Garlic Sticks — $8.49",
-            "Mozzarella Sticks — $6.49",
-            "Garlic Bites (S $5.49 | M $6.49 | L $7.49)",
-            "Garlic Bread — $3.99",
+            "Cheesy Garlic Sticks — $9.99",
+            "Mozzarella Sticks — $7.99",
+            "Breaded Okra - $6.99",
+            "Fried Dough Bombs (S $5.49 | M $6.49 | L $7.49)",
+            "Garlic Bread — $4.49",
             "Cheesy Garlic Bread — $5.99",
-            "Pizza Bread (2 toppings) — $8.49 (+$0.99 per extra topping)",
-            "French Fries (S $4.49 | L $6.49)",
-            "Tater Tots (S $4.49 | L $6.49)",
-            "Cheese Curds — $6.49",
-            "Breaded Mushrooms — $6.49",
-            "Jalapeño Poppers — $6.49",
-            "Sampler Platter — $9.49",
+            "Pizza Bread (2 toppings) — $9.99 (+$0.99 per extra topping)",
+            "French Fries (S $4.99 | L $6.99)",
+            "Tater Tots (S $4.99 | L $6.99)",
+            "Cheese Nuggets — $7.99",
+            "Breaded Mushrooms — $7.99",
+            "Jalapeño Poppers — $7.99",
+            "Sampler Platter —  (S $10.99 | L $13.99)",
             "Chicken Tenders (4pc $7.49 | 8pc $13.99)",
-            "Chicken Wings (10pc $12.49 | 15pc $17.49 | 20pc $22.49)",
+            "Chicken Wings (10pc $12.99 | 15pc $17.99 | 20pc $22.99)",
           ].map((item) => (
             <div key={item} className="bg-zinc-900 p-5 rounded-lg shadow-md">
               <p>{item}</p>
@@ -270,12 +271,12 @@ export default function Menu() {
           <div>
             <h4 className="font-bold text-yellow-400 mb-2">Hoagies</h4>
             <ul className="space-y-1">
-              <li>Philly Cheesesteak — $9.49</li>
-              <li>Italian Cheesesteak — $9.49</li>
-              <li>Meatball Hoagie — $9.49</li>
-              <li>Sausage Hoagie — $9.49</li>
-              <li>Grilled Veggie Hoagie — $8.49</li>
-              <li>BLT Hoagie — $8.49</li>
+              <li>Philly Cheesesteak — $9.99</li>
+              <li>Italian Cheesesteak — $9.99</li>
+              <li>Meatball Hoagie — $9.99</li>
+              <li>Sausage Hoagie — $9.99</li>
+              <li>Grilled Veggie Hoagie — $8.99</li>
+              <li>BLT Hoagie — $9.99</li>
             </ul>
             <p className="text-gray-400 text-sm mt-2">
               Fries, Onion Rings, or Tater Tots for an additional cost.
@@ -284,9 +285,11 @@ export default function Menu() {
           <div>
             <h4 className="font-bold text-yellow-400 mb-2">Pasta</h4>
             <ul className="space-y-1">
-              <li>Classic Spaghetti — $8.49</li>
-              <li>Chicken Parmesan — $10.49</li>
-              <li>Spinach & Garlic Primavera — $10.49</li>
+              <li>Classic Spaghetti — $8.99</li>
+              <li>Spaghetti and Meatballs — $11.99</li>
+              <li>Chicken Parmesan — $11.99</li>
+              <li>Spinach & Garlic Spaghetti — $10.99</li>
+              <li>Chicken Alfredo — $10.99</li>
             </ul>
           </div>
         </div>
@@ -296,17 +299,18 @@ export default function Menu() {
       <div id="burgers" className="max-w-5xl mx-auto text-center mb-16 scroll-mt-28">
         <h3 className="text-3xl font-bold text-yellow-400 mb-6">Burgers & Chicken Sandwiches</h3>
         <ul className="space-y-2 text-gray-200 max-w-lg mx-auto text-left">
-          <li>Classic Cheeseburger — $8.49</li>
-          <li>Texas Burger — $9.49</li>
-          <li>Buffalo Burger — $9.49</li>
+          <li>Classic 1/4th Pound Cheeseburger — $8.99</li>
+          <li>Texas Burger — $9.99</li>
+          <li>Buffalo Burger — $9.99</li>
         </ul>
         <div className="mt-6 text-left max-w-lg mx-auto">
           <h4 className="text-xl font-semibold text-yellow-400 mb-2">Chicken Sandwiches</h4>
           <ul className="space-y-1">
-            <li>Chicken Sandwich — $8.49</li>
-            <li>Chicken Parmesan — $8.49</li>
-            <li>Texas Chicken — $9.49</li>
-            <li>Buffalo Chicken — $9.49</li>
+            <li>Chicken Sandwich — $8.99</li>
+            <li>Chicken Parmesan — $8.99</li>
+            <li>Texas Chicken — $9.99</li>
+            <li>Buffalo Chicken — $9.99</li>
+            <li>Nashville Chicken — $9.99</li>
           </ul>
           <p className="text-gray-400 text-sm mt-2">
             Fries, Onion Rings, or Tater Tots for an additional cost.
@@ -318,10 +322,10 @@ export default function Menu() {
       <div id="salads" className="max-w-5xl mx-auto text-center mb-16 scroll-mt-28">
         <h3 className="text-3xl font-bold text-yellow-400 mb-6">Salads</h3>
         <ul className="space-y-2 text-gray-200 max-w-lg mx-auto text-left">
-          <li>Garden — $5.99</li>
-          <li>Greek — $5.99</li>
-          <li>Chef — $5.99</li>
-          <li>Chicken — $7.49</li>
+          <li>Garden — $6.99</li>
+          <li>Greek — $6.99</li>
+          <li>Chef — $7.99</li>
+          <li>Grilled Chicken Salad — $7.99</li>
         </ul>
       </div>
 
@@ -333,15 +337,16 @@ export default function Menu() {
             <h4 className="font-bold text-yellow-400 mb-2">Desserts</h4>
             <ul className="space-y-1">
               <li>Maple Cinnamon Bites — $6.49</li>
-              <li>Cannoli’s (1 for $3.25 | 2 for $5.50)</li>
+              <li>Cannoli’s $3.50</li>
             </ul>
           </div>
           <div>
             <h4 className="font-bold text-yellow-400 mb-2">Drinks</h4>
             <ul className="space-y-1">
-              <li>Coke, Diet Coke, Sprite, Dr. Pepper, A&W Root Beer, Mountain Dew, or Orange Crush</li>
-              <li>2-Liters — $3.49</li>
-              <li>Cans — $2</li>
+              <li>Coke, Diet Coke, Dole Lemonaide, Sprite, Strawberry Lemonade, Dr. Pepper, Root Beer, or Orange Crush</li>
+              <li>2-Liters — $3.99</li>
+              <li>Cans — $1.49</li>
+              <li>Bottle Water — $1.49</li>
             </ul>
           </div>
         </div>
