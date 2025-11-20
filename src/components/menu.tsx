@@ -215,7 +215,7 @@ export default function Menu() {
           {/* Animation Stagger Container */}
           <motion.div
             variants={staggerContainer}
-            initial="hidden"
+            initial="visable"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
             className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
