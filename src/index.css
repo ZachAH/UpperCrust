@@ -109,19 +109,6 @@
 /* --- Slick Carousel Custom Styling --- */
 
 /* Arrow buttons */
-.slick-prev,
-.slick-next {
-  width: 40px !important;
-  height: 40px !important;
-  z-index: 10;
-}
-
-.slick-prev:before,
-.slick-next:before {
-  font-size: 24px !important;
-  color: #d4af37 !important; /* Metallic gold */
-  opacity: 0.9 !important;
-}
 
 /* Hover glow on arrows */
 .slick-prev:hover:before,
