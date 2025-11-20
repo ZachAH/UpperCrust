@@ -193,3 +193,49 @@
   }
 }
 
+/* --- CIRCULAR SLICK ARROWS --- */
+.slick-prev,
+.slick-next {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 9999px !important;
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  z-index: 10 !important;
+  border: 2px solid rgba(255, 255, 255, 0.4) !important;
+  transition: all 0.25s ease-in-out !important;
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border-color: #D4AF37 !important;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 18px !important;
+  color: white !important;
+  opacity: 1 !important;
+}
+
+.slick-prev:hover:before,
+.slick-next:hover:before {
+  color: black !important;
+}
+
+/* Align inside carousel bounds */
+@media (max-width: 768px) {
+  .slick-prev,
+  .slick-next {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 14px !important;
+  }
+}
