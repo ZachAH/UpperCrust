@@ -31,10 +31,10 @@ export default function Contact() {
               <h3 className="text-yellow-400 font-bold text-lg mb-2">Email</h3>
               <p>
                 <a
-                  href="mailto:contactus@uppercrustpizza.us"
+                  href="mailto:theoriginaluppercrust@gmail.com"
                   className="text-yellow-400 hover:text-yellow-500 transition"
                 >
-                  contactus@uppercrustpizza.us
+                  theoriginaluppercrust@gmail.com
                 </a>
               </p>
             </div>
