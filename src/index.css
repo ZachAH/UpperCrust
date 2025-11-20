@@ -193,49 +193,54 @@
   }
 }
 
-/* --- CIRCULAR SLICK ARROWS --- */
+/* --- CHUNKY CIRCULAR SLICK ARROWS --- */
 .slick-prev,
 .slick-next {
-  width: 40px !important;
-  height: 40px !important;
+  width: 48px !important;
+  height: 48px !important;
   border-radius: 9999px !important;
-  background-color: rgba(0, 0, 0, 0.6) !important;
+  background-color: rgba(0, 0, 0, 0.75) !important;
   display: flex !important;
   justify-content: center;
   align-items: center;
-  z-index: 10 !important;
-  border: 2px solid rgba(255, 255, 255, 0.4) !important;
+  z-index: 20 !important;
+  border: 3px solid rgba(255, 215, 120, 0.6) !important; /* thicker gold */
   transition: all 0.25s ease-in-out !important;
-}
-
-.slick-prev:hover,
-.slick-next:hover {
-  background-color: rgba(255, 255, 255, 0.95) !important;
-  border-color: #D4AF37 !important;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.4);
 }
 
 .slick-prev:before,
 .slick-next:before {
-  font-size: 18px !important;
-  color: white !important;
+  font-size: 20px !important;
+  font-weight: bold !important;
+  color: #F8E49A !important; /* warm gold */
   opacity: 1 !important;
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+  background-color: #D4AF37 !important; /* metallic gold */
+  transform: scale(1.12);
+  border-color: #fff !important;
 }
 
 .slick-prev:hover:before,
 .slick-next:hover:before {
-  color: black !important;
+  color: #000 !important;
 }
 
-/* Align inside carousel bounds */
+/* Mobile Chunky Arrows */
 @media (max-width: 768px) {
   .slick-prev,
   .slick-next {
-    width: 32px !important;
-    height: 32px !important;
+    width: 42px !important;
+    height: 42px !important;
+    border-width: 3px !important;
   }
 
   .slick-prev:before,
   .slick-next:before {
-    font-size: 14px !important;
+    font-size: 16px !important;
   }
 }
+
