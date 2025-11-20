@@ -101,3 +101,110 @@
     animation: slideDown 0.25s ease-out;
   }
   
+  /* Soft warm glow for food cards */
+.hover\:shadow-xl:hover {
+  box-shadow: 0 6px 20px rgba(255, 200, 50, 0.25);
+}
+
+/* --- Slick Carousel Custom Styling --- */
+
+/* Arrow buttons */
+.slick-prev,
+.slick-next {
+  width: 40px !important;
+  height: 40px !important;
+  z-index: 10;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 24px !important;
+  color: #d4af37 !important; /* Metallic gold */
+  opacity: 0.9 !important;
+}
+
+/* Hover glow on arrows */
+.slick-prev:hover:before,
+.slick-next:hover:before {
+  color: #ffea80 !important;
+  text-shadow: 0 0 10px rgba(255, 230, 150, 0.8);
+}
+
+/* Dot indicators */
+.slick-dots li button:before {
+  font-size: 10px !important;
+  color: #666 !important;
+  opacity: 0.45 !important;
+}
+
+/* Active dot — bright gold highlight */
+.slick-dots li.slick-active button:before {
+  color: #f7d23e !important;
+  opacity: 1 !important;
+  text-shadow: 0 0 6px rgba(255, 200, 50, 0.75);
+}
+
+/* Lower carousel positioning */
+.appetizer-carousel .slick-dots {
+  bottom: -35px;
+}
+
+.hoagies-carousel .slick-slide img,
+.burgers-carousel .slick-slide img {
+  height: 400px !important;
+  object-fit: cover;
+}
+
+/* Center and fully visible arrows for all carousels */
+.slick-prev,
+.slick-next {
+  top: 50% !important;
+  transform: translateY(-50%);
+}
+
+/* Bring arrows slightly inside the visible area */
+.hoagies-carousel .slick-prev,
+.burgers-carousel .slick-prev {
+  left: -20px !important;
+}
+
+.hoagies-carousel .slick-next,
+.burgers-carousel .slick-next {
+  right: -20px !important;
+}
+
+/* Optional: Match appetizer exactly */
+@media (min-width: 1024px) {
+  .hoagies-carousel .slick-prev,
+  .burgers-carousel .slick-prev {
+    left: 10px !important;
+  }
+  .hoagies-carousel .slick-next,
+  .burgers-carousel .slick-next {
+    right: 10px !important;
+  }
+}
+
+/* Perfect mobile arrow placement inside the image bounds */
+@media (max-width: 768px) {
+  .hoagies-carousel .slick-prev,
+  .hoagies-carousel .slick-next,
+  .burgers-carousel .slick-prev,
+  .burgers-carousel .slick-next {
+    top: 50% !important;
+    transform: translateY(-50%);
+  }
+
+  .hoagies-carousel .slick-prev,
+  .burgers-carousel .slick-prev {
+    left: 6px !important;
+  }
+
+  .hoagies-carousel .slick-next,
+  .burgers-carousel .slick-next {
+    right: 6px !important;
+  }
+}
+
+
+

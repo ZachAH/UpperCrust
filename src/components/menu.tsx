@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import Slider from "react-slick";
+
 
 export default function Menu() {
   const [activeSection, setActiveSection] = useState("pizzas");
@@ -175,7 +177,6 @@ export default function Menu() {
             <ul className="space-y-1">
               <li>Italian Sausage</li>
               <li>Pepperoni</li>
-              <li>Ground Beef</li>
               <li>Philly Steak</li>
               <li>Meatball</li>
               <li>Chicken</li>
@@ -202,155 +203,477 @@ export default function Menu() {
         </div>
 
         {/* Signature Pies */}
-        <div className="mt-12">
-          <h3 className="text-3xl font-bold text-yellow-400 mb-6 text-center">Signature Pies</h3>
-          <div className="grid md:grid-cols-2 gap-8 text-left">
+        <div className="mt-16">
+          <h3 className="text-3xl font-bold text-yellow-400 mb-10 text-center">
+            Signature Pies
+          </h3>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { name: "Upper Crust Special", desc: "Italian Sausage, Fresh Mushrooms, and White Onions.", price: "$18.49-$36.99" },
-              { name: "Deluxe", desc: "Sausage, Pepperoni, Mushrooms, Onions, and Green Peppers.", price: "$19.99-$36.99" },
-              { name: "Carne", desc: "Sausage, Pepperoni, Bacon, and Ham.", price: "$19.99-$39.99" },
-              { name: "Pepperoni Plus", desc: "Double the Pepperoni and Mozzarella.", price: "$18.49-$38.99" },
-              { name: "Buffalo Chicken", desc: "Buffalo Ranch sauce, Chicken, Bacon, Red Onion, and Jalapeño.", price: "$19.49–$39.99" },
-              { name: "BBQ Chicken", desc: "Sweet Baby Ray’s BBQ sauce, Chicken, Bacon, and Red Onion.", price: "$19.49–$39.99" },
-              { name: "Chicken Alfredo", desc: "Alfredo sauce, Chicken, Mushrooms, Spinach, Bacon, and Red Onion.", price: "$19.99–$39.99" },
-              { name: "Chicken Bacon Ranch", desc: "Chicken, Bacon, and Ranch sauce.", price: "$18.49–$34.99" },
-              { name: "Mediterranean", desc: "Chicken, Black & Green Olives, Red Onions, and Feta.", price: "$19.49–$39.99" },
-              { name: "Hawaiian", desc: "Ham and Pineapple.", price: "$17.99–$34.99" },
-              { name: "Veggie", desc: "Mushrooms, Onions, Green Peppers, and Black Olives.", price: "$17.99–$34.99" },
-              { name: "Garden Harvest", desc: "Mushrooms, Spinach, Red Onion, Tomato, and Garlic.", price: "$18.49–$38.99" },
-              { name: "GSM", desc: "Garlic Sauce, Spinach, and Fresh Mushrooms.", price: "$17.99–$35.99" },
-              { name: "BLT", desc: "Bacon, Lettuce, Tomato, and Mayo.", price: "$18.49–$34.99" },
-              { name: "Philly Cheese Steak", desc: "Philly Steak, Mushrooms, Onion, and Green Peppers.", price: "$20.99–$41.99" },
+              {
+                name: "Upper Crust Special",
+                desc: "Italian Sausage, Fresh Mushrooms, and White Onions.",
+                price: "$18.49-$36.99",
+                img: "/images/pizzas/1.jpg",
+              },
+              {
+                name: "Deluxe",
+                desc: "Sausage, Pepperoni, Mushrooms, Onions, and Green Peppers.",
+                price: "$19.99-$36.99",
+                img: "/images/pizzas/2.jpg",
+              },
+              {
+                name: "Carne",
+                desc: "Sausage, Pepperoni, Bacon, and Ham.",
+                price: "$19.99-$39.99",
+                img: "/images/pizzas/3.jpg",
+              },
+              {
+                name: "Pepperoni Plus",
+                desc: "Double the Pepperoni and Mozzarella.",
+                price: "$18.49-$38.99",
+                img: "/images/pizzas/4.jpg",
+              },
+              {
+                name: "Buffalo Chicken",
+                desc: "Buffalo Ranch sauce, Chicken, Bacon, Red Onion, Jalapeño.",
+                price: "$19.49–$39.99",
+                img: "/images/pizzas/5.jpg",
+              },
+              {
+                name: "BBQ Chicken",
+                desc: "BBQ sauce, Chicken, Bacon, Red Onion.",
+                price: "$19.49–$39.99",
+                img: "/images/pizzas/1.jpg",
+              },
             ].map((pizza) => (
-              <div key={pizza.name} className="bg-zinc-900 p-5 rounded-lg shadow-md">
-                <h4 className="text-xl font-semibold text-yellow-400">{pizza.name}</h4>
-                <p className="text-gray-300">{pizza.desc}</p>
-                <p className="text-gray-400 mt-1">{pizza.price}</p>
+              <div
+                key={pizza.name}
+                className="bg-zinc-900 rounded-xl overflow-hidden shadow-md border border-zinc-700 hover:shadow-xl hover:-translate-y-2 hover:border-yellow-500 transition-all duration-300"
+              >
+                <img
+                  src={pizza.img}
+                  alt={pizza.name}
+                  className="h-44 w-full object-cover"
+                />
+                <div className="p-5 text-left">
+                  <h4 className="text-xl font-bold text-yellow-400">{pizza.name}</h4>
+                  <p className="text-gray-300 text-sm">{pizza.desc}</p>
+                  <p className="text-gray-400 text-sm mt-1">{pizza.price}</p>
+
+                  <div className="mt-4">
+                    <a
+                      href="https://uppercrust.hungerrush.com/Order/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block text-center bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full text-sm font-semibold transition"
+                    >
+                      Order • Customize →
+                    </a>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
         </div>
+
       </div>
 
       {/* --- APPETIZERS --- */}
-      <div id="appetizers" className="max-w-5xl mx-auto text-center mb-16 scroll-mt-28">
-        <h3 className="text-3xl font-bold text-yellow-400 mb-6">Appetizers</h3>
-        <div className="grid md:grid-cols-2 gap-8 text-left text-gray-200">
+      <div id="appetizers" className="max-w-6xl mx-auto mb-24 scroll-mt-28">
+        <h3 className="text-3xl font-extrabold text-yellow-400 text-center mb-10 tracking-wider">
+          Appetizers
+        </h3>
+
+        {/* Featured Carousel */}
+        <Slider
+          dots
+          infinite
+          speed={600}
+          slidesToShow={1}
+          slidesToScroll={1}
+          autoplay
+          autoplaySpeed={4000}
+          fade
+          pauseOnHover
+          lazyLoad="ondemand"
+          arrows={true}
+          className="appetizer-carousel"
+        >
+
           {[
-            "Cheesy Garlic Sticks — $9.99",
-            "Mozzarella Sticks — $7.99",
-            "Breaded Okra - $6.99",
-            "Fried Dough Bombs (S $5.49 | M $6.49 | L $7.49)",
+            {
+              name: "Cheesy Garlic Sticks",
+              price: "$9.99",
+              img: "/images/appetizers/1.jpg",
+            },
+            {
+              name: "Mozzarella Sticks",
+              price: "$7.99",
+              img: "/images/appetizers/2.jpg",
+            },
+            {
+              name: "Chicken Wings",
+              price: "10pc $12.99",
+              img: "/images/appetizers/3.jpg",
+            },
+            {
+              name: "Breaded Mushrooms",
+              price: "$7.99",
+              img: "/images/appetizers/4.jpg",
+            },
+          ].map((item) => (
+            <div key={item.name} className="relative">
+              <img
+                loading="lazy"
+                src={item.img}
+                alt={item.name}
+                className="h-64 w-full object-cover brightness-90"
+              />
+
+              <div className="absolute bottom-0 left-0 right-0 bg-black/70 p-4 text-center">
+                <h4 className="text-xl font-bold text-yellow-400">{item.name}</h4>
+                <p className="text-gray-200 text-sm">{item.price}</p>
+                <a
+                  href="https://uppercrust.hungerrush.com/Order/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-block bg-red-600 hover:bg-red-700 text-white px-4 py-1.5 rounded-full text-xs font-semibold"
+                >
+                  Order • Customize →
+                </a>
+              </div>
+            </div>
+          ))}
+        </Slider>
+
+        {/* Quick List */}
+        <div className="mt-12 text-left text-gray-300 space-y-2 max-w-lg mx-auto">
+          {[
+            "Fried Dough Bombs — S $5.49 | M $6.49 | L $7.49",
             "Garlic Bread — $4.49",
             "Cheesy Garlic Bread — $5.99",
-            "Pizza Bread (2 toppings) — $9.99 (+$0.99 per extra topping)",
-            "French Fries (S $4.99 | L $6.99)",
-            "Tater Tots (S $4.99 | L $6.99)",
+            "Pizza Bread (2 toppings) — $9.99",
+            "French Fries — S $4.99 | L $6.99",
+            "Tater Tots — S $4.99 | L $6.99",
             "Cheese Nuggets — $7.99",
-            "Breaded Mushrooms — $7.99",
             "Jalapeño Poppers — $7.99",
-            "Sampler Platter —  (S $10.99 | L $13.99)",
-            "Chicken Tenders (4pc $7.49 | 8pc $13.99)",
-            "Chicken Wings (10pc $12.99 | 15pc $17.99 | 20pc $22.99)",
+            "Sampler Platter — S $10.99 | L $13.99",
+            "Chicken Tenders — 4pc $7.49 | 8pc $13.99",
           ].map((item) => (
-            <div key={item} className="bg-zinc-900 p-5 rounded-lg shadow-md">
-              <p>{item}</p>
-            </div>
+            <p key={item} className="border-b border-zinc-700 pb-2">
+              {item}
+            </p>
           ))}
         </div>
 
-        <p className="text-gray-400 mt-6">
-          Wing Sauces: Mango Habanero, Franks Red Hot, Nashville Hot, Buffalo Ranch, Sweet Baby Ray’s, Kickin’ Bourbon, Lemon Pepper.
+        <p className="text-gray-500 mt-6 text-center text-sm italic">
+          Wing Sauces: Mango Habanero, Frank’s Red Hot, Nashville Hot, Buffalo Ranch,
+          Sweet Baby Ray’s, Kickin’ Bourbon, Lemon Pepper.
         </p>
       </div>
 
+
+
+
       {/* --- HOAGIES & PASTA --- */}
-      <div id="hoagies" className="max-w-5xl mx-auto text-center mb-16 scroll-mt-28">
-        <h3 className="text-3xl font-bold text-yellow-400 mb-6">Hoagies & Pasta</h3>
-        <div className="grid md:grid-cols-2 gap-8 text-left text-gray-200">
+      <div id="hoagies" className="max-w-6xl mx-auto mb-24 scroll-mt-28">
+        <h3 className="text-3xl font-extrabold text-yellow-400 text-center mb-10 tracking-wider">
+          Hoagies & Pasta
+        </h3>
+
+        {/* Featured Carousel */}
+        <div className="max-w-5xl mx-auto relative">
+          <Slider
+            dots
+            infinite
+            speed={600}
+            slidesToShow={1}
+            slidesToScroll={1}
+            autoplay
+            autoplaySpeed={4000}
+            fade
+            pauseOnHover
+            lazyLoad="ondemand"
+            arrows={true}
+            className="hoagies-carousel rounded-xl overflow-hidden"
+          >
+            {[
+              {
+                name: "Philly Cheesesteak",
+                price: "$9.99",
+                img: "/images/hoagies/1.jpg",
+              },
+              {
+                name: "Meatball Hoagie",
+                price: "$9.99",
+                img: "/images/hoagies/2.jpg",
+              },
+              {
+                name: "Chicken Alfredo Pasta",
+                price: "$10.99",
+                img: "/images/pasta/1.jpg",
+              },
+              {
+                name: "Spaghetti & Meatballs",
+                price: "$11.99",
+                img: "/images/pasta/2.jpg",
+              },
+            ].map((item) => (
+              <div key={item.name} className="relative">
+                <img
+                  loading="lazy"
+                  src={item.img}
+                  alt={item.name}
+                  className="h-64 w-full object-cover brightness-90"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-black/70 p-4 text-center">
+                  <h4 className="text-xl font-bold text-yellow-400">{item.name}</h4>
+                  <p className="text-gray-200 text-sm">{item.price}</p>
+                  <a
+                    href="https://uppercrust.hungerrush.com/Order/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 inline-block bg-red-600 hover:bg-red-700 text-white px-4 py-1.5 rounded-full text-xs font-semibold"
+                  >
+                    Order • Customize →
+                  </a>
+                </div>
+              </div>
+            ))}
+          </Slider>
+        </div>
+
+        {/* Quick List */}
+        <div className="mt-12 grid sm:grid-cols-2 gap-10 text-left text-gray-300 text-sm">
           <div>
-            <h4 className="font-bold text-yellow-400 mb-2">Hoagies</h4>
-            <ul className="space-y-1">
-              <li>Philly Cheesesteak — $9.99</li>
-              <li>Italian Cheesesteak — $9.99</li>
-              <li>Meatball Hoagie — $9.99</li>
-              <li>Sausage Hoagie — $9.99</li>
-              <li>Grilled Veggie Hoagie — $8.99</li>
-              <li>BLT Hoagie — $9.99</li>
+            <h4 className="text-lg font-bold text-yellow-400 mb-2">Hoagies</h4>
+            <ul className="space-y-2">
+              <li className="border-b border-zinc-700 pb-2">Philly Cheesesteak — $9.99</li>
+              <li className="border-b border-zinc-700 pb-2">Italian Philly Cheesesteak — $9.99</li>
+              <li className="border-b border-zinc-700 pb-2">Italian Chicken Cheesesteak — $9.99</li>
+              <li className="border-b border-zinc-700 pb-2">Chicken Philly Cheesesteak — $9.99</li>
+              <li className="border-b border-zinc-700 pb-2">Meatball Hoagie — $9.99</li>
+              <li className="border-b border-zinc-700 pb-2">Sausage Hoagie — $9.99</li>
+              <li className="border-b border-zinc-700 pb-2">Grilled Veggie Hoagie — $8.99</li>
+              <li className="border-b border-zinc-700 pb-2">BLT Hoagie — $9.99</li>
             </ul>
-            <p className="text-gray-400 text-sm mt-2">
-              Fries, Onion Rings, or Tater Tots for an additional cost.
+            <p className="text-gray-500 text-xs mt-2 italic">
+              Add fries, onion rings, or tots for an additional cost
             </p>
           </div>
+
           <div>
-            <h4 className="font-bold text-yellow-400 mb-2">Pasta</h4>
-            <ul className="space-y-1">
-              <li>Classic Spaghetti — $8.99</li>
-              <li>Spaghetti and Meatballs — $11.99</li>
-              <li>Chicken Parmesan — $11.99</li>
-              <li>Spinach & Garlic Spaghetti — $10.99</li>
-              <li>Chicken Alfredo — $10.99</li>
+            <h4 className="text-lg font-bold text-yellow-400 mb-2">Pasta</h4>
+            <ul className="space-y-2">
+              <li className="border-b border-zinc-700 pb-2">Classic Spaghetti — $8.99</li>
+              <li className="border-b border-zinc-700 pb-2">Spaghetti and Meatballs — $11.99</li>
+              <li className="border-b border-zinc-700 pb-2">Chicken Parmesan — $11.99</li>
+              <li className="border-b border-zinc-700 pb-2">Spinach & Garlic Spaghetti — $10.99</li>
+              <li className="border-b border-zinc-700 pb-2">Chicken Alfredo — $10.99</li>
             </ul>
           </div>
         </div>
       </div>
+
+
 
       {/* --- BURGERS & CHICKEN SANDWICHES --- */}
-      <div id="burgers" className="max-w-5xl mx-auto text-center mb-16 scroll-mt-28">
-        <h3 className="text-3xl font-bold text-yellow-400 mb-6">Burgers & Chicken Sandwiches</h3>
-        <ul className="space-y-2 text-gray-200 max-w-lg mx-auto text-left">
-          <li>Classic 1/4th Pound Cheeseburger — $8.99</li>
-          <li>Texas Burger — $9.99</li>
-          <li>Buffalo Burger — $9.99</li>
-        </ul>
-        <div className="mt-6 text-left max-w-lg mx-auto">
-          <h4 className="text-xl font-semibold text-yellow-400 mb-2">Chicken Sandwiches</h4>
-          <ul className="space-y-1">
-            <li>Chicken Sandwich — $8.99</li>
-            <li>Chicken Parmesan — $8.99</li>
-            <li>Texas Chicken — $9.99</li>
-            <li>Buffalo Chicken — $9.99</li>
-            <li>Nashville Chicken — $9.99</li>
-          </ul>
-          <p className="text-gray-400 text-sm mt-2">
-            Fries, Onion Rings, or Tater Tots for an additional cost.
-          </p>
+      <div id="burgers" className="max-w-6xl mx-auto mb-24 scroll-mt-28">
+        <h3 className="text-3xl font-extrabold text-yellow-400 text-center mb-10 tracking-wider">
+          Burgers & Chicken Sandwiches
+        </h3>
+
+        {/* Featured Carousel */}
+        <div className="max-w-5xl mx-auto relative">
+          <Slider
+            dots
+            infinite
+            speed={600}
+            slidesToShow={1}
+            slidesToScroll={1}
+            autoplay
+            autoplaySpeed={4000}
+            fade
+            pauseOnHover
+            lazyLoad="ondemand"
+            arrows={true}
+            className="burgers-carousel rounded-xl overflow-hidden"
+          >
+            {[
+              {
+                name: "Texas Burger",
+                price: "$9.99",
+                img: "/images/burgers/1.jpg",
+              },
+              {
+                name: "Classic 1/4 lb Cheeseburger",
+                price: "$8.99",
+                img: "/images/burgers/2.jpg",
+              },
+              {
+                name: "Buffalo Chicken Sandwich",
+                price: "$9.99",
+                img: "/images/burgers/3.jpg",
+              },
+            ].map((item) => (
+              <div key={item.name} className="relative">
+                <img
+                  loading="lazy"
+                  src={item.img}
+                  alt={item.name}
+                  className="h-64 w-full object-cover brightness-90"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-black/70 p-4 text-center">
+                  <h4 className="text-xl font-bold text-yellow-400">{item.name}</h4>
+                  <p className="text-gray-200 text-sm">{item.price}</p>
+                  <a
+                    href="https://uppercrust.hungerrush.com/Order/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 inline-block bg-red-600 hover:bg-red-700 text-white px-4 py-1.5 rounded-full text-xs font-semibold"
+                  >
+                    Order • Customize →
+                  </a>
+                </div>
+              </div>
+            ))}
+          </Slider>
+        </div>
+
+        {/* Quick List */}
+        <div className="mt-12 grid sm:grid-cols-2 gap-10 text-left text-gray-300 text-sm">
+          <div>
+            <h4 className="text-lg font-bold text-yellow-400 mb-2">Burgers</h4>
+            <ul className="space-y-2">
+              <li className="border-b border-zinc-700 pb-2">Classic 1/4 lb Cheeseburger — $8.99</li>
+              <li className="border-b border-zinc-700 pb-2">Texas Burger — $9.99</li>
+              <li className="border-b border-zinc-700 pb-2">Buffalo Burger — $9.99</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-lg font-bold text-yellow-400 mb-2">Chicken Sandwiches</h4>
+            <ul className="space-y-2">
+              <li className="border-b border-zinc-700 pb-2">Chicken Sandwich — $8.99</li>
+              <li className="border-b border-zinc-700 pb-2">Chicken Parmesan — $8.99</li>
+              <li className="border-b border-zinc-700 pb-2">Texas Chicken — $9.99</li>
+              <li className="border-b border-zinc-700 pb-2">Buffalo Chicken — $9.99</li>
+              <li className="border-b border-zinc-700 pb-2">Nashville Chicken — $9.99</li>
+            </ul>
+            <p className="text-gray-500 text-xs mt-2 italic">
+              Add fries, onion rings, or tots for an additional cost.
+            </p>
+          </div>
         </div>
       </div>
+
+
 
       {/* --- SALADS --- */}
-      <div id="salads" className="max-w-5xl mx-auto text-center mb-16 scroll-mt-28">
-        <h3 className="text-3xl font-bold text-yellow-400 mb-6">Salads</h3>
-        <ul className="space-y-2 text-gray-200 max-w-lg mx-auto text-left">
-          <li>Garden — $6.99</li>
-          <li>Greek — $6.99</li>
-          <li>Chef — $7.99</li>
-          <li>Grilled Chicken Salad — $7.99</li>
-        </ul>
-      </div>
+      <div id="salads" className="max-w-6xl mx-auto mb-24 scroll-mt-28">
+        <h3 className="text-3xl font-extrabold text-yellow-400 text-center mb-10 tracking-wider">
+          Salads
+        </h3>
 
-      {/* --- DESSERTS & DRINKS --- */}
-      <div id="desserts" className="max-w-5xl mx-auto text-center scroll-mt-28">
-        <h3 className="text-3xl font-bold text-yellow-400 mb-6">Desserts & Drinks</h3>
-        <div className="grid md:grid-cols-2 gap-8 text-left text-gray-200">
-          <div>
-            <h4 className="font-bold text-yellow-400 mb-2">Desserts</h4>
-            <ul className="space-y-1">
-              <li>Maple Cinnamon Bites — $6.49</li>
-              <li>Cannoli’s $3.50</li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-bold text-yellow-400 mb-2">Drinks</h4>
-            <ul className="space-y-1">
-              <li>Coke, Diet Coke, Dole Lemonaide, Sprite, Strawberry Lemonade, Dr. Pepper, Root Beer, or Orange Crush</li>
-              <li>2-Liters — $3.99</li>
-              <li>Cans — $1.49</li>
-              <li>Bottle Water — $1.49</li>
-            </ul>
+        {/* Featured Salad Card */}
+        <div className="relative max-w-3xl mx-auto rounded-xl overflow-hidden shadow-md border border-zinc-700">
+          <img
+            loading="lazy"
+            src="/images/salads/1.jpg"
+            alt="Grilled Chicken Salad"
+            className="h-64 w-full object-cover brightness-90"
+          />
+
+          <div className="absolute bottom-0 left-0 right-0 bg-black/70 p-5 text-center">
+            <h4 className="text-xl font-bold text-yellow-400">Grilled Chicken Salad</h4>
+            <p className="text-gray-200 text-sm">$7.99</p>
+
+            <a
+              href="https://uppercrust.hungerrush.com/Order/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-block bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full text-xs font-semibold"
+            >
+              Order • Customize →
+            </a>
           </div>
         </div>
+
+        {/* Salad List */}
+        <div className="mt-12 max-w-lg mx-auto text-left text-gray-300">
+          {[
+            "Garden — $6.99",
+            "Greek — $6.99",
+            "Chef — $7.99",
+            "Grilled Chicken Salad — $7.99",
+          ].map((item) => (
+            <p key={item} className="border-b border-zinc-700 pb-2 mb-2">
+              {item}
+            </p>
+          ))}
+        </div>
       </div>
+
+
+      {/* --- DESSERTS & DRINKS --- */}
+      <div id="desserts" className="max-w-6xl mx-auto mb-24 scroll-mt-28">
+        <h3 className="text-3xl font-extrabold text-yellow-400 text-center mb-10 tracking-wider">
+          Desserts & Drinks
+        </h3>
+
+        {/* Featured Dessert Card */}
+        <div className="relative max-w-3xl mx-auto rounded-xl overflow-hidden shadow-md border border-zinc-700">
+          <img
+            loading="lazy"
+            src="/images/desserts/1.jpg"
+            alt="Cannolis"
+            className="h-64 w-full object-cover brightness-90"
+          />
+
+          <div className="absolute bottom-0 left-0 right-0 bg-black/70 p-5 text-center">
+            <h4 className="text-xl font-bold text-yellow-400">Cannolis</h4>
+            <p className="text-gray-200 text-sm">$3.50 each</p>
+            <a
+              href="https://uppercrust.hungerrush.com/Order/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-block bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full text-xs font-semibold"
+            >
+              Order • Customize →
+            </a>
+          </div>
+        </div>
+
+        {/* Quick List */}
+        <div className="mt-12 grid sm:grid-cols-2 gap-10 text-left text-gray-300 text-sm">
+
+          {/* Desserts */}
+          <div>
+            <h4 className="text-lg font-bold text-yellow-400 mb-2">Desserts</h4>
+            <ul className="space-y-2">
+              <li className="border-b border-zinc-700 pb-2">Maple Cinnamon Bites — $6.49</li>
+              <li className="border-b border-zinc-700 pb-2">Cannolis — $3.50</li>
+            </ul>
+          </div>
+
+          {/* Drinks */}
+          <div>
+            <h4 className="text-lg font-bold text-yellow-400 mb-2">Drinks</h4>
+            <ul className="space-y-2">
+              <li className="border-b border-zinc-700 pb-2">
+                Coke, Diet Coke, Dole Lemonade, Sprite, Pink Lemonade,
+                Dr. Pepper, Root Beer, Orange Crush
+              </li>
+              <li className="border-b border-zinc-700 pb-2">2-Liters — $3.99</li>
+              <li className="border-b border-zinc-700 pb-2">Cans (Coke, Diet Coke, Sprite) — $1.49</li>
+              <li className="border-b border-zinc-700 pb-2">Bottled Water — $1.49</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
       <div className="max-w-6xl mx-auto text-center mt-20">
         <a
           href="https://uppercrust.hungerrush.com/Order/"
