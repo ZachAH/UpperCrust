@@ -261,7 +261,9 @@ export default function Menu() {
               <motion.div
                 key={pizza.name}
                 variants={popIn}
-                className="bg-zinc-900 rounded-xl overflow-hidden shadow-md border border-zinc-700 hover:shadow-xl hover:-translate-y-2 hover:border-yellow-500 transition-all duration-300"
+                className="bg-zinc-900 rounded-xl overflow-hidden shadow-md border border-zinc-800
+                transition-transform transition-border duration-150 will-change-transform
+                hover:-translate-y-2 hover:border-yellow-400 hover:shadow-yellow-400/20"
               >
                 <img
                   src={pizza.img}
