@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import Slider from "react-slick";
+import { motion } from "framer-motion";
+import { popIn } from "../animations";
+import { staggerContainer } from "../animations";
+
 
 
 export default function Menu() {
@@ -208,7 +212,14 @@ export default function Menu() {
             Signature Pies
           </h3>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Animation Stagger Container */}
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
             {[
               {
                 name: "Upper Crust Special",
@@ -247,8 +258,9 @@ export default function Menu() {
                 img: "/images/pizzas/1.jpg",
               },
             ].map((pizza) => (
-              <div
+              <motion.div
                 key={pizza.name}
+                variants={popIn}
                 className="bg-zinc-900 rounded-xl overflow-hidden shadow-md border border-zinc-700 hover:shadow-xl hover:-translate-y-2 hover:border-yellow-500 transition-all duration-300"
               >
                 <img
@@ -272,10 +284,11 @@ export default function Menu() {
                     </a>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
+
 
       </div>
 
@@ -323,14 +336,20 @@ export default function Menu() {
               img: "/images/appetizers/4.jpg",
             },
           ].map((item) => (
-            <div key={item.name} className="relative">
+            <motion.div
+              key={item.name}
+              variants={popIn}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              className="relative"
+            >
               <img
                 loading="lazy"
                 src={item.img}
                 alt={item.name}
                 className="h-64 w-full object-cover brightness-90"
               />
-
               <div className="absolute bottom-0 left-0 right-0 bg-black/70 p-4 text-center">
                 <h4 className="text-xl font-bold text-yellow-400">{item.name}</h4>
                 <p className="text-gray-200 text-sm">{item.price}</p>
@@ -343,7 +362,7 @@ export default function Menu() {
                   Order • Customize →
                 </a>
               </div>
-            </div>
+            </motion.div>
           ))}
         </Slider>
 
@@ -420,7 +439,14 @@ export default function Menu() {
                 img: "/images/pasta/2.jpg",
               },
             ].map((item) => (
-              <div key={item.name} className="relative">
+              <motion.div
+                key={item.name}
+                variants={popIn}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                className="relative"
+              >
                 <img
                   loading="lazy"
                   src={item.img}
@@ -439,7 +465,7 @@ export default function Menu() {
                     Order • Customize →
                   </a>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </Slider>
         </div>
@@ -517,7 +543,15 @@ export default function Menu() {
                 img: "/images/burgers/3.jpg",
               },
             ].map((item) => (
-              <div key={item.name} className="relative">
+              <motion.div
+                key={item.name}
+                variants={popIn}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                className="relative"
+              >
+
                 <img
                   loading="lazy"
                   src={item.img}
@@ -536,7 +570,7 @@ export default function Menu() {
                     Order • Customize →
                   </a>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </Slider>
         </div>
@@ -577,7 +611,13 @@ export default function Menu() {
         </h3>
 
         {/* Featured Salad Card */}
-        <div className="relative max-w-3xl mx-auto rounded-xl overflow-hidden shadow-md border border-zinc-700">
+        <motion.div
+          variants={popIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+          className="relative max-w-3xl mx-auto rounded-xl overflow-hidden shadow-md border border-zinc-700"
+        >
           <img
             loading="lazy"
             src="/images/salads/1.jpg"
@@ -598,7 +638,7 @@ export default function Menu() {
               Order • Customize →
             </a>
           </div>
-        </div>
+        </motion.div>
 
         {/* Salad List */}
         <div className="mt-12 max-w-lg mx-auto text-left text-gray-300">
@@ -623,7 +663,14 @@ export default function Menu() {
         </h3>
 
         {/* Featured Dessert Card */}
-        <div className="relative max-w-3xl mx-auto rounded-xl overflow-hidden shadow-md border border-zinc-700">
+        <motion.div
+          variants={popIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+          className="relative max-w-3xl mx-auto rounded-xl overflow-hidden shadow-md border border-zinc-700"
+        >
+
           <img
             loading="lazy"
             src="/images/desserts/1.jpg"
@@ -643,7 +690,7 @@ export default function Menu() {
               Order • Customize →
             </a>
           </div>
-        </div>
+        </motion.div>
 
         {/* Quick List */}
         <div className="mt-12 grid sm:grid-cols-2 gap-10 text-left text-gray-300 text-sm">
