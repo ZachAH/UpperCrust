@@ -1,17 +1,23 @@
-import { circOut } from "framer-motion";
 
 export const popIn = {
-  hidden: { opacity: 0, scale: 0.95, y: 20 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: {
-      duration: 0.35,
-      ease: circOut, // ✔ Framer’s typed easing
+    hidden: {
+      opacity: 0,
+      y: 40,
+      scale: 0.97,
     },
-  },
-};
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.45,
+      },
+    },
+  };
+  
+  
+  
+  
 
 export const staggerContainer = {
     hidden: {},

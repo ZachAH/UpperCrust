@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Slider from "react-slick";
 import { motion } from "framer-motion";
 import { popIn } from "../animations";
 import { staggerContainer } from "../animations";
-
-
+import { useInView } from "framer-motion";
 
 export default function Menu() {
   const [activeSection, setActiveSection] = useState("pizzas");
@@ -215,7 +214,7 @@ export default function Menu() {
           {/* Animation Stagger Container */}
           <motion.div
             variants={staggerContainer}
-            initial="visable"
+            initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
             className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
@@ -257,40 +256,55 @@ export default function Menu() {
                 price: "$19.49–$39.99",
                 img: "/images/pizzas/1.jpg",
               },
-            ].map((pizza) => (
-              <motion.div
-                key={pizza.name}
-                variants={popIn}
-                className="bg-zinc-900 rounded-xl overflow-hidden shadow-md border border-zinc-800
-                transition-transform transition-border duration-150 will-change-transform
-                hover:-translate-y-2 hover:border-yellow-400 hover:shadow-yellow-400/20"
-              >
-                <img
-                  src={pizza.img}
-                  alt={pizza.name}
-                  className="h-44 w-full object-cover"
-                />
-                <div className="p-5 text-left">
-                  <h4 className="text-xl font-bold text-yellow-400">{pizza.name}</h4>
-                  <p className="text-gray-300 text-sm">{pizza.desc}</p>
-                  <p className="text-gray-400 text-sm mt-1">{pizza.price}</p>
+            ].map((pizza) => {
+              const ref = useRef(null);
+              const inView = useInView(ref, { amount: 0.55 });
+              const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
 
-                  <div className="mt-4">
-                    <a
-                      href="https://uppercrust.hungerrush.com/Order/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block text-center bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full text-sm font-semibold transition"
-                    >
-                      Order • Customize →
-                    </a>
+              return (
+                <motion.div
+                  ref={ref}
+                  key={pizza.name}
+                  variants={popIn}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false }}
+                  className={`bg-zinc-900 rounded-xl overflow-hidden shadow-md border
+                      will-change-transform transition-all duration-300
+                      ${inView && isMobile
+                      ? "border-yellow-400 shadow-yellow-400/30 scale-[1.03] brightness-105 z-20"
+                      : "border-zinc-800 opacity-95"
+                    }
+                      hover:shadow-yellow-400/30 hover:border-yellow-400
+                      `}
+                >
+                  <img
+                    src={pizza.img}
+                    alt={pizza.name}
+                    className="h-44 w-full object-cover"
+                  />
+
+                  <div className="p-5 text-left">
+                    <h4 className="text-xl font-bold text-yellow-400">{pizza.name}</h4>
+                    <p className="text-gray-300 text-sm">{pizza.desc}</p>
+                    <p className="text-gray-400 text-sm mt-1">{pizza.price}</p>
+
+                    <div className="mt-4">
+                      <a
+                        href="https://uppercrust.hungerrush.com/Order/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block text-center bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full text-sm font-semibold transition"
+                      >
+                        Order • Customize →
+                      </a>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
-
 
       </div>
 
