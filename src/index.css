@@ -193,54 +193,52 @@
   }
 }
 
-/* --- CHUNKY CIRCULAR SLICK ARROWS --- */
+/* --- CHUNKY MINIMAL ARROWS (NO CIRCLES) --- */
 .slick-prev,
 .slick-next {
-  width: 48px !important;
-  height: 48px !important;
-  border-radius: 9999px !important;
-  background-color: rgba(0, 0, 0, 0.75) !important;
+  width: 38px !important;
+  height: 38px !important;
   display: flex !important;
   justify-content: center;
   align-items: center;
   z-index: 20 !important;
-  border: 3px solid rgba(255, 215, 120, 0.6) !important; /* thicker gold */
+  background: transparent !important;
+  border: none !important;
+  transform: translateY(-50%);
   transition: all 0.25s ease-in-out !important;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.4);
 }
 
 .slick-prev:before,
 .slick-next:before {
-  font-size: 20px !important;
-  font-weight: bold !important;
-  color: #F8E49A !important; /* warm gold */
+  font-size: 28px !important;
+  font-weight: 900 !important;
   opacity: 1 !important;
+  color: #D4AF37 !important; /* Metallic gold */
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
 }
 
-.slick-prev:hover,
-.slick-next:hover {
-  background-color: #D4AF37 !important; /* metallic gold */
-  transform: scale(1.12);
-  border-color: #fff !important;
-}
-
+/* Hover zoom + bright highlight */
 .slick-prev:hover:before,
 .slick-next:hover:before {
-  color: #000 !important;
+  color: #fff !important;
+  transform: scale(1.2);
+  text-shadow: 0 0 12px rgba(255, 240, 180, 0.9);
 }
 
-/* Mobile Chunky Arrows */
-@media (max-width: 768px) {
-  .slick-prev,
-  .slick-next {
-    width: 42px !important;
-    height: 42px !important;
-    border-width: 3px !important;
-  }
+/* Disabled state fade */
+.slick-prev.slick-disabled:before,
+.slick-next.slick-disabled:before {
+  opacity: 0.35 !important;
+  text-shadow: none !important;
+  transform: none !important;
+}
 
+/* Mobile size tweak */
+@media (max-width: 768px) {
   .slick-prev:before,
   .slick-next:before {
-    font-size: 16px !important;
+    font-size: 22px !important;
   }
 }
+
 
