@@ -2,6 +2,14 @@
 @import "slick-carousel/slick/slick.css";
 @import "slick-carousel/slick/slick-theme.css";
 
+@font-face {
+  font-family: "slick";
+  src: url("/fonts/slick.woff") format("woff"),
+    url("/fonts/slick.ttf") format("truetype");
+  font-display: swap;
+}
+
+
 @keyframes pulse-glow {
 
   0%,

@@ -6,11 +6,29 @@ export default function Hero() {
   const [offset, setOffset] = useState(0);
 
   // Parallax scroll
+  // Parallax scroll
   useEffect(() => {
-    const handleScroll = () => setOffset(window.scrollY * 0.10);
+    let ticking = false;
+
+    const updateParallax = () => {
+      setOffset(window.scrollY * 0.10);
+      ticking = false;
+    };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    };
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
+
 
   return (
     <>
