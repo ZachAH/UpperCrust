@@ -74,8 +74,18 @@ export default function Menu() {
       <div className="max-w-6xl mx-auto text-center mb-12 mt-8">
         <h2 className="text-4xl font-extrabold text-yellow-500 mb-4">Our Menu</h2>
         <p className="text-gray-300 text-lg mb-8">
-          Build your perfect pie or choose from our signature favorites — plus all your other Upper Crust classics.
+          Build your perfect pie or choose from our signature favorites — plus all your other Upper Crust classics. All made fresh per order!
         </p>
+
+        {/* 🍕 Cinematic Pizza Line Zoom-Out */}
+        <div className="pizza-line-container overflow-hidden rounded-xl w-full mb-8 shadow-lg border border-zinc-800">
+          <img
+            src="/images/pizza_line.webp"
+            alt="Pizza Line"
+            className="pizza-line-image w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
 
         {/* Order Now button */}
         <div className="flex justify-center">
@@ -221,40 +231,40 @@ export default function Menu() {
           >
             {[
               {
-                name: "Upper Crust Special",
-                desc: "Italian Sausage, Fresh Mushrooms, and White Onions.",
+                name: "Super",
+                desc: "Italian Sausage,Pepperoni, Anchovies, Fresh Mushrooms, White Onions, Green Peppers and Black Olives",
                 price: "$18.49-$36.99",
-                img: "/images/pizzas/1.jpg",
+                img: "/images/pizzas/super.webp",
               },
               {
                 name: "Deluxe",
                 desc: "Sausage, Pepperoni, Mushrooms, Onions, and Green Peppers.",
                 price: "$19.99-$36.99",
-                img: "/images/pizzas/2.jpg",
+                img: "/images/pizzas/Deluxe.webp",
               },
               {
                 name: "Carne",
                 desc: "Sausage, Pepperoni, Bacon, and Ham.",
                 price: "$19.99-$39.99",
-                img: "/images/pizzas/3.jpg",
+                img: "/images/pizzas/carne.jpg",
               },
               {
-                name: "Pepperoni Plus",
-                desc: "Double the Pepperoni and Mozzarella.",
+                name: "Classic Pepporoni",
+                desc: "Pepperoni and Mozzarella.",
                 price: "$18.49-$38.99",
-                img: "/images/pizzas/4.jpg",
+                img: "/images/pizzas/pepperoni.webp",
               },
               {
-                name: "Buffalo Chicken",
-                desc: "Buffalo Ranch sauce, Chicken, Bacon, Red Onion, Jalapeño.",
+                name: "CBR(Chicken, Bacon, Ranch)",
+                desc: "Chicken, Bacon, Mozzerella, with a ranch drizzle on top.",
                 price: "$19.49–$39.99",
-                img: "/images/pizzas/5.jpg",
+                img: "/images/pizzas/CBR.webp",
               },
               {
-                name: "BBQ Chicken",
-                desc: "BBQ sauce, Chicken, Bacon, Red Onion.",
+                name: "Veggie",
+                desc: "Onions, Green Peppers, Black Olives, and Mushrooms.",
                 price: "$19.49–$39.99",
-                img: "/images/pizzas/1.jpg",
+                img: "/images/pizzas/veggie.webp",
               },
             ].map((pizza) => {
               const ref = useRef(null);
@@ -334,23 +344,13 @@ export default function Menu() {
             {
               name: "Cheesy Garlic Sticks",
               price: "$9.99",
-              img: "/images/appetizers/1.jpg",
-            },
-            {
-              name: "Mozzarella Sticks",
-              price: "$7.99",
-              img: "/images/appetizers/2.jpg",
+              img: "/images/appetizers/sticks.webp",
             },
             {
               name: "Chicken Wings",
               price: "10pc $12.99",
               img: "/images/appetizers/3.jpg",
-            },
-            {
-              name: "Breaded Mushrooms",
-              price: "$7.99",
-              img: "/images/appetizers/4.jpg",
-            },
+            }
           ].map((item) => (
             <motion.div
               key={item.name}

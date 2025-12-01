@@ -3,105 +3,122 @@
 @import "slick-carousel/slick/slick-theme.css";
 
 @keyframes pulse-glow {
-    0%, 100% {
-      transform: scale(1);
-      box-shadow: 0 0 0px rgba(239, 68, 68, 0.5);
-    }
-    50% {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
-    }
-  }
-  
-  .animate-pulse-glow {
-    animation: pulse-glow 2.5s ease-in-out infinite;
-  }
-  
-  @keyframes soft-glow {
-    0%, 100% {
-      transform: scale(1);
-      box-shadow: 0 0 8px rgba(239, 68, 68, 0.3);
-    }
-    50% {
-      transform: scale(1.03);
-      box-shadow: 0 0 18px rgba(239, 68, 68, 0.4);
-    }
-  }
-  
-  .animate-soft-glow {
-    animation: soft-glow 4s ease-in-out infinite;
-  }
-  
-  .bg-gradient-animated {
-    background: radial-gradient(circle at 20% 20%, rgba(255,0,0,0.2), transparent 60%),
-                radial-gradient(circle at 80% 80%, rgba(255,255,0,0.2), transparent 60%);
-    animation: gradientMove 8s infinite alternate ease-in-out;
-  }
-  
-  @keyframes gradientMove {
-    0% {
-      background-position: 0% 0%;
-    }
-    100% {
-      background-position: 80% 80%;
-    }
+
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0px rgba(239, 68, 68, 0.5);
   }
 
-  @keyframes fadeInUp {
-    0% {
-      opacity: 0;
-      transform: translateY(25px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
   }
-  
-  .animate-fadeInUp {
-    animation: fadeInUp 1s ease-out forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2.5s ease-in-out infinite;
+}
+
+@keyframes soft-glow {
+
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.3);
   }
 
-  @keyframes bounceOnce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 18px rgba(239, 68, 68, 0.4);
   }
-  
-  .animate-bounce-once {
-    animation: bounceOnce 0.8s ease-out;
+}
+
+.animate-soft-glow {
+  animation: soft-glow 4s ease-in-out infinite;
+}
+
+.bg-gradient-animated {
+  background: radial-gradient(circle at 20% 20%, rgba(255, 0, 0, 0.2), transparent 60%),
+    radial-gradient(circle at 80% 80%, rgba(255, 255, 0, 0.2), transparent 60%);
+  animation: gradientMove 8s infinite alternate ease-in-out;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 0%;
   }
 
-  .review-card {
-    animation: reviewFadeUp 0.7s ease-out;
+  100% {
+    background-position: 80% 80%;
   }
-  
-  @keyframes reviewFadeUp {
-    0% {
-      opacity: 0;
-      transform: translateY(25px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
   }
-  
-  @keyframes slideDown {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .animate-slideDown {
-    animation: slideDown 0.25s ease-out;
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+@keyframes bounceOnce {
+
+  0%,
+  100% {
+    transform: translateY(0);
   }
-  
-  /* Soft warm glow for food cards */
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-bounce-once {
+  animation: bounceOnce 0.8s ease-out;
+}
+
+.review-card {
+  animation: reviewFadeUp 0.7s ease-out;
+}
+
+@keyframes reviewFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.25s ease-out;
+}
+
+/* Soft warm glow for food cards */
 .hover\:shadow-xl:hover {
   box-shadow: 0 6px 20px rgba(255, 200, 50, 0.25);
 }
@@ -162,10 +179,12 @@
 
 /* Optional: Match appetizer exactly */
 @media (min-width: 1024px) {
+
   .hoagies-carousel .slick-prev,
   .burgers-carousel .slick-prev {
     left: 10px !important;
   }
+
   .hoagies-carousel .slick-next,
   .burgers-carousel .slick-next {
     right: 10px !important;
@@ -174,6 +193,7 @@
 
 /* Perfect mobile arrow placement inside the image bounds */
 @media (max-width: 768px) {
+
   .hoagies-carousel .slick-prev,
   .hoagies-carousel .slick-next,
   .burgers-carousel .slick-prev,
@@ -213,7 +233,8 @@
   font-size: 28px !important;
   font-weight: 900 !important;
   opacity: 1 !important;
-  color: #D4AF37 !important; /* Metallic gold */
+  color: #D4AF37 !important;
+  /* Metallic gold */
   text-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
 }
 
@@ -235,10 +256,48 @@
 
 /* Mobile size tweak */
 @media (max-width: 768px) {
+
   .slick-prev:before,
   .slick-next:before {
     font-size: 22px !important;
   }
 }
 
+/* Add in your global styles or a linked CSS file */
 
+.pizza-line-container {
+  height: 550px;
+  /* show more at max zoom out */
+}
+
+.pizza-line-image {
+  animation: slowZoomOut 7s ease-out forwards;
+  object-position: center top;
+  /* keep the pizzas as the focus */
+}
+
+@keyframes slowZoomOut {
+  0% {
+    transform: scale(1.65);
+    object-position: 15% 25%;
+    /* 🎯 bottom-right focus */
+  }
+
+  100% {
+    transform: scale(1);
+    object-position: center top;
+    /* perfect ending location */
+  }
+}
+
+.pizza-line-container {
+  height: 550px;
+  overflow: hidden;
+}
+
+.pizza-line-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: slowZoomOut 8s ease-out forwards;
+}
