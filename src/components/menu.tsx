@@ -525,34 +525,29 @@ export default function Menu() {
         </h3>
 
         {/* Featured Salad Card */}
-        <motion.div
-          variants={popIn}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.25 }}
-          className="relative max-w-3xl mx-auto rounded-xl overflow-hidden shadow-md border border-zinc-700"
-        >
-          <img
-            loading="lazy"
-            src="/images/salads/1.jpg"
-            alt="Grilled Chicken Salad"
-            className="h-64 w-full object-cover brightness-90"
-          />
+        {/* 🥗 Salads Fresh Feature */}
+        <div className="relative z-0 fresh-glow rounded-xl w-full md:w-[80%] mx-auto mb-12 p-10 bg-zinc-900 shadow-lg border border-zinc-700 overflow-visible">
 
-          <div className="absolute bottom-0 left-0 right-0 bg-black/70 p-5 text-center">
-            <h4 className="text-xl font-bold text-yellow-400">Grilled Chicken Salad</h4>
-            <p className="text-gray-200 text-sm">$7.99</p>
+          {/* Mist */}
+          <div className="mist mist-1"></div>
+          <div className="mist mist-2"></div>
 
-            <a
-              href="https://uppercrust.hungerrush.com/Order/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 inline-block bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full text-xs font-semibold"
-            >
-              Order • Customize →
-            </a>
+          {/* Sparkles */}
+          <div className="leaf-sparkle sparkle-1"></div>
+          <div className="leaf-sparkle sparkle-2"></div>
+          <div className="leaf-sparkle sparkle-3"></div>
+
+
+          <div className="text-center relative z-10">
+            <h4 className="text-3xl font-extrabold text-yellow-400 drop-shadow-lg mb-2">
+              Salads
+            </h4>
+            <p className="text-gray-300 text-lg italic">
+              Crisp. Cool. Refreshing.
+            </p>
           </div>
-        </motion.div>
+        </div>
+
 
         {/* Salad List */}
         <div className="mt-12 max-w-lg mx-auto text-left text-gray-300">
@@ -577,34 +572,27 @@ export default function Menu() {
         </h3>
 
         {/* Featured Dessert Card */}
-        <motion.div
-          variants={popIn}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.25 }}
-          className="relative max-w-3xl mx-auto rounded-xl overflow-hidden shadow-md border border-zinc-700"
-        >
+        {/* 🍰 Desserts Feature */}
+        <div className="relative z-0 dessert-glow rounded-xl w-full md:w-[80%] mx-auto mb-12 p-10 bg-zinc-900 shadow-lg border border-zinc-700 overflow-visible">
 
-          <img
-            loading="lazy"
-            src="/images/desserts/1.jpg"
-            alt="Cannolis"
-            className="h-64 w-full object-cover brightness-90"
-          />
+          {/* Sparkles */}
+          <div className="dessert-sparkle sparkle-d1"></div>
+          <div className="dessert-sparkle sparkle-d2"></div>
 
-          <div className="absolute bottom-0 left-0 right-0 bg-black/70 p-5 text-center">
-            <h4 className="text-xl font-bold text-yellow-400">Cannolis</h4>
-            <p className="text-gray-200 text-sm">$3.50 each</p>
-            <a
-              href="https://uppercrust.hungerrush.com/Order/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 inline-block bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full text-xs font-semibold"
-            >
-              Order • Customize →
-            </a>
+          {/* Drip effect */}
+          <div className="drip drip-1"></div>
+          <div className="drip drip-2"></div>
+
+          <div className="text-center relative z-10">
+            <h4 className="text-3xl font-extrabold text-yellow-400 drop-shadow-lg mb-2">
+              Desserts & Drinks
+            </h4>
+            <p className="text-gray-300 text-lg italic">
+              Sweet treats & chilled drinks.
+            </p>
           </div>
-        </motion.div>
+        </div>
+
 
         {/* Quick List */}
         <div className="mt-12 grid sm:grid-cols-2 gap-10 text-left text-gray-300 text-sm">

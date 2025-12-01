@@ -368,3 +368,212 @@
 .hot-glow {
   box-shadow: 0 0 40px rgba(255, 120, 40, 0.18);
 }
+
+@layer utilities {
+
+  /* SALAD EFFECTS 🌿 */
+  .fresh-glow::before {
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 45px;
+    background: radial-gradient(circle, rgba(100, 255, 150, 0.35), transparent 75%);
+    filter: blur(20px);
+    z-index: -1;
+  }
+
+  .mist {
+    position: absolute;
+    width: 120px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.5), transparent 70%);
+    filter: blur(28px);
+    opacity: 0.45;
+    pointer-events: none;
+    animation: mistRise 7s infinite ease-in-out;
+  }
+
+  .mist-1 {
+    left: 40%;
+    top: -15px;
+    animation-delay: 0s;
+  }
+
+  .mist-2 {
+    left: 55%;
+    top: -25px;
+    animation-delay: 3s;
+  }
+
+  @keyframes mistRise {
+    0% {
+      transform: translateY(20px) scale(0.9);
+      opacity: 0;
+    }
+
+    35% {
+      opacity: 0.55;
+    }
+
+    100% {
+      transform: translateY(-140px) scale(1.3);
+      opacity: 0;
+    }
+  }
+
+  /* --- Leaf Sparkle Replacement 🌿 --- */
+  .leaf-sparkle {
+    position: absolute;
+    width: 18px;
+    height: 26px;
+    background: rgba(120, 255, 120, 0.85);
+    border-radius: 50% 50% 0 50%;
+    transform-origin: bottom center;
+    animation: leafFloat 5.5s infinite ease-in-out;
+    filter: blur(0.5px);
+  }
+
+  /* stem shape */
+  .leaf-sparkle::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 45%;
+    width: 2px;
+    height: 7px;
+    background: rgba(100, 200, 100, 0.95);
+    border-radius: 9999px;
+  }
+
+  .sparkle-1 {
+    left: 45%;
+    top: -12px;
+    animation-delay: 1.2s;
+  }
+
+  .sparkle-2 {
+    left: 60%;
+    top: -20px;
+    animation-delay: 2.4s
+  }
+
+
+  .sparkle-3 {
+    left: 52%;
+    top: -18px;
+    animation-delay: 3.7s;
+  }
+
+
+
+  /* float animation */
+  @keyframes leafFloat {
+    0% {
+      transform: translateY(10px) rotate(0deg) scale(0.6);
+      opacity: 0;
+    }
+
+    40% {
+      opacity: 1;
+    }
+
+    100% {
+      transform: translateY(-80px) rotate(25deg) scale(1.2);
+      opacity: 0;
+    }
+  }
+
+
+
+
+  /* DESSERT EFFECTS ✨🍫 */
+  .dessert-glow::before {
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 50px;
+    background: radial-gradient(circle, rgba(255, 200, 150, 0.45), transparent 80%);
+    filter: blur(28px);
+    z-index: -1;
+  }
+
+  .dessert-sparkle {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 9999px;
+    animation: dessertSparkle 5s infinite ease-in-out;
+  }
+
+  .sparkle-d1 {
+    left: 42%;
+    top: -20px;
+    animation-delay: 0s;
+  }
+
+  .sparkle-d2 {
+    left: 58%;
+    top: -15px;
+    animation-delay: 2.4s;
+  }
+
+  @keyframes dessertSparkle {
+    0% {
+      transform: translateY(10px) scale(0.4);
+      opacity: 0;
+    }
+
+    40% {
+      opacity: 1;
+    }
+
+    100% {
+      transform: translateY(-110px) scale(1.3);
+      opacity: 0;
+    }
+  }
+
+  .drip {
+    position: absolute;
+    bottom: -15px;
+    width: 10px;
+    height: 25px;
+    background: rgba(255, 180, 150, 0.7);
+    border-radius: 50%;
+    animation: dessertDrip 6s infinite ease-in;
+  }
+
+  .drip-1 {
+    left: 47%;
+    animation-delay: 1.2s;
+  }
+
+  .drip-2 {
+    left: 53%;
+    animation-delay: 3.3s;
+  }
+
+  @keyframes dessertDrip {
+    0% {
+      transform: translateY(0px) scaleY(0.4);
+      opacity: 0;
+    }
+
+    30% {
+      opacity: 0.7;
+    }
+
+    100% {
+      transform: translateY(20px) scaleY(1.2);
+      opacity: 0;
+    }
+  }
+
+}
