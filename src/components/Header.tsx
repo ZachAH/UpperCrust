@@ -31,6 +31,7 @@ export default function Header() {
         {/* Logo + Title */}
         <div className="flex items-center space-x-3 flex-shrink-0">
           <img
+            loading="lazy"
             src="/logo.webp"
             alt="Upper Crust Pizza Logo"
             className="w-9 h-9 md:w-11 md:h-11 object-contain"

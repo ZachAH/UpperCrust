@@ -62,11 +62,10 @@ export default function Menu() {
             <a
               key={cat.id}
               href={`#${cat.id}`}
-              className={`transition-colors ${
-                activeSection === cat.id
+              className={`transition-colors ${activeSection === cat.id
                   ? "text-yellow-400"
                   : "text-gray-300 hover:text-yellow-400"
-              }`}
+                }`}
             >
               {cat.name}
             </a>
@@ -85,10 +84,10 @@ export default function Menu() {
         {/* Cinematic Pizza Line Zoom-Out */}
         <div className="pizza-line-container overflow-hidden rounded-xl w-full mb-8 shadow-lg border border-zinc-800">
           <img
+            loading="lazy"
             src="/images/pizza_line.webp"
             alt="Pizza Line"
             className="pizza-line-image w-full h-full object-cover"
-            loading="lazy"
           />
         </div>
 
@@ -184,13 +183,13 @@ export default function Menu() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: false }}
-                className={`bg-zinc-900 rounded-xl overflow-hidden shadow-md border transition duration-300 will-change-transform ${
-                  inView && isMobile
+                className={`bg-zinc-900 rounded-xl overflow-hidden shadow-md border transition duration-300 will-change-transform ${inView && isMobile
                     ? "border-yellow-400 shadow-yellow-400/30 scale-[1.03] brightness-105 z-20"
                     : "border-zinc-800 opacity-95"
-                } hover:shadow-yellow-400/30 hover:border-yellow-400`}
+                  } hover:shadow-yellow-400/30 hover:border-yellow-400`}
               >
                 <img
+                  loading="lazy"
                   src={pizza.img}
                   alt={pizza.name}
                   className="h-44 w-full object-cover"

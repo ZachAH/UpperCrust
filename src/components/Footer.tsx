@@ -18,9 +18,9 @@ export default function Footer() {
         </p>
 
         <div className="flex gap-4 items-center justify-center mt-1">
-          <img src="/react.png" alt="React" className="w-7 h-7" />
-          <img src="/vite.svg" alt="Vite" className="w-7 h-7" />
-          <img src="/tailwind.png" alt="TailwindCSS" className="w-7 h-7" />
+          <img loading="lazy" src="/react.png" alt="React" className="w-7 h-7" />
+          <img loading="lazy" src="/vite.svg" alt="Vite" className="w-7 h-7" />
+          <img loading="lazy" src="/tailwind.png" alt="TailwindCSS" className="w-7 h-7" />
         </div>
       </div>
     </footer>
