@@ -345,11 +345,6 @@ export default function Menu() {
               name: "Cheesy Garlic Sticks",
               price: "$9.99",
               img: "/images/appetizers/sticks.webp",
-            },
-            {
-              name: "Chicken Wings",
-              price: "10pc $12.99",
-              img: "/images/appetizers/3.jpg",
             }
           ].map((item) => (
             <motion.div
@@ -414,77 +409,26 @@ export default function Menu() {
       {/* --- HOAGIES & PASTA --- */}
       <div id="hoagies" className="max-w-6xl mx-auto mb-24 scroll-mt-28">
         <h3 className="text-3xl font-extrabold text-yellow-400 text-center mb-10 tracking-wider">
-          Hoagies & Pasta
         </h3>
 
-        {/* Featured Carousel */}
-        <div className="max-w-5xl mx-auto relative">
-          <Slider
-            dots
-            infinite
-            speed={600}
-            slidesToShow={1}
-            slidesToScroll={1}
-            autoplay
-            autoplaySpeed={4000}
-            fade
-            pauseOnHover
-            lazyLoad="ondemand"
-            arrows={true}
-            className="hoagies-carousel rounded-xl overflow-hidden"
-          >
-            {[
-              {
-                name: "Philly Cheesesteak",
-                price: "$9.99",
-                img: "/images/hoagies/1.jpg",
-              },
-              {
-                name: "Meatball Hoagie",
-                price: "$9.99",
-                img: "/images/hoagies/2.jpg",
-              },
-              {
-                name: "Chicken Alfredo Pasta",
-                price: "$10.99",
-                img: "/images/pasta/1.jpg",
-              },
-              {
-                name: "Spaghetti & Meatballs",
-                price: "$11.99",
-                img: "/images/pasta/2.jpg",
-              },
-            ].map((item) => (
-              <motion.div
-                key={item.name}
-                variants={popIn}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-                className="relative"
-              >
-                <img
-                  loading="lazy"
-                  src={item.img}
-                  alt={item.name}
-                  className="h-64 w-full object-cover brightness-90"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-black/70 p-4 text-center">
-                  <h4 className="text-xl font-bold text-yellow-400">{item.name}</h4>
-                  <p className="text-gray-200 text-sm">{item.price}</p>
-                  <a
-                    href="https://uppercrust.hungerrush.com/Order/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-3 inline-block bg-red-600 hover:bg-red-700 text-white px-4 py-1.5 rounded-full text-xs font-semibold"
-                  >
-                    Order • Customize →
-                  </a>
-                </div>
-              </motion.div>
-            ))}
-          </Slider>
+        {/* Hoagies & Pasta Feature Hero */}
+        <div className="relative z-0 hot-glow rounded-xl w-full md:w-[80%] mx-auto mb-16 p-10 bg-zinc-900 shadow-lg border border-zinc-700 overflow-visible">
+
+          {/* Steam */}
+          <div className="steam steam-1"></div>
+          <div className="steam steam-2"></div>
+          <div className="steam steam-3"></div>
+
+          <div className="text-center relative z-10">
+            <h4 className="text-3xl font-extrabold text-yellow-400 drop-shadow-lg mb-2">
+              Hoagies & Pasta
+            </h4>
+            <p className="text-gray-300 text-lg italic">
+              Hot and made fresh per order!
+            </p>
+          </div>
         </div>
+
 
         {/* Quick List */}
         <div className="mt-12 grid sm:grid-cols-2 gap-10 text-left text-gray-300 text-sm">
@@ -526,70 +470,24 @@ export default function Menu() {
           Burgers & Chicken Sandwiches
         </h3>
 
-        {/* Featured Carousel */}
-        <div className="max-w-5xl mx-auto relative">
-          <Slider
-            dots
-            infinite
-            speed={600}
-            slidesToShow={1}
-            slidesToScroll={1}
-            autoplay
-            autoplaySpeed={4000}
-            fade
-            pauseOnHover
-            lazyLoad="ondemand"
-            arrows={true}
-            className="burgers-carousel rounded-xl overflow-hidden"
-          >
-            {[
-              {
-                name: "Texas Burger",
-                price: "$9.99",
-                img: "/images/burgers/1.jpg",
-              },
-              {
-                name: "Classic 1/4 lb Cheeseburger",
-                price: "$8.99",
-                img: "/images/burgers/2.jpg",
-              },
-              {
-                name: "Buffalo Chicken Sandwich",
-                price: "$9.99",
-                img: "/images/burgers/3.jpg",
-              },
-            ].map((item) => (
-              <motion.div
-                key={item.name}
-                variants={popIn}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-                className="relative"
-              >
+        {/* 🔥 Burgers Feature Hero */}
+        <div className="relative z-0 hot-glow rounded-xl w-full md:w-[80%] mx-auto mb-16 p-10 bg-zinc-900 shadow-lg border border-zinc-700 overflow-visible">
 
-                <img
-                  loading="lazy"
-                  src={item.img}
-                  alt={item.name}
-                  className="h-64 w-full object-cover brightness-90"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-black/70 p-4 text-center">
-                  <h4 className="text-xl font-bold text-yellow-400">{item.name}</h4>
-                  <p className="text-gray-200 text-sm">{item.price}</p>
-                  <a
-                    href="https://uppercrust.hungerrush.com/Order/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-3 inline-block bg-red-600 hover:bg-red-700 text-white px-4 py-1.5 rounded-full text-xs font-semibold"
-                  >
-                    Order • Customize →
-                  </a>
-                </div>
-              </motion.div>
-            ))}
-          </Slider>
+          {/* Steam */}
+          <div className="steam steam-1"></div>
+          <div className="steam steam-2"></div>
+          <div className="steam steam-3"></div>
+
+          <div className="text-center relative z-10">
+            <h4 className="text-3xl font-extrabold text-yellow-400 drop-shadow-lg mb-2">
+              Burgers & Chicken Sandwiches
+            </h4>
+            <p className="text-gray-300 text-lg italic">
+              Fresh off the grill and stacked with flavor!
+            </p>
+          </div>
         </div>
+
 
         {/* Quick List */}
         <div className="mt-12 grid sm:grid-cols-2 gap-10 text-left text-gray-300 text-sm">

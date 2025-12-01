@@ -301,3 +301,70 @@
   object-fit: cover;
   animation: slowZoomOut 8s ease-out forwards;
 }
+
+@layer utilities {
+  .steam {
+    position: absolute;
+    width: 130px;
+    height: 230px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.65) 0%, transparent 70%);
+    filter: blur(30px);
+    opacity: 0.75;
+    pointer-events: none;
+    animation: steamRise 6s infinite ease-in-out;
+  }
+
+  .steam-1 {
+    left: 38%;
+    top: -20px;
+    animation-delay: 0s;
+  }
+
+  .steam-2 {
+    left: 50%;
+    top: -15px;
+    animation-delay: 2s;
+  }
+
+  .steam-3 {
+    left: 62%;
+    top: -25px;
+    animation-delay: 4s;
+  }
+
+  @keyframes steamRise {
+    0% {
+      transform: translateY(30px) scale(0.85);
+      opacity: 0;
+    }
+
+    35% {
+      opacity: 0.85;
+    }
+
+    100% {
+      transform: translate(25px, -150px) scale(1.4);
+      opacity: 0;
+    }
+  }
+}
+
+@layer utilities {
+  .hot-glow::before {
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 40px;
+    background: radial-gradient(circle, rgba(255, 100, 20, 0.45), transparent 70%);
+    filter: blur(18px);
+    z-index: -1;
+    /* Glow behind */
+  }
+}
+
+.hot-glow {
+  box-shadow: 0 0 40px rgba(255, 120, 40, 0.18);
+}
