@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import LaunchModal from "./LaunchModal";
 
 export default function Hero() {
   const [offset, setOffset] = useState(0);
@@ -13,6 +14,8 @@ export default function Hero() {
 
   return (
     <>
+      <LaunchModal />
+
       {/* Sticky Tap-To-Call (Mobile only) */}
       <a
         href="tel:+14143326820"
@@ -24,12 +27,13 @@ export default function Hero() {
       </a>
 
       <section
-        className="relative h-screen flex items-center justify-center bg-cover bg-center overflow-hidden"
+        className="relative h-screen flex items-center justify-center bg-cover bg-center overflow-hidden hero-bg"
         style={{
           backgroundImage: "url('/pizza-hero.webp')",
           backgroundPositionY: `${offset}px`, // parallax effect
         }}
       >
+
         {/* Animated Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-animated pointer-events-none"></div>
 
@@ -41,6 +45,7 @@ export default function Hero() {
           className="relative z-10 text-center text-white px-4 max-w-2xl 
           opacity-0 animate-fadeInUp"
         >
+
           <h2 className="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight leading-tight">
             Proudly serving Milwaukee’s best hand-tossed pizza — and so much more.
           </h2>

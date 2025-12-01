@@ -8,6 +8,7 @@ import { useInView } from "framer-motion";
 export default function Menu() {
   const [activeSection, setActiveSection] = useState("pizzas");
 
+  // Smooth scroll + active nav tracker
   useEffect(() => {
     const links = document.querySelectorAll<HTMLAnchorElement>("a[href^='#']");
     links.forEach((link) => {
@@ -29,9 +30,10 @@ export default function Menu() {
     const handleScroll = () => {
       const scrollPos = window.scrollY + 140;
       sections.forEach((section) => {
-        const top = section.offsetTop;
-        const height = section.offsetHeight;
-        if (scrollPos >= top && scrollPos < top + height) {
+        if (
+          scrollPos >= section.offsetTop &&
+          scrollPos < section.offsetTop + section.offsetHeight
+        ) {
           setActiveSection(section.id);
         }
       });
@@ -52,6 +54,7 @@ export default function Menu() {
 
   return (
     <section id="menu" className="bg-black text-white py-20 px-6">
+
       {/* Sticky Subnav */}
       <div className="sticky top-0 z-40 bg-black/90 backdrop-blur-sm border-b border-zinc-800">
         <div className="max-w-6xl mx-auto flex flex-wrap justify-center gap-4 py-3 text-sm font-semibold uppercase">
@@ -59,10 +62,11 @@ export default function Menu() {
             <a
               key={cat.id}
               href={`#${cat.id}`}
-              className={`transition-colors ${activeSection === cat.id
-                ? "text-yellow-400"
-                : "text-gray-300 hover:text-yellow-400"
-                }`}
+              className={`transition-colors ${
+                activeSection === cat.id
+                  ? "text-yellow-400"
+                  : "text-gray-300 hover:text-yellow-400"
+              }`}
             >
               {cat.name}
             </a>
@@ -74,10 +78,11 @@ export default function Menu() {
       <div className="max-w-6xl mx-auto text-center mb-12 mt-8">
         <h2 className="text-4xl font-extrabold text-yellow-500 mb-4">Our Menu</h2>
         <p className="text-gray-300 text-lg mb-8">
-          Build your perfect pie or choose from our signature favorites — plus all your other Upper Crust classics. All made fresh per order!
+          Build your perfect pie or choose from our signature favorites —
+          plus all your other Upper Crust classics. All made fresh per order!
         </p>
 
-        {/* 🍕 Cinematic Pizza Line Zoom-Out */}
+        {/* Cinematic Pizza Line Zoom-Out */}
         <div className="pizza-line-container overflow-hidden rounded-xl w-full mb-8 shadow-lg border border-zinc-800">
           <img
             src="/images/pizza_line.webp"
@@ -87,7 +92,7 @@ export default function Menu() {
           />
         </div>
 
-        {/* Order Now button */}
+        {/* Order CTA */}
         <div className="flex justify-center">
           <a
             href="https://uppercrust.hungerrush.com/Order/"
@@ -100,17 +105,17 @@ export default function Menu() {
         </div>
       </div>
 
-
-      {/* --- PIZZAS --- */}
-      <div id="pizzas" className="max-w-5xl mx-auto bg-zinc-900 rounded-xl shadow-lg p-8 mb-16 scroll-mt-28">
-        <h3 className="text-2xl font-bold text-yellow-400 mb-6 text-center">
+      {/* ================= PIZZAS ================= */}
+      <div id="pizzas" className="max-w-5xl mx-auto bg-zinc-900 rounded-xl shadow-lg p-8 mb-24 scroll-mt-28">
+        <h3 className="text-3xl font-bold text-yellow-400 mb-8 text-center">
           Build Your Own Pie
         </h3>
-        <p className="text-center mb-6 text-gray-300">
+        <p className="text-center text-gray-300 mb-6">
           Hand-tossed or thin crust — made just the way you like it.
         </p>
 
-        <div className="text-center mb-6">
+        {/* Base Pricing */}
+        <div className="text-center mb-10">
           <p>12" — $13.49 | 14" — $14.99 | 16" — $16.49</p>
           <p className="text-gray-400 text-sm mt-1">
             +$2.30–$2.50 per additional topping
@@ -118,213 +123,109 @@ export default function Menu() {
           <p className="text-gray-400 text-sm mt-1">
             Gluten Free available in 14" for $17.99.
           </p>
-          <div className="mt-10 bg-zinc-800 rounded-lg p-6 text-center border border-zinc-700">
-            <h4 className="text-2xl font-bold text-yellow-400 mb-3">
-              Make it a Double Decker
-            </h4>
-            <p className="text-gray-200 mb-2">
-              Two layers of crust, cheese, and toppings — the ultimate Upper Crust upgrade.
-            </p>
-
-            <div className="flex justify-center mt-4">
-              <table className="text-gray-300 text-sm md:text-base">
-                <thead>
-                  <tr className="text-yellow-400">
-                    <th className="px-4">Size</th>
-                    <th className="px-4">12"</th>
-                    <th className="px-4">14"</th>
-                    <th className="px-4">16"</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="px-4 py-1 font-semibold">Price</td>
-                    <td className="px-4 py-1">$21.49</td>
-                    <td className="px-4 py-1">$24.99</td>
-                    <td className="px-4 py-1">$27.49</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-1 font-semibold">Add. Toppings</td>
-                    <td className="px-4 py-1">$4.10</td>
-                    <td className="px-4 py-1">$4.30</td>
-                    <td className="px-4 py-1">$4.50</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <p className="text-gray-400 text-xs mt-3 italic">
-              *Cost per additional topping*
-            </p>
-          </div>
         </div>
 
-        {/* Toppings */}
-        <div className="grid md:grid-cols-2 gap-8 text-left text-gray-200">
-          <div>
-            <h4 className="font-bold text-yellow-400 mb-2">Sauces</h4>
-            <ul className="space-y-1">
-              <li>Homemade Marinara</li>
-              <li>Creamy Alfredo</li>
-              <li>Garlic Sauce</li>
-              <li>Sweet Baby Ray’s BBQ</li>
-              <li>Franks Red Hot</li>
-              <li>Buffalo Ranch</li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-bold text-yellow-400 mb-2">Cheeses</h4>
-            <ul className="space-y-1">
-              <li>Mozzarella</li>
-              <li>Cheddar</li>
-              <li>Monterey Jack</li>
-              <li>Romano</li>
-              <li>Feta</li>
-            </ul>
-          </div>
-        </div>
+        {/* Signature Pies – Stagger Animation */}
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          {[
+            {
+              name: "Super",
+              desc: "Italian Sausage, Pepperoni, Anchovies, Mushrooms, Onions, Green Peppers, Black Olives",
+              price: "$18.49–$36.99",
+              img: "/images/pizzas/super.webp",
+            },
+            {
+              name: "Deluxe",
+              desc: "Sausage, Pepperoni, Mushrooms, Onions, and Green Peppers.",
+              price: "$19.99–$36.99",
+              img: "/images/pizzas/Deluxe.webp",
+            },
+            {
+              name: "Carne",
+              desc: "Sausage, Pepperoni, Bacon, and Ham.",
+              price: "$19.99–$39.99",
+              img: "/images/pizzas/carne.jpg",
+            },
+            {
+              name: "Classic Pepperoni",
+              desc: "Pepperoni and Mozzarella.",
+              price: "$18.49–$38.99",
+              img: "/images/pizzas/pepperoni.webp",
+            },
+            {
+              name: "CBR",
+              desc: "Chicken, Bacon, Mozzarella, with ranch drizzle.",
+              price: "$19.49–$39.99",
+              img: "/images/pizzas/CBR.webp",
+            },
+            {
+              name: "Veggie",
+              desc: "Onions, Peppers, Olives, and Mushrooms.",
+              price: "$19.49–$39.99",
+              img: "/images/pizzas/veggie.webp",
+            },
+          ].map((pizza) => {
+            const ref = useRef(null);
+            const inView = useInView(ref, { amount: 0.55 });
+            const isMobile =
+              typeof window !== "undefined" && window.innerWidth < 768;
 
-        <div className="grid md:grid-cols-2 gap-8 mt-8 text-left text-gray-200">
-          <div>
-            <h4 className="font-bold text-yellow-400 mb-2">Meats</h4>
-            <ul className="space-y-1">
-              <li>Italian Sausage</li>
-              <li>Pepperoni</li>
-              <li>Philly Steak</li>
-              <li>Meatball</li>
-              <li>Chicken</li>
-              <li>Bacon</li>
-              <li>Ham</li>
-              <li>Anchovies</li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-bold text-yellow-400 mb-2">Veggies & Fruits</h4>
-            <ul className="space-y-1">
-              <li>Fresh Mushrooms</li>
-              <li>White or Red Onion</li>
-              <li>Green Peppers</li>
-              <li>Black or Green Olives</li>
-              <li>Diced Tomatoes</li>
-              <li>Banana Peppers</li>
-              <li>Jalapeño</li>
-              <li>Garlic</li>
-              <li>Spinach</li>
-              <li>Pineapple</li>
-            </ul>
-          </div>
-        </div>
+            return (
+              <motion.div
+                ref={ref}
+                key={pizza.name}
+                variants={popIn}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false }}
+                className={`bg-zinc-900 rounded-xl overflow-hidden shadow-md border transition duration-300 will-change-transform ${
+                  inView && isMobile
+                    ? "border-yellow-400 shadow-yellow-400/30 scale-[1.03] brightness-105 z-20"
+                    : "border-zinc-800 opacity-95"
+                } hover:shadow-yellow-400/30 hover:border-yellow-400`}
+              >
+                <img
+                  src={pizza.img}
+                  alt={pizza.name}
+                  className="h-44 w-full object-cover"
+                />
 
-        {/* Signature Pies */}
-        <div className="mt-16">
-          <h3 className="text-3xl font-bold text-yellow-400 mb-10 text-center">
-            Signature Pies
-          </h3>
+                <div className="p-5 text-left">
+                  <h4 className="text-xl font-bold text-yellow-400">{pizza.name}</h4>
+                  <p className="text-gray-300 text-sm">{pizza.desc}</p>
+                  <p className="text-gray-400 text-sm mt-1">{pizza.price}</p>
 
-          {/* Animation Stagger Container */}
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            {[
-              {
-                name: "Super",
-                desc: "Italian Sausage,Pepperoni, Anchovies, Fresh Mushrooms, White Onions, Green Peppers and Black Olives",
-                price: "$18.49-$36.99",
-                img: "/images/pizzas/super.webp",
-              },
-              {
-                name: "Deluxe",
-                desc: "Sausage, Pepperoni, Mushrooms, Onions, and Green Peppers.",
-                price: "$19.99-$36.99",
-                img: "/images/pizzas/Deluxe.webp",
-              },
-              {
-                name: "Carne",
-                desc: "Sausage, Pepperoni, Bacon, and Ham.",
-                price: "$19.99-$39.99",
-                img: "/images/pizzas/carne.jpg",
-              },
-              {
-                name: "Classic Pepporoni",
-                desc: "Pepperoni and Mozzarella.",
-                price: "$18.49-$38.99",
-                img: "/images/pizzas/pepperoni.webp",
-              },
-              {
-                name: "CBR(Chicken, Bacon, Ranch)",
-                desc: "Chicken, Bacon, Mozzerella, with a ranch drizzle on top.",
-                price: "$19.49–$39.99",
-                img: "/images/pizzas/CBR.webp",
-              },
-              {
-                name: "Veggie",
-                desc: "Onions, Green Peppers, Black Olives, and Mushrooms.",
-                price: "$19.49–$39.99",
-                img: "/images/pizzas/veggie.webp",
-              },
-            ].map((pizza) => {
-              const ref = useRef(null);
-              const inView = useInView(ref, { amount: 0.55 });
-              const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-
-              return (
-                <motion.div
-                  ref={ref}
-                  key={pizza.name}
-                  variants={popIn}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: false }}
-                  className={`bg-zinc-900 rounded-xl overflow-hidden shadow-md border
-                      will-change-transform transition-all duration-300
-                      ${inView && isMobile
-                      ? "border-yellow-400 shadow-yellow-400/30 scale-[1.03] brightness-105 z-20"
-                      : "border-zinc-800 opacity-95"
-                    }
-                      hover:shadow-yellow-400/30 hover:border-yellow-400
-                      `}
-                >
-                  <img
-                    src={pizza.img}
-                    alt={pizza.name}
-                    className="h-44 w-full object-cover"
-                  />
-
-                  <div className="p-5 text-left">
-                    <h4 className="text-xl font-bold text-yellow-400">{pizza.name}</h4>
-                    <p className="text-gray-300 text-sm">{pizza.desc}</p>
-                    <p className="text-gray-400 text-sm mt-1">{pizza.price}</p>
-
-                    <div className="mt-4">
-                      <a
-                        href="https://uppercrust.hungerrush.com/Order/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-block text-center bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full text-sm font-semibold transition"
-                      >
-                        Order • Customize →
-                      </a>
-                    </div>
+                  <div className="mt-4">
+                    <a
+                      href="https://uppercrust.hungerrush.com/Order/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block text-center bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full text-sm font-semibold transition"
+                    >
+                      Order • Customize →
+                    </a>
                   </div>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        </div>
-
+                </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
       </div>
 
-      {/* --- APPETIZERS --- */}
+      {/* ================= APPETIZERS ================= */}
       <div id="appetizers" className="max-w-6xl mx-auto mb-24 scroll-mt-28">
+
         <h3 className="text-3xl font-extrabold text-yellow-400 text-center mb-10 tracking-wider">
           Appetizers
         </h3>
 
-        {/* Featured Carousel */}
+        {/* ONE Carousel – Perfect */}
         <Slider
           dots
           infinite
@@ -337,15 +238,13 @@ export default function Menu() {
           pauseOnHover
           lazyLoad="ondemand"
           arrows={true}
-          className="appetizer-carousel"
         >
-
           {[
             {
               name: "Cheesy Garlic Sticks",
               price: "$9.99",
               img: "/images/appetizers/sticks.webp",
-            }
+            },
           ].map((item) => (
             <motion.div
               key={item.name}
@@ -362,7 +261,9 @@ export default function Menu() {
                 className="h-64 w-full object-cover brightness-90"
               />
               <div className="absolute bottom-0 left-0 right-0 bg-black/70 p-4 text-center">
-                <h4 className="text-xl font-bold text-yellow-400">{item.name}</h4>
+                <h4 className="text-xl font-bold text-yellow-400">
+                  {item.name}
+                </h4>
                 <p className="text-gray-200 text-sm">{item.price}</p>
                 <a
                   href="https://uppercrust.hungerrush.com/Order/"
@@ -398,23 +299,17 @@ export default function Menu() {
         </div>
 
         <p className="text-gray-500 mt-6 text-center text-sm italic">
-          Wing Sauces: Mango Habanero, Frank’s Red Hot, Nashville Hot, Buffalo Ranch,
-          Sweet Baby Ray’s, Kickin’ Bourbon, Lemon Pepper.
+          Wing Sauces: Mango Habanero, Frank’s Hot, Nashville, Buffalo Ranch,
+          BBQ, Kickin’ Bourbon, Lemon Pepper.
         </p>
       </div>
 
-
-
-
-      {/* --- HOAGIES & PASTA --- */}
+      {/* ================= HOAGIES & PASTA ================= */}
       <div id="hoagies" className="max-w-6xl mx-auto mb-24 scroll-mt-28">
-        <h3 className="text-3xl font-extrabold text-yellow-400 text-center mb-10 tracking-wider">
-        </h3>
 
-        {/* Hoagies & Pasta Feature Hero */}
+        {/* Feature Hero */}
         <div className="relative z-0 hot-glow rounded-xl w-full md:w-[80%] mx-auto mb-16 p-10 bg-zinc-900 shadow-lg border border-zinc-700 overflow-visible">
 
-          {/* Steam */}
           <div className="steam steam-1"></div>
           <div className="steam steam-2"></div>
           <div className="steam steam-3"></div>
@@ -424,56 +319,40 @@ export default function Menu() {
               Hoagies & Pasta
             </h4>
             <p className="text-gray-300 text-lg italic">
-              Hot and made fresh per order!
+              Hot and Savory. Made Fresh to order!
             </p>
           </div>
         </div>
 
-
         {/* Quick List */}
-        <div className="mt-12 grid sm:grid-cols-2 gap-10 text-left text-gray-300 text-sm">
+        <div className="grid sm:grid-cols-2 gap-10 text-left text-gray-300 text-sm">
           <div>
             <h4 className="text-lg font-bold text-yellow-400 mb-2">Hoagies</h4>
             <ul className="space-y-2">
               <li className="border-b border-zinc-700 pb-2">Philly Cheesesteak — $9.99</li>
-              <li className="border-b border-zinc-700 pb-2">Italian Philly Cheesesteak — $9.99</li>
               <li className="border-b border-zinc-700 pb-2">Italian Chicken Cheesesteak — $9.99</li>
-              <li className="border-b border-zinc-700 pb-2">Chicken Philly Cheesesteak — $9.99</li>
-              <li className="border-b border-zinc-700 pb-2">Meatball Hoagie — $9.99</li>
+              <li className="border-b border-zinc-700 pb-2">Meatball — $9.99</li>
               <li className="border-b border-zinc-700 pb-2">Sausage Hoagie — $9.99</li>
-              <li className="border-b border-zinc-700 pb-2">Grilled Veggie Hoagie — $8.99</li>
+              <li className="border-b border-zinc-700 pb-2">Grilled Veggie — $8.99</li>
               <li className="border-b border-zinc-700 pb-2">BLT Hoagie — $9.99</li>
             </ul>
-            <p className="text-gray-500 text-xs mt-2 italic">
-              Add fries, onion rings, or tots for an additional cost
-            </p>
           </div>
-
           <div>
             <h4 className="text-lg font-bold text-yellow-400 mb-2">Pasta</h4>
             <ul className="space-y-2">
               <li className="border-b border-zinc-700 pb-2">Classic Spaghetti — $8.99</li>
-              <li className="border-b border-zinc-700 pb-2">Spaghetti and Meatballs — $11.99</li>
-              <li className="border-b border-zinc-700 pb-2">Chicken Parmesan — $11.99</li>
-              <li className="border-b border-zinc-700 pb-2">Spinach & Garlic Spaghetti — $10.99</li>
               <li className="border-b border-zinc-700 pb-2">Chicken Alfredo — $10.99</li>
+              <li className="border-b border-zinc-700 pb-2">Chicken Parm — $11.99</li>
+              <li className="border-b border-zinc-700 pb-2">Spinach & Garlic — $10.99</li>
             </ul>
           </div>
         </div>
       </div>
 
-
-
-      {/* --- BURGERS & CHICKEN SANDWICHES --- */}
+      {/* ================= BURGERS & CHICKEN ================= */}
       <div id="burgers" className="max-w-6xl mx-auto mb-24 scroll-mt-28">
-        <h3 className="text-3xl font-extrabold text-yellow-400 text-center mb-10 tracking-wider">
-          Burgers & Chicken Sandwiches
-        </h3>
 
-        {/* 🔥 Burgers Feature Hero */}
         <div className="relative z-0 hot-glow rounded-xl w-full md:w-[80%] mx-auto mb-16 p-10 bg-zinc-900 shadow-lg border border-zinc-700 overflow-visible">
-
-          {/* Steam */}
           <div className="steam steam-1"></div>
           <div className="steam steam-2"></div>
           <div className="steam steam-3"></div>
@@ -483,60 +362,45 @@ export default function Menu() {
               Burgers & Chicken Sandwiches
             </h4>
             <p className="text-gray-300 text-lg italic">
-              Fresh off the grill and stacked with flavor!
+              Fresh off the grill & stacked with flavor.
             </p>
           </div>
         </div>
 
-
-        {/* Quick List */}
-        <div className="mt-12 grid sm:grid-cols-2 gap-10 text-left text-gray-300 text-sm">
+        <div className="grid sm:grid-cols-2 gap-10 text-left text-gray-300 text-sm">
           <div>
             <h4 className="text-lg font-bold text-yellow-400 mb-2">Burgers</h4>
             <ul className="space-y-2">
-              <li className="border-b border-zinc-700 pb-2">Classic 1/4 lb Cheeseburger — $8.99</li>
-              <li className="border-b border-zinc-700 pb-2">Texas Burger — $9.99</li>
+              <li className="border-b border-zinc-700 pb-2">Classic 1/4 lb — $8.99</li>
+              <li className="border-b border-zinc-700 pb-2">Texas — $9.99</li>
               <li className="border-b border-zinc-700 pb-2">Buffalo Burger — $9.99</li>
             </ul>
           </div>
-
           <div>
             <h4 className="text-lg font-bold text-yellow-400 mb-2">Chicken Sandwiches</h4>
             <ul className="space-y-2">
-              <li className="border-b border-zinc-700 pb-2">Chicken Sandwich — $8.99</li>
-              <li className="border-b border-zinc-700 pb-2">Chicken Parmesan — $8.99</li>
+              <li className="border-b border-zinc-700 pb-2">Classic Chicken — $8.99</li>
+              <li className="border-b border-zinc-700 pb-2">Chicken Parm — $8.99</li>
               <li className="border-b border-zinc-700 pb-2">Texas Chicken — $9.99</li>
               <li className="border-b border-zinc-700 pb-2">Buffalo Chicken — $9.99</li>
               <li className="border-b border-zinc-700 pb-2">Nashville Chicken — $9.99</li>
             </ul>
-            <p className="text-gray-500 text-xs mt-2 italic">
-              Add fries, onion rings, or tots for an additional cost.
-            </p>
           </div>
         </div>
       </div>
 
-
-
-      {/* --- SALADS --- */}
+      {/* ================= SALADS ================= */}
       <div id="salads" className="max-w-6xl mx-auto mb-24 scroll-mt-28">
-        <h3 className="text-3xl font-extrabold text-yellow-400 text-center mb-10 tracking-wider">
-          Salads
-        </h3>
 
-        {/* Featured Salad Card */}
-        {/* 🥗 Salads Fresh Feature */}
         <div className="relative z-0 fresh-glow rounded-xl w-full md:w-[80%] mx-auto mb-12 p-10 bg-zinc-900 shadow-lg border border-zinc-700 overflow-visible">
 
-          {/* Mist */}
           <div className="mist mist-1"></div>
           <div className="mist mist-2"></div>
 
-          {/* Sparkles */}
+          {/* 3 Leaves */}
           <div className="leaf-sparkle sparkle-1"></div>
           <div className="leaf-sparkle sparkle-2"></div>
           <div className="leaf-sparkle sparkle-3"></div>
-
 
           <div className="text-center relative z-10">
             <h4 className="text-3xl font-extrabold text-yellow-400 drop-shadow-lg mb-2">
@@ -548,38 +412,25 @@ export default function Menu() {
           </div>
         </div>
 
-
-        {/* Salad List */}
-        <div className="mt-12 max-w-lg mx-auto text-left text-gray-300">
-          {[
-            "Garden — $6.99",
-            "Greek — $6.99",
-            "Chef — $7.99",
-            "Grilled Chicken Salad — $7.99",
-          ].map((item) => (
-            <p key={item} className="border-b border-zinc-700 pb-2 mb-2">
-              {item}
-            </p>
-          ))}
+        <div className="max-w-lg mx-auto text-left text-gray-300 space-y-2">
+          {["Garden — $6.99", "Greek — $6.99", "Chef — $7.99", "Grilled Chicken — $7.99"].map(
+            (item) => (
+              <p key={item} className="border-b border-zinc-700 pb-2">
+                {item}
+              </p>
+            )
+          )}
         </div>
       </div>
 
+      {/* ================= DESSERTS & DRINKS ================= */}
+      <div id="desserts" className="max-w-6xl mx-auto mb-32 scroll-mt-28">
 
-      {/* --- DESSERTS & DRINKS --- */}
-      <div id="desserts" className="max-w-6xl mx-auto mb-24 scroll-mt-28">
-        <h3 className="text-3xl font-extrabold text-yellow-400 text-center mb-10 tracking-wider">
-          Desserts & Drinks
-        </h3>
-
-        {/* Featured Dessert Card */}
-        {/* 🍰 Desserts Feature */}
         <div className="relative z-0 dessert-glow rounded-xl w-full md:w-[80%] mx-auto mb-12 p-10 bg-zinc-900 shadow-lg border border-zinc-700 overflow-visible">
 
-          {/* Sparkles */}
           <div className="dessert-sparkle sparkle-d1"></div>
           <div className="dessert-sparkle sparkle-d2"></div>
 
-          {/* Drip effect */}
           <div className="drip drip-1"></div>
           <div className="drip drip-2"></div>
 
@@ -593,11 +444,7 @@ export default function Menu() {
           </div>
         </div>
 
-
-        {/* Quick List */}
-        <div className="mt-12 grid sm:grid-cols-2 gap-10 text-left text-gray-300 text-sm">
-
-          {/* Desserts */}
+        <div className="grid sm:grid-cols-2 gap-10 text-left text-gray-300 text-sm">
           <div>
             <h4 className="text-lg font-bold text-yellow-400 mb-2">Desserts</h4>
             <ul className="space-y-2">
@@ -606,24 +453,22 @@ export default function Menu() {
             </ul>
           </div>
 
-          {/* Drinks */}
           <div>
             <h4 className="text-lg font-bold text-yellow-400 mb-2">Drinks</h4>
             <ul className="space-y-2">
               <li className="border-b border-zinc-700 pb-2">
-                Coke, Diet Coke, Dole Lemonade, Sprite, Pink Lemonade,
-                Dr. Pepper, Root Beer, Orange Crush
+                Coke, Diet Coke, Sprite, Lemonade, Dr. Pepper, Root Beer
               </li>
               <li className="border-b border-zinc-700 pb-2">2-Liters — $3.99</li>
-              <li className="border-b border-zinc-700 pb-2">Cans (Coke, Diet Coke, Sprite) — $1.49</li>
-              <li className="border-b border-zinc-700 pb-2">Bottled Water — $1.49</li>
+              <li className="border-b border-zinc-700 pb-2">Cans — $1.49</li>
+              <li className="border-b border-zinc-700 pb-2">Water — $1.49</li>
             </ul>
           </div>
-
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto text-center mt-20">
+      {/* End CTA */}
+      <div className="max-w-6xl mx-auto text-center mt-10">
         <a
           href="https://uppercrust.hungerrush.com/Order/"
           target="_blank"
@@ -632,9 +477,7 @@ export default function Menu() {
         >
           Order Online Now
         </a>
-
       </div>
-
     </section>
   );
 }
