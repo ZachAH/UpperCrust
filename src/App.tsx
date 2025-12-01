@@ -1,22 +1,26 @@
+import { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
-import Header from "../src/components/Header";
-import Home from "../src/pages/Home";
-import MenuPage from "../src/pages/MenuPage";
-import HoursPage from "../src/pages/HoursPage";
-import ContactPage from "../src/pages/ContactPage";
+import Header from "./components/Header";
 
-
+// Lazy-loaded pages for code splitting
+const Home = lazy(() => import("./pages/Home"));
+const MenuPage = lazy(() => import("./pages/MenuPage"));
+const HoursPage = lazy(() => import("./pages/HoursPage"));
+const ContactPage = lazy(() => import("./pages/ContactPage"));
 
 function App() {
   return (
     <>
       <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/menu" element={<MenuPage />} />
-        <Route path="/hours" element={<HoursPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-      </Routes>
+
+      <Suspense fallback={<div className="page-loader">Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/menu" element={<MenuPage />} />
+          <Route path="/hours" element={<HoursPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Routes>
+      </Suspense>
     </>
   );
 }
