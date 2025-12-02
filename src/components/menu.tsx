@@ -9,7 +9,26 @@ export default function Menu() {
   const [activeSection, setActiveSection] = useState("pizzas");
 
   // Smooth scroll + active nav tracker
+  // Smooth scroll + active nav tracker
   useEffect(() => {
+    const sections = document.querySelectorAll<HTMLElement>("section[id], div[id]");
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          sections.forEach((section) => {
+            const rect = section.getBoundingClientRect();
+            if (rect.top <= 140 && rect.bottom >= 140) {
+              setActiveSection(section.id);
+            }
+          });
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
     const links = document.querySelectorAll<HTMLAnchorElement>("a[href^='#']");
     links.forEach((link) => {
       link.addEventListener("click", (e) => {
@@ -26,22 +45,10 @@ export default function Menu() {
       });
     });
 
-    const sections = document.querySelectorAll<HTMLElement>("section[id], div[id]");
-    const handleScroll = () => {
-      const scrollPos = window.scrollY + 140;
-      sections.forEach((section) => {
-        if (
-          scrollPos >= section.offsetTop &&
-          scrollPos < section.offsetTop + section.offsetHeight
-        ) {
-          setActiveSection(section.id);
-        }
-      });
-    };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
 
   const categories = [
     { name: "Pizzas", id: "pizzas" },
@@ -63,8 +70,8 @@ export default function Menu() {
               key={cat.id}
               href={`#${cat.id}`}
               className={`transition-colors ${activeSection === cat.id
-                  ? "text-yellow-400"
-                  : "text-gray-300 hover:text-yellow-400"
+                ? "text-yellow-400"
+                : "text-gray-300 hover:text-yellow-400"
                 }`}
             >
               {cat.name}
@@ -184,8 +191,8 @@ export default function Menu() {
                 whileInView="visible"
                 viewport={{ once: false }}
                 className={`bg-zinc-900 rounded-xl overflow-hidden shadow-md border transition duration-300 will-change-transform ${inView && isMobile
-                    ? "border-yellow-400 shadow-yellow-400/30 scale-[1.03] brightness-105 z-20"
-                    : "border-zinc-800 opacity-95"
+                  ? "border-yellow-400 shadow-yellow-400/30 scale-[1.03] brightness-105 z-20"
+                  : "border-zinc-800 opacity-95"
                   } hover:shadow-yellow-400/30 hover:border-yellow-400`}
               >
                 <img
