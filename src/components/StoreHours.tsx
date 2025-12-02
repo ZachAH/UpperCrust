@@ -34,7 +34,7 @@ export default function StoreHours() {
               </p>
               <p className="text-gray-400 mb-4">Located right on the border of Whitefish Bay and Shorewood.</p>
               <a
-                href="https://goo.gl/maps/YOUR_GOOGLE_MAPS_LINK"
+                href="https://www.google.com/maps/dir/?api=1&destination=249+E+Hampton+Ave%2C+Whitefish+Bay%2C+WI+53217"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-6 py-3 rounded-full transition"
