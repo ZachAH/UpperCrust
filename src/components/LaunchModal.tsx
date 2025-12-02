@@ -7,9 +7,18 @@ export default function LaunchModal() {
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
-    const timer = setTimeout(() => handleClose(), 4500); // 4.5s then auto-close
+    const isSmallScreen = window.innerWidth < 500;
+
+    // Auto-close only on larger screens
+    if (!isSmallScreen) {
+      const timer = setTimeout(() => handleClose(), 4500);
+      return () => {
+        clearTimeout(timer);
+        document.body.style.overflow = "auto";
+      };
+    }
+
     return () => {
-      clearTimeout(timer);
       document.body.style.overflow = "auto";
     };
   }, []);
@@ -31,6 +40,7 @@ export default function LaunchModal() {
       aria-modal="true"
       aria-labelledby="launch-modal-title"
       className={`fixed inset-0 z-[99999] flex items-center justify-center
+        p-4
         bg-black/70 backdrop-blur-sm transition-opacity
         ${closing ? "opacity-0" : "opacity-100"}
       `}
@@ -38,17 +48,18 @@ export default function LaunchModal() {
     >
       <div
         className="relative bg-yellow-400 text-black font-extrabold
-          px-6 py-5 rounded-xl shadow-2xl text-center
-          text-xl sm:text-2xl md:text-3xl
-          animate-popup overflow-hidden max-w-[90%] w-fit"
+          px-4 py-4 rounded-xl shadow-2xl text-center
+          text-lg sm:text-2xl
+          animate-popup overflow-hidden
+          max-w-[90%] w-full max-h-[70vh]
+          flex flex-col justify-center"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Title: Helps screen readers identify the message */}
         <h2 id="launch-modal-title" className="mb-1">
           🍕 New Website — Same Upper Crust!! 🍕
         </h2>
 
-        {/* Close button */}
+        {/* Close Button */}
         <button
           onClick={handleClose}
           className="absolute top-2 right-3 text-black text-2xl font-bold

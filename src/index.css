@@ -1,5 +1,14 @@
 @import "tailwindcss";
 @import "./styles/slick-fonts-override.css";
+@import "tailwindcss";
+
+/* Restore Slick core CSS */
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+
+/* Keep your override file BELOW the base styles */
+@import "./styles/slick-fonts-override.css";
+
 
 
 @keyframes pulse-glow {
