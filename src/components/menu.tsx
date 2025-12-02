@@ -6,18 +6,30 @@ import { useInView } from "framer-motion";
 
 export default function Menu() {
   const [activeSection, setActiveSection] = useState("pizzas");
+  const [isScrollingDown, setIsScrollingDown] = useState(false);
 
-  // Smooth scroll + active nav tracker
-  // Smooth scroll + active nav tracker
+  // Smooth scroll + active nav tracker + hide-on-scroll
   useEffect(() => {
     const sections = document.querySelectorAll<HTMLElement>("section[id], div[id]");
     let ticking = false;
+    let lastScrollY = window.scrollY;
 
     const handleScroll = () => {
+      const currentY = window.scrollY;
+
+      // Hide sticky nav when scrolling down, show when scrolling up
+      if (currentY > lastScrollY + 5) {
+        setIsScrollingDown(true);
+      } else if (currentY < lastScrollY - 5) {
+        setIsScrollingDown(false);
+      }
+      lastScrollY = currentY;
+
       if (!ticking) {
         window.requestAnimationFrame(() => {
           sections.forEach((section) => {
             const rect = section.getBoundingClientRect();
+
             if (rect.top <= 140 && rect.bottom >= 140) {
               setActiveSection(section.id);
             }
@@ -28,6 +40,7 @@ export default function Menu() {
       }
     };
 
+    // Smooth scroll behavior for nav links
     const links = document.querySelectorAll<HTMLAnchorElement>("a[href^='#']");
     links.forEach((link) => {
       link.addEventListener("click", (e) => {
@@ -62,7 +75,11 @@ export default function Menu() {
     <section id="menu" className="bg-black text-white py-20 px-6">
 
       {/* Sticky Subnav */}
-      <div className="sticky top-0 z-40 bg-black/90 backdrop-blur-sm border-b border-zinc-800">
+      <div
+        className={`sticky top-16 z-40 bg-black/90 backdrop-blur-sm border-b border-zinc-800
+          transition-transform duration-300
+          ${isScrollingDown ? "-translate-y-full" : "translate-y-0"}`}
+      >
         <div className="max-w-6xl mx-auto flex flex-wrap justify-center gap-4 py-3 text-sm font-semibold uppercase">
           {categories.map((cat) => (
             <a
