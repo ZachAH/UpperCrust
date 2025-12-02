@@ -1,0 +1,7 @@
+/* Override Slick default fonts */
+@font-face {
+    font-family: "slick";
+    src: url("/fonts/slick.woff") format("woff");
+    font-display: swap;
+  }
+  
