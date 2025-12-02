@@ -2,15 +2,64 @@
 <html lang="en">
 
 <head>
+  <!-- Cache Controls -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-
+  
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/png" href="/pizza.png" />
-  <link rel="preload" as="image" href="/pizza-hero.webp" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Upper Crust Pizza</title>
+
+  <!-- Primary SEO -->
+  <title>Upper Crust Pizza | Whitefish Bay</title>
+  <meta name="description"
+    content="Upper Crust Pizza — Fresh, handcrafted Wisconsin-style pizza in Whitefish Bay. Order online for pick-up or delivery! Family-owned since 1987.">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://uppercrustpizza.netlify.app/" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/pizza.png" />
+
+  <!-- Hero Image Preload -->
+  <link rel="preload" as="image" href="/pizza-hero.webp" />
+
+  <!-- OpenGraph: Social Sharing -->
+  <meta property="og:title" content="Upper Crust Pizza | Whitefish Bay">
+  <meta property="og:description"
+    content="Fresh handcrafted pizza made daily. Order online for fast pick-up or delivery! Family-owned since 1987.">
+  <meta property="og:image" content="https://uppercrustpizza.netlify.app/og-image.webp">
+  <meta property="og:url" content="https://uppercrustpizza.netlify.app/">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Upper Crust Pizza | Whitefish Bay">
+  <meta name="twitter:description"
+    content="Fresh handcrafted pizza made daily. Family-owned since 1987.">
+  <meta name="twitter:image" content="https://uppercrustpizza.netlify.app/og-image.webp">
+
+  <!-- Local SEO: Structured Data Markup -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "Upper Crust Pizza",
+      "image": "https://uppercrustpizza.netlify.app/og-image.webp",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "249 East Hampton Avenue,
+        "addressLocality": "Whitefish Bay",
+        "addressRegion": "WI",
+        "postalCode": "53217",
+        "addressCountry": "US"
+      },
+      "servesCuisine": "Pizza",
+      "priceRange": "$$",
+      "url": "https://uppercrustpizza.netlify.app/",
+      "telephone": "(262) 555-1234"
+    }
+  </script>
 </head>
 
 <body>
