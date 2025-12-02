@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from "react";
-import Slider from "react-slick";
 import { motion } from "framer-motion";
 import { popIn } from "../animations";
 import { staggerContainer } from "../animations";
@@ -225,64 +224,42 @@ export default function Menu() {
       </div>
 
       {/* ================= APPETIZERS ================= */}
-      <div id="appetizers" className="max-w-6xl mx-auto mb-24 scroll-mt-28">
-
-        <h3 className="text-3xl font-extrabold text-yellow-400 text-center mb-10 tracking-wider">
+      <section id="appetizers" className="max-w-6xl mx-auto mb-24 scroll-mt-28">
+        <h2 className="text-3xl font-extrabold text-yellow-400 text-center mb-10 tracking-wider">
           Appetizers
-        </h3>
+        </h2>
 
-        {/* ONE Carousel – Perfect */}
-        <Slider
-          dots
-          infinite
-          speed={600}
-          slidesToShow={1}
-          slidesToScroll={1}
-          autoplay
-          autoplaySpeed={4000}
-          fade
-          pauseOnHover
-          lazyLoad="ondemand"
-          arrows={true}
+        {/* Feature Item */}
+        <motion.div
+          variants={popIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          className="relative rounded-md overflow-hidden shadow-lg"
         >
-          {[
-            {
-              name: "Cheesy Garlic Sticks",
-              price: "$9.99",
-              img: "/images/appetizers/sticks.webp",
-            },
-          ].map((item) => (
-            <motion.div
-              key={item.name}
-              variants={popIn}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              className="relative"
+          <img
+            loading="lazy"
+            src="/images/appetizers/sticks.webp"
+            alt="Cheesy Garlic Sticks appetizer from Upper Crust Pizza"
+            className="w-full h-64 md:h-80 object-cover brightness-90"
+          />
+
+          <div className="absolute bottom-0 left-0 right-0 bg-black/70 p-4 text-center">
+            <h3 className="text-xl font-bold text-yellow-400">
+              Cheesy Garlic Sticks
+            </h3>
+            <p className="text-gray-200 text-sm">$9.99</p>
+
+            <a
+              href="https://uppercrust.hungerrush.com/Order/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-block bg-red-600 hover:bg-red-700 text-white px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200"
             >
-              <img
-                loading="lazy"
-                src={item.img}
-                alt={item.name}
-                className="h-64 w-full object-cover brightness-90"
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-black/70 p-4 text-center">
-                <h4 className="text-xl font-bold text-yellow-400">
-                  {item.name}
-                </h4>
-                <p className="text-gray-200 text-sm">{item.price}</p>
-                <a
-                  href="https://uppercrust.hungerrush.com/Order/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-3 inline-block bg-red-600 hover:bg-red-700 text-white px-4 py-1.5 rounded-full text-xs font-semibold"
-                >
-                  Order • Customize →
-                </a>
-              </div>
-            </motion.div>
-          ))}
-        </Slider>
+              Order • Customize →
+            </a>
+          </div>
+        </motion.div>
 
         {/* Quick List */}
         <div className="mt-12 text-left text-gray-300 space-y-2 max-w-lg mx-auto">
@@ -308,7 +285,8 @@ export default function Menu() {
           Wing Sauces: Mango Habanero, Frank’s Hot, Nashville, Buffalo Ranch,
           BBQ, Kickin’ Bourbon, Lemon Pepper.
         </p>
-      </div>
+      </section>
+
 
       {/* ================= HOAGIES & PASTA ================= */}
       <div id="hoagies" className="max-w-6xl mx-auto mb-24 scroll-mt-28">
@@ -484,6 +462,6 @@ export default function Menu() {
           Order Online Now
         </a>
       </div>
-    </section>
+    </section >
   );
 }
