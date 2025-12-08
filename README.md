@@ -10,8 +10,8 @@ Live production website for Upper Crust Pizza in Whitefish Bay, WI — built wit
 - Google Maps embed for customer directions
 - Call-to-action buttons (Call Now, Request a Quote)
 - Lighthouse-friendly performance and accessibility improvements
-  
-<img width="1360" height="188" alt="Screenshot 2025-12-01 at 6 50 53 PM" src="https://github.com/user-attachments/assets/c9ed6dd2-d2c2-4e03-8df0-eae3a93bc6b3" />
+
+<img width="2411" height="1161" alt="Screenshot 2025-12-08 at 4 33 29 PM" src="https://github.com/user-attachments/assets/77d4ec2a-9c62-40c4-9d9f-e318e1772316" />
 
 ## 🧩 Tech Stack
 | Category | Tools |
