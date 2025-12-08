@@ -181,7 +181,7 @@ export default function Menu() {
               img: "/images/pizzas/pepperoni.webp",
             },
             {
-              name: "CBR",
+              name: "CBR(Chicken,Bacon,Ranch)",
               desc: "Chicken, Bacon, Mozzarella, with ranch drizzle.",
               price: "$19.49–$39.99",
               img: "/images/pizzas/CBR.webp",
@@ -238,6 +238,96 @@ export default function Menu() {
             );
           })}
         </motion.div>
+        {/* ================= MORE SPECIALTY PIZZAS ================= */}
+<div className="mt-16">
+  <h3 className="text-2xl font-bold text-yellow-400 mb-6 text-center">
+    More Specialty Pizzas
+  </h3>
+
+  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    {[
+      {
+        name: "Upper Crust Special",
+        desc: "Most Popular Gourmet Pizza. Sausage, Mushroom and Onion.",
+        price: "$18.49 – $36.99"
+      },
+      {
+        name: "Pepperoni Plus",
+        desc: "Two Layers of Pepperoni and Two Layers of Cheese.",
+        price: "$18.49 – $38.99"
+      },
+      {
+        name: "Hawaiian",
+        desc: "Ham and Pineapple.",
+        price: "$17.99 – $34.99"
+      },
+      {
+        name: "BBQ Chicken",
+        desc: "Grilled Chicken, Bacon, Onion and Sweet Baby Ray's BBQ Sauce.",
+        price: "$19.49 – $39.99"
+      },
+      {
+        name: "Buffalo Chicken",
+        desc: "Grilled Chicken with Frank's Buffalo Sauce, Jalapenos, Red Onion and Bacon.",
+        price: "$19.49 – $39.99"
+      },
+      {
+        name: "Chicken Alfredo",
+        desc: "Grilled Chicken, Mushrooms, Red Onions, Bacon and Spinach with a Parmesan Cream Sauce.",
+        price: "$19.99 – $39.99"
+      },
+      {
+        name: "Real Philly Cheesesteak",
+        desc: "Philly Steak, Mushroom, Onion and Green Pepper.",
+        price: "$20.99 – $41.99"
+      },
+      {
+        name: "Mediterranean",
+        desc: "Chicken, Black Olives, Green Olives, Red Onion and Feta.",
+        price: "$19.49 – $39.99"
+      },
+      {
+        name: "Garden Harvest",
+        desc: "Spinach, Mushroom, Tomato, Red Onion and Garlic.",
+        price: "$18.49 – $38.99"
+      },
+      {
+        name: "GSM",
+        desc: "Garlic, Spinach, Mushroom, Mozzarella.",
+        price: "$17.99 – $35.99"
+      },
+      {
+        name: "BLT",
+        desc: "Bacon and Cheese Pizza topped with Fresh Lettuce, Tomatoes and Mayo.",
+        price: "$18.49 – $34.99"
+      },
+    ].map((pizza) => (
+      <div
+        key={pizza.name}
+        className="bg-zinc-900 rounded-xl shadow-md border border-zinc-800 p-6 hover:border-yellow-400 hover:shadow-yellow-400/30 transition"
+      >
+        <h4 className="text-xl font-bold text-yellow-400 mb-1">
+          {pizza.name}
+        </h4>
+        <p className="text-gray-300 text-sm">{pizza.desc}</p>
+        <p className="text-gray-400 text-sm mt-1">{pizza.price}</p>
+
+        <div className="mt-4">
+          <a
+            href="https://uppercrust.hungerrush.com/Order/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full text-sm font-semibold transition"
+          >
+            Order • Customize →
+          </a>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+        
       </div>
 
       {/* ================= APPETIZERS ================= */}
@@ -277,7 +367,7 @@ export default function Menu() {
             </a>
           </div>
         </motion.div>
-
+          
         {/* Quick List */}
         <div className="mt-12 text-left text-gray-300 space-y-2 max-w-lg mx-auto">
           {[
@@ -303,8 +393,6 @@ export default function Menu() {
           BBQ, Kickin’ Bourbon, Lemon Pepper.
         </p>
       </section>
-
-
       {/* ================= HOAGIES & PASTA ================= */}
       <div id="hoagies" className="max-w-6xl mx-auto mb-24 scroll-mt-28">
 

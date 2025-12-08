@@ -2,5 +2,5 @@
 User-agent: *
 Allow: /
 
-sitemap URL
+# Sitemap file
 Sitemap: https://uppercrustpizza.netlify.app/sitemap.xml
