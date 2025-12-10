@@ -47,7 +47,7 @@ export default function Contact() {
             </p>
   
             <a
-              href="mailto:contactus@uppercrustpizza.us?subject=Inquiry from Upper Crust Pizza Website"
+              href="mailto:theoriginaluppercrust@gmail.com?subject=Inquiry from Upper Crust Pizza Website"
               className="inline-block bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-8 py-3 rounded-full transition w-full md:w-auto"
             >
               Send Us an Email
