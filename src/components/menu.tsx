@@ -4,6 +4,11 @@ import { popIn } from "../animations";
 import { staggerContainer } from "../animations";
 import { useInView } from "framer-motion";
 
+import { db } from '../lib/firebase.ts'; 
+
+console.log('Firebase DB:', db);
+
+
 export default function Menu() {
   const [activeSection, setActiveSection] = useState("pizzas");
   const [isScrollingDown, setIsScrollingDown] = useState(false);
