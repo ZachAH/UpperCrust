@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+//import { motion } from "framer-motion";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from '../lib/firebase.ts';
 // import { seedSignaturePizzas } from '../lib/seedMenu';
