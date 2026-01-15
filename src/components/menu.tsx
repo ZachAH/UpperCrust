@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from '../lib/firebase.ts';
-import { seedSignaturePizzas } from '../lib/seedMenu';
+// import { seedSignaturePizzas } from '../lib/seedMenu';
 
 // --- HELPER COMPONENT: LIST ITEM ---
 const MenuListItem = ({ item }: { item: any }) => (
@@ -71,12 +71,12 @@ export default function Menu() {
         </div>
       </div>
 
-      <button
+      {/* <button
         onClick={() => seedSignaturePizzas()}
         className="bg-blue-500 p-2 fixed top-0 left-0 z-[9999]"
       >
         DEBUG: Seed Database
-      </button>
+      </button> */}
 
       {/* ================= HEADER SECTION ================= */}
       <div className="max-w-6xl mx-auto text-center mb-12 mt-8">
