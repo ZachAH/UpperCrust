@@ -108,7 +108,6 @@ export default function Menu() {
       </div>
 
       {/* ================= PIZZAS ================= */}
-          {/* ================= PIZZAS SECTION ================= */}
 <div id="pizzas" className="max-w-5xl mx-auto mb-24 scroll-mt-28">
   
   {/* Static "Build Your Own" Header Card */}
