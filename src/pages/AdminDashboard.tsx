@@ -105,7 +105,7 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-screen bg-zinc-950 text-white overflow-hidden">
+    <div className="flex flex-col md:flex-row h-screen bg-zinc-950 text-white">
 
       {/* SIDEBAR (Desktop) / TOP NAV (Mobile) */}
       {/* Added pt-8 for top padding */}
@@ -133,7 +133,7 @@ export default function AdminDashboard() {
 
       {/* MAIN CONTENT */}
       {/* Added pt-12 for top padding */}
-      <main className="flex-1 p-4 md:p-10 pt-12 md:pt-16 overflow-y-auto">
+      <main className="flex-1 p-4 md:p-10 pt-12 md:pt-16 pb-28 overflow-y-auto">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8 md:mb-12">
           <div>
             <p className="text-red-500 text-[10px] font-black uppercase tracking-widest mb-1">Live Menu</p>
@@ -239,6 +239,20 @@ export default function AdminDashboard() {
           </div>
         )}
       </main>
+      {/* MOBILE FIXED LOGOUT */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 px-4 pb-4 pt-3
+                bg-gradient-to-t from-black/90 to-black/40 backdrop-blur">
+        <button
+          onClick={() => signOut(auth)}
+          className="w-full bg-zinc-900 border border-zinc-800
+               py-3 rounded-xl
+               text-xs font-black uppercase tracking-widest
+               text-zinc-400 hover:text-white
+               transition"
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 }
