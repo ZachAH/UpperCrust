@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "../lib/firebase.ts";
+import { motion } from "framer-motion";
+import { popIn, staggerContainer } from "@/animations.ts";
 
 // --- HELPER COMPONENT: LIST ITEM ---
 const MenuListItem = ({ item }: { item: any }) => (
@@ -95,8 +97,8 @@ export default function Menu() {
                 key={id}
                 href={`#${id}`}
                 className={`transition-colors ${activeSection === id
-                    ? "text-yellow-400"
-                    : "text-gray-300 hover:text-yellow-400"
+                  ? "text-yellow-400"
+                  : "text-gray-300 hover:text-yellow-400"
                   }`}
               >
                 {id === "hoagies" ? "HOAGIES & PASTA" : id.toUpperCase()}
@@ -381,37 +383,52 @@ export default function Menu() {
 
       {/* ================= DESSERTS & DRINKS ================= */}
       <div id="desserts" className="max-w-5xl mx-auto mb-32 scroll-mt-28">
-        <div className="relative z-0 dessert-glow rounded-xl w-full md:w-[80%] mx-auto mb-12 p-10 bg-zinc-900 border border-zinc-700 text-center">
+        <div className="relative z-0 dessert-glow rounded-xl w-full md:w-[80%] mx-auto mb-12 p-10 bg-zinc-900 shadow-lg border border-zinc-700 overflow-visible">
+          <div className="dessert-sparkle sparkle-d1" />
+          <div className="dessert-sparkle sparkle-d2" />
+
           <div className="drip drip-1" />
-          <h4 className="text-3xl font-extrabold text-yellow-400">
-            Desserts & Drinks
-          </h4>
-          <p className="text-gray-300 italic">Sweet treats & chilled drinks.</p>
-        </div>
-        <div className="grid sm:grid-cols-2 gap-x-12 gap-y-4">
-          <div>
-            <h4 className="text-lg font-bold text-yellow-400 mb-4 uppercase">
-              Desserts
+          <div className="drip drip-2" />
+
+          <div className="text-center relative z-10">
+            <h4 className="text-3xl font-extrabold text-yellow-400 drop-shadow-lg mb-2">
+              Desserts & Drinks
             </h4>
-            {menuData.desserts_drinks
-              ?.filter(onlyAvailable)
-              .filter((i: any) => i.subcategory === "Desserts")
-              .map((item: any) => (
-                <MenuListItem key={item.id} item={item} />
-              ))}
-          </div>
-          <div>
-            <h4 className="text-lg font-bold text-yellow-400 mb-4 uppercase">
-              Drinks
-            </h4>
-            {menuData.desserts_drinks
-              ?.filter(onlyAvailable)
-              .filter((i: any) => i.subcategory === "Drinks")
-              .map((item: any) => (
-                <MenuListItem key={item.id} item={item} />
-              ))}
+            <p className="text-gray-300 italic">Sweet treats & chilled drinks.</p>
           </div>
         </div>
+
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid sm:grid-cols-2 gap-x-12 gap-y-4"
+        >
+          <motion.div variants={popIn}>
+            <h4 className="text-lg font-bold text-yellow-400 mb-4 uppercase">Desserts</h4>
+            <div className="space-y-2">
+              {menuData.desserts_drinks
+                ?.filter(onlyAvailable)
+                .filter((i: any) => i.subcategory === "Desserts")
+                .map((item: any) => (
+                  <MenuListItem key={item.id} item={item} />
+                ))}
+            </div>
+          </motion.div>
+
+          <motion.div variants={popIn}>
+            <h4 className="text-lg font-bold text-yellow-400 mb-4 uppercase">Drinks</h4>
+            <div className="space-y-2">
+              {menuData.desserts_drinks
+                ?.filter(onlyAvailable)
+                .filter((i: any) => i.subcategory === "Drinks")
+                .map((item: any) => (
+                  <MenuListItem key={item.id} item={item} />
+                ))}
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
