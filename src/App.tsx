@@ -7,6 +7,12 @@ const Home = lazy(() => import("./pages/Home"));
 const MenuPage = lazy(() => import("./pages/MenuPage"));
 const HoursPage = lazy(() => import("./pages/HoursPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
+// Components (Functional wrappers)
+import { ProtectedRoute } from "./components/ProtectedRoute";
+
+// Pages (Lazy loaded for performance)
+const Login = lazy(() => import(".//pages/login"));
+const AdminDashboard = lazy(() => import(".//pages/AdminDasboard"));
 
 function App() {
   return (
@@ -19,6 +25,15 @@ function App() {
           <Route path="/menu" element={<MenuPage />} />
           <Route path="/hours" element={<HoursPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </Suspense>
     </>
