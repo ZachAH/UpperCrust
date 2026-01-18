@@ -11,8 +11,8 @@ const ContactPage = lazy(() => import("./pages/ContactPage"));
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
 // Pages (Lazy loaded for performance)
-const Login = lazy(() => import(".//pages/login"));
-const AdminDashboard = lazy(() => import(".//pages/AdminDasboard"));
+const Login = lazy(() => import("./pages/login"));
+const AdminDashboard = lazy(() => import("./pages/AdminDasboard"));
 
 function App() {
   return (
