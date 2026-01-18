@@ -76,8 +76,25 @@ export default function AdminDashboard() {
   };
 
   const toggleAvailability = async (item: any) => {
-    await updateDoc(doc(db, "menu", activeCategory, "items", item.id), { available: !item.available });
-    fetchItems();
+    // 1. Calculate the new status
+    const newStatus = !item.available;
+
+    // 2. Optimistic Update: Update the UI immediately so it feels snappy
+    setItems(prevItems =>
+      prevItems.map(i => i.id === item.id ? { ...i, available: newStatus } : i)
+    );
+
+    try {
+      // 3. Update the database in the background
+      await updateDoc(doc(db, "menu", activeCategory, "items", item.id), {
+        available: newStatus
+      });
+    } catch (error) {
+      console.error("Failed to update status:", error);
+      // Optional: Roll back UI if the database update fails
+      fetchItems();
+      alert("Error updating availability");
+    }
   };
 
   const handleDelete = async (id: string, name: string) => {
