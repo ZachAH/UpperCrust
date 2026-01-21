@@ -1,14 +1,25 @@
 import { useState, useEffect } from "react";
-import logo from "../../public/logo.webp"
+import logo from "../../public/logo.webp";
 
-export default function LaunchModal() {
+interface LaunchModalProps {
+  message?: string;
+}
+
+export default function LaunchModal({ message }: LaunchModalProps) {
   const [visible, setVisible] = useState(true);
   const [closing, setClosing] = useState(false);
 
   useEffect(() => {
+    // If there is no message, don't block the scroll or show anything
+    if (!message) {
+      setVisible(false);
+      return;
+    }
+
     document.body.style.overflow = "hidden";
     const isSmallScreen = window.innerWidth < 500;
 
+    // Auto-close logic for desktop
     if (!isSmallScreen) {
       const timer = setTimeout(() => handleClose(), 4500);
       return () => {
@@ -20,7 +31,7 @@ export default function LaunchModal() {
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, []);
+  }, [message]);
 
   const handleClose = () => {
     setClosing(true);
@@ -28,7 +39,8 @@ export default function LaunchModal() {
     setTimeout(() => setVisible(false), 400);
   };
 
-  if (!visible) return null;
+  // Only render if there is a message and visibility is true
+  if (!visible || !message) return null;
 
   return (
     <div
@@ -36,7 +48,7 @@ export default function LaunchModal() {
       aria-modal="true"
       aria-labelledby="launch-modal-title"
       className={`fixed inset-0 z-[99999] flex items-center justify-center
-        p-4 bg-black/70 backdrop-blur-sm transition-opacity
+        p-4 bg-black/70 backdrop-blur-sm transition-opacity duration-400
         ${closing ? "opacity-0" : "opacity-100"}
       `}
       onClick={handleClose}
@@ -49,11 +61,10 @@ export default function LaunchModal() {
           flex flex-col items-center"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Headline */}
+        {/* Headline - Now Dynamic */}
         <h2 id="launch-modal-title" className="mb-3 leading-snug">
-          {/* Desktop emojis */}
           <span className="hidden sm:inline">🍕 </span>
-          New Website — Same Upper Crust!!
+          {message}
           <span className="hidden sm:inline"> 🍕</span>
         </h2>
 
@@ -67,7 +78,7 @@ export default function LaunchModal() {
         <button
           onClick={handleClose}
           className="absolute top-2 right-3 text-black text-2xl font-bold
-            hover:text-red-700"
+            hover:text-red-700 transition-colors"
           aria-label="Close popup"
         >
           ❌
