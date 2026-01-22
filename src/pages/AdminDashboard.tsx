@@ -15,6 +15,9 @@ export default function AdminDashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<any>(null);
   const [isAddingNew, setIsAddingNew] = useState(false);
+  
+  // Mobile UI State
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // Home Landing Page State
   const [siteContent, setSiteContent] = useState<any>({
@@ -63,7 +66,7 @@ export default function AdminDashboard() {
 
   useEffect(() => { fetchData(); }, [activeCategory, view]);
 
-  // --- LOGIC: GROUPING (RESTORES HOAGIES vs PASTA) ---
+  // --- LOGIC: GROUPING (HOAGIES vs PASTA) ---
   const getGroupedItems = () => {
     if (!["hoagies", "burgers_chicken", "desserts_drinks"].includes(activeCategory)) {
       return { "All Items": items };
@@ -94,7 +97,7 @@ export default function AdminDashboard() {
       
       triggerNotify();
     } catch (error) {
-      alert("Upload failed. Please check your storage permissions.");
+      alert("Upload failed.");
     } finally {
       setUploading(false);
     }
@@ -145,43 +148,62 @@ export default function AdminDashboard() {
   const groupedItems = getGroupedItems();
 
   return (
-    <div className="flex flex-col md:flex-row h-screen bg-zinc-950 text-white font-sans overflow-hidden">
-      {/* SIDEBAR */}
-      <aside className="w-full md:w-72 bg-zinc-900 border-r border-zinc-800 p-6 flex flex-col shrink-0">
-        <h2 className="text-xl font-black text-red-600 uppercase italic mb-10 tracking-tighter">Upper Crust Admin</h2>
-        <nav className="flex-1 space-y-8 overflow-y-auto no-scrollbar">
+    <div className="flex h-screen bg-zinc-950 text-white font-sans overflow-hidden relative">
+      
+      {/* MOBILE TOP BAR (Stripped of main site nav) */}
+      <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-zinc-900 border-b border-zinc-800 flex items-center justify-between px-6 z-50">
+        <h2 className="text-sm font-black text-red-600 uppercase italic tracking-tighter">Admin Dashboard</h2>
+        <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-2 text-zinc-400">
+          {isSidebarOpen ? <span className="text-xl">✕</span> : <span className="text-xl">☰</span>}
+        </button>
+      </div>
+
+      {/* SIDEBAR (Collapsible on Mobile) */}
+      <aside className={`
+        fixed inset-y-0 left-0 z-40 w-72 bg-zinc-900 border-r border-zinc-800 p-6 flex flex-col transition-transform duration-300 ease-in-out
+        md:translate-x-0 md:static md:block
+        ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
+      `}>
+        <h2 className="hidden md:block text-xl font-black text-red-600 uppercase italic mb-10 tracking-tighter">Upper Crust Admin</h2>
+        
+        <nav className="flex-1 space-y-8 mt-12 md:mt-0 overflow-y-auto no-scrollbar">
           <div>
             <p className="text-[10px] text-zinc-600 font-black uppercase tracking-widest mb-4">Live Menu Items</p>
             {categories.map((cat) => (
-              <button key={cat} onClick={() => { setView("menu"); setActiveCategory(cat); }} 
-                className={`w-full text-left px-4 py-2.5 rounded-xl text-xs font-bold uppercase mb-1 transition-all ${view === "menu" && activeCategory === cat ? "bg-red-600 text-white shadow-lg" : "text-zinc-500 hover:text-white"}`}>
+              <button key={cat} onClick={() => { setView("menu"); setActiveCategory(cat); setIsSidebarOpen(false); }} 
+                className={`w-full text-left px-4 py-3 rounded-xl text-xs font-bold uppercase mb-1 transition-all ${view === "menu" && activeCategory === cat ? "bg-red-600 text-white shadow-lg" : "text-zinc-500 hover:text-white"}`}>
                 {cat === "hoagies" ? "Hoagies & Pasta" : cat.replace("_", " & ")}
               </button>
             ))}
           </div>
           <div>
             <p className="text-[10px] text-zinc-600 font-black uppercase tracking-widest mb-4">Global Content</p>
-            <button onClick={() => setView("menu-page")} className={`w-full text-left px-4 py-2.5 rounded-xl text-xs font-bold uppercase mb-2 ${view === "menu-page" ? "bg-yellow-600 text-white" : "text-zinc-500 hover:text-white"}`}>Menu Layout & BYO</button>
-            <button onClick={() => setView("website")} className={`w-full text-left px-4 py-2.5 rounded-xl text-xs font-bold uppercase ${view === "website" ? "bg-blue-600 text-white" : "text-zinc-500 hover:text-white"}`}>Home Landing Page</button>
+            <button onClick={() => { setView("menu-page"); setIsSidebarOpen(false); }} className={`w-full text-left px-4 py-3 rounded-xl text-xs font-bold uppercase mb-2 ${view === "menu-page" ? "bg-yellow-600 text-white" : "text-zinc-500 hover:text-white"}`}>Menu Layout & BYO</button>
+            <button onClick={() => { setView("website"); setIsSidebarOpen(false); }} className={`w-full text-left px-4 py-3 rounded-xl text-xs font-bold uppercase ${view === "website" ? "bg-blue-600 text-white" : "text-zinc-500 hover:text-white"}`}>Home Landing Page</button>
           </div>
         </nav>
         <button onClick={() => signOut(auth)} className="mt-6 p-4 text-[10px] text-zinc-600 border border-zinc-800 rounded-2xl font-black uppercase hover:bg-zinc-800 transition-colors">LOGOUT</button>
       </aside>
 
-      {/* MAIN PANEL */}
-      <main className="flex-1 p-6 md:p-16 overflow-y-auto bg-black scroll-smooth">
+      {/* MOBILE OVERLAY */}
+      {isSidebarOpen && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-30 md:hidden" onClick={() => setIsSidebarOpen(false)} />
+      )}
+
+      {/* MAIN CONTENT AREA */}
+      <main className="flex-1 p-6 md:p-16 overflow-y-auto bg-black scroll-smooth pt-24 md:pt-16">
         {loading ? (
            <div className="h-full flex items-center justify-center font-black text-zinc-800 uppercase tracking-widest animate-pulse">Gathering Data...</div>
         ) : (
-          <>
+          <div className="max-w-4xl mx-auto">
             {/* VIEW: MENU ITEMS */}
             {view === "menu" && (
               <section>
-                <div className="flex justify-between items-end mb-12">
-                  <h1 className="text-4xl font-black italic uppercase tracking-tighter">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-12">
+                  <h1 className="text-3xl md:text-4xl font-black italic uppercase tracking-tighter">
                     {activeCategory === "hoagies" ? "Hoagies & Pasta" : activeCategory.replace("_", " & ")}
                   </h1>
-                  <button onClick={() => { setIsAddingNew(true); setEditingItem({ name: "", price: "", desc: "", subcategory: "Hoagies", available: true }); setIsModalOpen(true); }} className="bg-white text-black px-8 py-3.5 rounded-2xl font-black uppercase text-xs hover:scale-105 transition-transform">
+                  <button onClick={() => { setIsAddingNew(true); setEditingItem({ name: "", price: "", desc: "", subcategory: "Hoagies", available: true }); setIsModalOpen(true); }} className="w-full sm:w-auto bg-white text-black px-8 py-3.5 rounded-2xl font-black uppercase text-xs">
                     + Add Item
                   </button>
                 </div>
@@ -189,24 +211,24 @@ export default function AdminDashboard() {
                 {Object.keys(groupedItems).map((subcat) => (
                   <div key={subcat} className="mb-12">
                     <div className="flex items-center gap-4 mb-6">
-                      <h2 className="text-xs font-black text-zinc-500 uppercase tracking-widest whitespace-nowrap">{subcat}</h2>
+                      <h2 className="text-[10px] font-black text-zinc-500 uppercase tracking-widest whitespace-nowrap">{subcat}</h2>
                       <div className="h-px bg-zinc-800 flex-1" />
                     </div>
                     <div className="grid gap-3">
                       {groupedItems[subcat].map((item: any) => (
-                        <div key={item.id} className="bg-zinc-900/40 border border-zinc-800 p-5 rounded-[28px] flex justify-between items-center hover:border-zinc-700 transition-all">
-                          <div className="flex items-center gap-5">
-                            <div className="w-14 h-14 bg-zinc-800 rounded-2xl overflow-hidden border border-zinc-700">
+                        <div key={item.id} className="bg-zinc-900/40 border border-zinc-800 p-4 md:p-5 rounded-[24px] flex justify-between items-center hover:border-zinc-700 transition-all">
+                          <div className="flex items-center gap-4 min-w-0">
+                            <div className="w-12 h-12 bg-zinc-800 rounded-xl overflow-hidden border border-zinc-700 shrink-0">
                                <img src={item.imageURL || ""} className="w-full h-full object-cover" />
                             </div>
-                            <div>
-                              <h3 className="font-bold text-zinc-100">{item.name}</h3>
-                              <span className="text-red-500 font-black text-sm">{item.price}</span>
+                            <div className="min-w-0">
+                              <h3 className="font-bold text-zinc-100 truncate text-sm md:text-base">{item.name}</h3>
+                              <span className="text-red-500 font-black text-xs">{item.price}</span>
                             </div>
                           </div>
-                          <div className="flex gap-2">
-                             <button onClick={() => { setIsAddingNew(false); setEditingItem(item); setIsModalOpen(true); }} className="bg-zinc-800 hover:bg-zinc-700 px-6 py-2.5 rounded-xl text-[10px] font-black uppercase">EDIT</button>
-                             <button onClick={() => handleDelete(item.id, item.name)} className="px-4 text-zinc-600 hover:text-red-600 transition-colors"><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/><path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/></svg></button>
+                          <div className="flex items-center gap-2">
+                             <button onClick={() => { setIsAddingNew(false); setEditingItem(item); setIsModalOpen(true); }} className="bg-zinc-800 px-4 md:px-6 py-2.5 rounded-xl text-[10px] font-black uppercase shrink-0 hover:bg-zinc-700">EDIT</button>
+                             <button onClick={() => handleDelete(item.id, item.name)} className="hidden sm:block p-2 text-zinc-600 hover:text-red-600 transition-colors">🗑️</button>
                           </div>
                         </div>
                       ))}
@@ -216,38 +238,38 @@ export default function AdminDashboard() {
               </section>
             )}
 
-            {/* VIEW: HOME LANDING PAGE (RESTORED) */}
+            {/* VIEW: HOME LANDING PAGE */}
             {view === "website" && (
               <div className="max-w-2xl">
-                <h1 className="text-4xl font-black mb-10 italic uppercase tracking-tighter">Home Landing Page</h1>
-                <form onSubmit={handleUpdateWebsite} className="space-y-8 bg-zinc-900/50 p-8 rounded-[40px] border border-zinc-800">
+                <h1 className="text-3xl md:text-4xl font-black mb-10 italic uppercase">Home Landing Page</h1>
+                <form onSubmit={handleUpdateWebsite} className="space-y-8 bg-zinc-900/50 p-6 md:p-10 rounded-[40px] border border-zinc-800 shadow-2xl">
                   <div className="space-y-4">
                     <label className="text-[10px] font-black uppercase text-zinc-500">Hero Main Title</label>
-                    <input className="w-full bg-zinc-800 p-4 rounded-2xl font-bold" value={siteContent.heroTitle} onChange={(e) => setSiteContent({...siteContent, heroTitle: e.target.value})} />
+                    <input className="w-full bg-zinc-800 p-4 rounded-xl font-bold text-sm" value={siteContent.heroTitle} onChange={(e) => setSiteContent({...siteContent, heroTitle: e.target.value})} />
                     
                     <label className="text-[10px] font-black uppercase text-zinc-500">Hero Subtitle</label>
-                    <textarea className="w-full bg-zinc-800 p-4 rounded-2xl text-sm h-32 leading-relaxed" value={siteContent.heroSubtitle} onChange={(e) => setSiteContent({...siteContent, heroSubtitle: e.target.value})} />
+                    <textarea className="w-full bg-zinc-800 p-4 rounded-xl text-sm h-28" value={siteContent.heroSubtitle} onChange={(e) => setSiteContent({...siteContent, heroSubtitle: e.target.value})} />
                   </div>
 
-                  <div className="p-6 bg-zinc-800/80 rounded-3xl border border-zinc-700 space-y-4">
+                  <div className="p-6 bg-zinc-800 rounded-3xl border border-zinc-700 space-y-4">
                     <div className="flex justify-between items-center">
                       <p className="text-[10px] font-black text-blue-500 uppercase tracking-widest">Announcement Pop-Up</p>
                       <button type="button" onClick={() => setSiteContent({...siteContent, showModal: !siteContent.showModal})} className={`px-4 py-1.5 rounded-full text-[9px] font-black uppercase transition-colors ${siteContent.showModal ? "bg-green-600 text-white" : "bg-zinc-600 text-zinc-300"}`}>
-                        {siteContent.showModal ? "Modal Active" : "Modal Hidden"}
+                        {siteContent.showModal ? "Visible" : "Hidden"}
                       </button>
                     </div>
-                    <input className="w-full bg-zinc-900 p-4 rounded-xl text-sm italic" value={siteContent.LaunchModal} onChange={(e) => setSiteContent({...siteContent, LaunchModal: e.target.value})} placeholder="Message in the pop-up..." />
+                    <input className="w-full bg-zinc-900 p-4 rounded-xl text-xs italic" value={siteContent.LaunchModal} onChange={(e) => setSiteContent({...siteContent, LaunchModal: e.target.value})} />
                   </div>
 
                   <div className="space-y-4">
-                    <label className="text-[10px] font-black uppercase text-zinc-500">Hero Backdrop Image</label>
-                    <div className="flex items-center gap-6 p-4 bg-zinc-900 rounded-2xl border border-zinc-800">
-                        <img src={siteContent.heroImageURL} className="w-24 h-24 rounded-xl object-cover" />
+                    <label className="text-[10px] font-black uppercase text-zinc-500">Hero Image</label>
+                    <div className="flex items-center gap-6 p-4 bg-zinc-900 rounded-2xl">
+                        <img src={siteContent.heroImageURL} className="w-16 h-16 rounded-lg object-cover" />
                         <input type="file" onChange={(e) => handleImageUpload(e, "hero")} className="text-[10px]" />
                     </div>
                   </div>
 
-                  <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 p-5 rounded-2xl font-black uppercase text-xs tracking-widest transition-all">Update Landing Page</button>
+                  <button type="submit" className="w-full bg-blue-600 p-5 rounded-2xl font-black uppercase text-xs tracking-widest">Update Landing Page</button>
                 </form>
               </div>
             )}
@@ -255,68 +277,56 @@ export default function AdminDashboard() {
             {/* VIEW: MENU LAYOUT PAGE */}
             {view === "menu-page" && (
               <div className="max-w-2xl">
-                <h1 className="text-4xl font-black mb-10 italic uppercase tracking-tighter">Menu Header & BYO</h1>
-                <form onSubmit={handleUpdateWebsite} className="space-y-8 bg-zinc-900/50 p-8 rounded-[40px] border border-zinc-800">
+                <h1 className="text-3xl md:text-4xl font-black mb-10 italic uppercase">Menu Header & BYO</h1>
+                <form onSubmit={handleUpdateWebsite} className="space-y-8 bg-zinc-900/50 p-6 md:p-10 rounded-[40px] border border-zinc-800 shadow-2xl">
                   <div className="space-y-4">
                     <label className="text-[10px] font-black uppercase text-zinc-500">Menu Headline</label>
-                    <input className="w-full bg-zinc-800 p-4 rounded-2xl font-bold text-yellow-500" value={menuPageContent.menuTitle} onChange={(e) => setMenuPageContent({...menuPageContent, menuTitle: e.target.value})} />
-                    <textarea className="w-full bg-zinc-800 p-4 rounded-2xl text-sm h-20" value={menuPageContent.menuSubtitle} onChange={(e) => setMenuPageContent({...menuPageContent, menuSubtitle: e.target.value})} placeholder="Intro text..." />
+                    <input className="w-full bg-zinc-800 p-4 rounded-xl font-bold text-yellow-500" value={menuPageContent.menuTitle} onChange={(e) => setMenuPageContent({...menuPageContent, menuTitle: e.target.value})} />
+                    <textarea className="w-full bg-zinc-800 p-4 rounded-xl text-xs h-20" value={menuPageContent.menuSubtitle} onChange={(e) => setMenuPageContent({...menuPageContent, menuSubtitle: e.target.value})} />
                   </div>
 
-                  <div className="p-8 bg-zinc-800 rounded-[32px] border border-zinc-700 space-y-5">
-                    <p className="text-[10px] font-black text-yellow-500 uppercase tracking-widest">Build Your Own Section</p>
-                    <input className="w-full bg-zinc-900 p-4 rounded-xl font-bold" value={menuPageContent.buildTitle} onChange={(e) => setMenuPageContent({...menuPageContent, buildTitle: e.target.value})} placeholder="BYO Section Title" />
-                    <input className="w-full bg-zinc-900 p-4 rounded-xl text-xs" value={menuPageContent.buildPricing} onChange={(e) => setMenuPageContent({...menuPageContent, buildPricing: e.target.value})} placeholder="Pricing list..." />
-                    <input className="w-full bg-zinc-900 p-4 rounded-xl text-xs" value={menuPageContent.buildPricingSubtext} onChange={(e) => setMenuPageContent({...menuPageContent, buildPricingSubtext: e.target.value})} placeholder="Topping pricing subtext..." />
-                    <input className="w-full bg-zinc-900 p-4 rounded-xl text-xs text-red-500 italic font-bold" value={menuPageContent.BuildPricingRedText} onChange={(e) => setMenuPageContent({...menuPageContent, BuildPricingRedText: e.target.value})} placeholder="Red warning text (GF)..." />
+                  <div className="p-6 bg-zinc-800 rounded-3xl border border-zinc-700 space-y-4">
+                    <p className="text-[10px] font-black text-yellow-500 uppercase tracking-widest">Build Your Own Card</p>
+                    <input className="w-full bg-zinc-900 p-4 rounded-xl font-bold text-sm" value={menuPageContent.buildTitle} onChange={(e) => setMenuPageContent({...menuPageContent, buildTitle: e.target.value})} />
+                    <input className="w-full bg-zinc-900 p-4 rounded-xl text-xs" value={menuPageContent.buildPricing} onChange={(e) => setMenuPageContent({...menuPageContent, buildPricing: e.target.value})} />
+                    <input className="w-full bg-zinc-900 p-4 rounded-xl text-[10px] text-red-500 italic font-bold" value={menuPageContent.BuildPricingRedText} onChange={(e) => setMenuPageContent({...menuPageContent, BuildPricingRedText: e.target.value})} />
                   </div>
 
-                  <div className="space-y-4">
-                    <label className="text-[10px] font-black uppercase text-zinc-500">Menu Prep Photo</label>
-                    <div className="flex items-center gap-6 p-4 bg-zinc-900 rounded-2xl border border-zinc-800">
-                        <img src={menuPageContent.menuImageURL} className="w-32 h-20 rounded-xl object-cover" />
-                        <input type="file" onChange={(e) => handleImageUpload(e, "menu-page")} className="text-[10px]" />
-                    </div>
-                  </div>
-
-                  <button type="submit" className="w-full bg-yellow-600 hover:bg-yellow-700 p-5 rounded-2xl font-black uppercase text-xs tracking-widest transition-all">Save Menu Layout</button>
+                  <button type="submit" className="w-full bg-yellow-600 p-5 rounded-2xl font-black uppercase text-xs tracking-widest">Save Menu Layout</button>
                 </form>
               </div>
             )}
-          </>
+          </div>
         )}
 
-        {showSavedMessage && <div className="fixed bottom-12 right-12 bg-green-600 text-white px-10 py-5 rounded-3xl font-black uppercase text-xs shadow-2xl animate-bounce">✅ Changes Published</div>}
+        {showSavedMessage && <div className="fixed bottom-6 right-6 md:bottom-12 md:right-12 bg-green-600 text-white px-10 py-5 rounded-3xl font-black uppercase text-[10px] shadow-2xl animate-bounce z-50">✅ Live</div>}
 
         {/* MODAL: ADD/EDIT MENU ITEM */}
         {isModalOpen && (
           <div className="fixed inset-0 bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 z-[100]">
-            <form onSubmit={handleSaveMenu} className="bg-zinc-900 border border-zinc-800 p-10 rounded-[40px] w-full max-w-lg space-y-6 max-h-[90vh] overflow-y-auto shadow-2xl">
-              <h2 className="text-2xl font-black italic uppercase tracking-tighter">{isAddingNew ? "New Menu Item" : "Update Item"}</h2>
+            <form onSubmit={handleSaveMenu} className="bg-zinc-900 border border-zinc-800 p-8 md:p-10 rounded-[40px] w-full max-w-lg space-y-5 max-h-[90vh] overflow-y-auto">
+              <h2 className="text-2xl font-black italic uppercase tracking-tighter">{isAddingNew ? "New Item" : "Edit Item"}</h2>
               <div className="space-y-4">
-                <input required className="w-full bg-zinc-800 p-4 rounded-2xl font-bold outline-none" value={editingItem?.name || ""} onChange={(e) => setEditingItem({ ...editingItem, name: e.target.value })} placeholder="Item Name" />
-                <input required className="w-full bg-zinc-800 p-4 rounded-2xl font-bold text-red-500 outline-none" value={editingItem?.price || ""} onChange={(e) => setEditingItem({ ...editingItem, price: e.target.value })} placeholder="Price (e.g. $14.99)" />
+                <input required className="w-full bg-zinc-800 p-4 rounded-xl font-bold outline-none" value={editingItem?.name || ""} onChange={(e) => setEditingItem({ ...editingItem, name: e.target.value })} placeholder="Item Name" />
+                <input required className="w-full bg-zinc-800 p-4 rounded-xl font-bold text-red-500 outline-none" value={editingItem?.price || ""} onChange={(e) => setEditingItem({ ...editingItem, price: e.target.value })} placeholder="Price" />
                 
                 {activeCategory === "hoagies" && (
-                  <select required className="w-full bg-zinc-800 p-4 rounded-2xl font-bold text-sm outline-none" value={editingItem?.subcategory || ""} onChange={(e) => setEditingItem({ ...editingItem, subcategory: e.target.value })}>
+                  <select required className="w-full bg-zinc-800 p-4 rounded-xl font-bold text-sm" value={editingItem?.subcategory || ""} onChange={(e) => setEditingItem({ ...editingItem, subcategory: e.target.value })}>
                     <option value="Hoagies">Hoagies</option>
                     <option value="Pasta">Pasta</option>
                   </select>
                 )}
 
-                <textarea className="w-full bg-zinc-800 p-4 rounded-2xl text-sm h-24 outline-none resize-none" value={editingItem?.desc || ""} onChange={(e) => setEditingItem({ ...editingItem, desc: e.target.value })} placeholder="Ingredients / Description..." />
+                <textarea className="w-full bg-zinc-800 p-4 rounded-xl text-sm h-24 outline-none resize-none" value={editingItem?.desc || ""} onChange={(e) => setEditingItem({ ...editingItem, desc: e.target.value })} placeholder="Description..." />
                 
-                <div className="flex items-center gap-4 bg-zinc-950 p-4 rounded-2xl border border-zinc-800">
-                    <img src={editingItem?.imageURL || ""} className="w-12 h-12 rounded-lg object-cover bg-zinc-800" />
-                    <div className="flex-1">
-                        <p className="text-[9px] font-black text-zinc-500 uppercase mb-1">Upload Photo</p>
-                        <input type="file" onChange={(e) => handleImageUpload(e, "menu-item")} className="text-[10px] file:bg-zinc-800 file:text-white file:border-0 file:rounded-md file:px-2 file:py-1" />
-                    </div>
+                <div className="flex items-center gap-4 bg-zinc-950 p-4 rounded-xl border border-zinc-800">
+                    <img src={editingItem?.imageURL || ""} className="w-12 h-12 rounded-lg object-cover" />
+                    <input type="file" onChange={(e) => handleImageUpload(e, "menu-item")} className="text-[10px]" />
                 </div>
               </div>
               <div className="flex gap-3 pt-4">
-                <button type="submit" disabled={uploading} className="flex-1 bg-red-600 hover:bg-red-700 disabled:bg-zinc-700 p-4 rounded-2xl font-black uppercase text-xs transition-all">Confirm</button>
-                <button type="button" onClick={() => setIsModalOpen(false)} className="flex-1 bg-zinc-800 p-4 rounded-2xl font-black uppercase text-xs transition-all">Cancel</button>
+                <button type="submit" disabled={uploading} className="flex-1 bg-red-600 p-4 rounded-xl font-black uppercase text-xs transition-all">Confirm</button>
+                <button type="button" onClick={() => setIsModalOpen(false)} className="flex-1 bg-zinc-800 p-4 rounded-xl font-black uppercase text-xs">Cancel</button>
               </div>
             </form>
           </div>
