@@ -147,6 +147,18 @@ export default function Menu() {
         </div>
       </div>
 
+      {/* Sticky Order Now Button */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <a
+          href="https://uppercrust.hungerrush.com/Order/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest px-10 py-4 rounded-full transition shadow-2xl shadow-red-900/50 hover:scale-105 transform duration-300 block"
+        >
+          Order Now
+        </a>
+      </div>
+
       {/* HEADER SECTION - NOW DYNAMIC */}
       <div className="max-w-6xl mx-auto text-center mb-16 mt-8">
         <h2 className="text-5xl font-black text-yellow-500 mb-4 tracking-tighter uppercase italic">
@@ -163,17 +175,6 @@ export default function Menu() {
             alt="Upper Crust Prep"
             className="pizza-line-image w-full h-[300px] md:h-[450px] object-cover"
           />
-        </div>
-
-        <div className="flex justify-center">
-          <a
-            href="https://uppercrust.hungerrush.com/Order/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest px-10 py-4 rounded-full transition shadow-lg shadow-red-900/20"
-          >
-            Order Now
-          </a>
         </div>
       </div>
 
@@ -211,19 +212,13 @@ export default function Menu() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {menuData.signature_pizzas?.filter(onlyAvailable).map((pizza: any) => (
             <div key={pizza.id} className="bg-zinc-900/50 rounded-[32px] overflow-hidden border border-zinc-800 group transition-all duration-500 hover:border-yellow-500/40">
-              {pizza.imageURL ? (
+              {pizza.imageURL && (
                 <div className="relative overflow-hidden h-52">
                   <img
                     src={pizza.imageURL}
                     alt={pizza.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                </div>
-              ) : (
-                <div className="h-52 bg-zinc-800/50 flex items-center justify-center">
-                  <span className="text-zinc-600 font-black italic tracking-widest text-xs uppercase">
-                    Image Coming Soon
-                  </span>
                 </div>
               )}
 
@@ -232,7 +227,6 @@ export default function Menu() {
                 <p className="text-zinc-400 text-xs leading-relaxed mb-6 min-h-[48px] italic">{pizza.desc}</p>
                 <div className="flex items-center justify-between">
                   <span className="text-white font-black">{pizza.price}</span>
-                  <a href="https://uppercrust.hungerrush.com/Order/" target="_blank" className="bg-red-600 hover:bg-red-700 text-white text-[9px] font-black uppercase px-5 py-2.5 rounded-full transition-colors">Order</a>
                 </div>
               </div>
             </div>

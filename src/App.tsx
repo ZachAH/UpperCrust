@@ -1,5 +1,5 @@
-import { Suspense, lazy } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Suspense, lazy, useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 
 // Lazy-loaded pages for code splitting
@@ -16,6 +16,13 @@ const Login = lazy(() => import("./pages/login")); // Ensure it is lowercase 'l'
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 
 function App() {
+  const { pathname } = useLocation();
+
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
     <>
       <Header />
