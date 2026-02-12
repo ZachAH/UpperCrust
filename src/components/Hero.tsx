@@ -49,7 +49,7 @@ export default function Hero() {
 
   // Data mapping from your Firestore screenshot
   const heroImage = content?.heroImageURL;
-  const heroTitle = content?.heroTitle || "Proudly serving Milwaukee’s best hand-tossed pizza — and so much more.";
+  const heroTitle = content?.heroTitle || "Proudly serving Milwaukee's best hand-tossed pizza — and so much more.";
   const heroSubtitle = content?.heroSubtitle || "Conveniently located where Milwaukee meets Whitefish Bay and Shorewood...";
   
   // Modal Data
@@ -94,7 +94,7 @@ export default function Hero() {
         <div
           className={`relative z-10 text-center text-white px-4 max-w-2xl transition-opacity duration-1000 ${loading ? 'opacity-0' : 'opacity-100 animate-fadeInUp'}`}
         >
-          <h2 className="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight leading-tight uppercase italic">
+          <h2 className="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight leading-tight uppercase italic whitespace-pre-line">
             {heroTitle}
           </h2>
 

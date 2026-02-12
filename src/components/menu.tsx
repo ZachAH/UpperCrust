@@ -47,6 +47,11 @@ export default function Menu() {
   const [pageContent, setPageContent] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
+  // --- SCROLL TO TOP ON MOUNT ---
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // --- FETCH DATA ---
   useEffect(() => {
     const fetchAllData = async () => {
@@ -164,7 +169,7 @@ export default function Menu() {
         <h2 className="text-5xl font-black text-yellow-500 mb-4 tracking-tighter uppercase italic">
           {pageContent?.menuTitle || "Our Menu"}
         </h2>
-        <p className="text-gray-400 text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-gray-400 text-lg mb-10 max-w-2xl mx-auto leading-relaxed whitespace-pre-line">
           {pageContent?.menuSubtitle}
         </p>
 
@@ -186,17 +191,17 @@ export default function Menu() {
           <h3 className="text-3xl font-black text-yellow-500 mb-4 uppercase italic">
             {pageContent?.buildTitle || "Build Your Own Pie"}
           </h3>
-          <p className="text-gray-400 mb-8 max-w-md mx-auto">
+          <p className="text-gray-400 mb-8 max-w-md mx-auto whitespace-pre-line">
             {pageContent?.buildSubtitle}
           </p>
           <div className="space-y-2">
-            <p className="text-xl font-black text-white">
+            <p className="text-xl font-black text-white whitespace-pre-line">
               {pageContent?.buildPricing}
             </p>
-            <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest">
+            <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest whitespace-pre-line">
               {pageContent?.buildPricingSubtext}
             </p>
-            <p className="text-red-500 text-xs font-black italic mt-2">
+            <p className="text-red-500 text-xs font-black italic mt-2 whitespace-pre-line">
               {pageContent?.BuildPricingRedText}
             </p>
           </div>

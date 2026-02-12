@@ -132,6 +132,13 @@ export default function AdminDashboard() {
     } catch (error) { alert("Failed to update content."); }
   };
 
+  // Prevent Enter key from submitting form when in textarea
+  const handleFormKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
+    if (e.key === 'Enter' && (e.target as HTMLElement).tagName === 'TEXTAREA') {
+      e.stopPropagation();
+    }
+  };
+
   const handleDelete = async (id: string, name: string) => {
     if (window.confirm(`Delete "${name}"?`)) {
       await deleteDoc(doc(db, "menu", activeCategory, "items", id));
@@ -246,7 +253,7 @@ export default function AdminDashboard() {
             {view === "menu-page" && (
               <div className="max-w-2xl text-left">
                 <h1 className="text-4xl font-black mb-10 italic uppercase text-yellow-500">Menu Header & BYO</h1>
-                <form onSubmit={handleUpdateGlobalContent} className="space-y-8 bg-zinc-900/50 p-6 md:p-10 rounded-[40px] border border-zinc-800">
+                <form onSubmit={handleUpdateGlobalContent} onKeyDown={handleFormKeyDown} className="space-y-8 bg-zinc-900/50 p-6 md:p-10 rounded-[40px] border border-zinc-800">
                   <div className="space-y-4">
                     <label className="text-[10px] font-black uppercase text-zinc-500">Menu Header Image</label>
                     <div className="flex flex-col md:flex-row items-center gap-6 p-4 bg-zinc-900 rounded-2xl border border-zinc-800">
@@ -260,15 +267,50 @@ export default function AdminDashboard() {
 
                   <div className="space-y-4">
                     <label className="text-[10px] font-black uppercase text-zinc-500">Menu Headline</label>
-                    <input className="w-full bg-zinc-800 p-4 rounded-xl font-bold text-yellow-500 outline-none" value={menuPageContent.menuTitle} onChange={(e) => setMenuPageContent({ ...menuPageContent, menuTitle: e.target.value })} />
-                    <textarea className="w-full bg-zinc-800 p-4 rounded-xl text-xs h-20 outline-none" value={menuPageContent.menuSubtitle} onChange={(e) => setMenuPageContent({ ...menuPageContent, menuSubtitle: e.target.value })} />
+                    <textarea 
+                      className="w-full bg-zinc-800 p-4 rounded-xl font-bold text-yellow-500 outline-none h-16" 
+                      value={menuPageContent.menuTitle} 
+                      onChange={(e) => setMenuPageContent({ ...menuPageContent, menuTitle: e.target.value })} 
+                    />
+                    <textarea 
+                      className="w-full bg-zinc-800 p-4 rounded-xl text-xs h-20 outline-none" 
+                      value={menuPageContent.menuSubtitle} 
+                      onChange={(e) => setMenuPageContent({ ...menuPageContent, menuSubtitle: e.target.value })} 
+                    />
                   </div>
 
                   <div className="p-6 bg-zinc-800 rounded-3xl border border-zinc-700 space-y-4">
                     <p className="text-[10px] font-black text-yellow-500 uppercase tracking-widest italic">Build Your Own Section</p>
-                    <input className="w-full bg-zinc-900 p-4 rounded-xl font-bold text-sm" value={menuPageContent.buildTitle} onChange={(e) => setMenuPageContent({ ...menuPageContent, buildTitle: e.target.value })} placeholder="BYO Title" />
-                    <input className="w-full bg-zinc-900 p-4 rounded-xl text-xs" value={menuPageContent.buildPricing} onChange={(e) => setMenuPageContent({ ...menuPageContent, buildPricing: e.target.value })} placeholder="Pricing (Black)" />
-                    <input className="w-full bg-zinc-900 p-4 rounded-xl text-xs text-red-500 font-bold" value={menuPageContent.BuildPricingRedText} onChange={(e) => setMenuPageContent({ ...menuPageContent, BuildPricingRedText: e.target.value })} placeholder="Subtext (Red)" />
+                    <textarea 
+                      className="w-full bg-zinc-900 p-4 rounded-xl font-bold text-sm h-16 outline-none" 
+                      value={menuPageContent.buildTitle} 
+                      onChange={(e) => setMenuPageContent({ ...menuPageContent, buildTitle: e.target.value })} 
+                      placeholder="BYO Title" 
+                    />
+                    <textarea 
+                      className="w-full bg-zinc-900 p-4 rounded-xl text-xs h-20 outline-none" 
+                      value={menuPageContent.buildSubtitle} 
+                      onChange={(e) => setMenuPageContent({ ...menuPageContent, buildSubtitle: e.target.value })} 
+                      placeholder="BYO Subtitle"
+                    />
+                    <textarea 
+                      className="w-full bg-zinc-900 p-4 rounded-xl text-xs h-16 outline-none" 
+                      value={menuPageContent.buildPricing} 
+                      onChange={(e) => setMenuPageContent({ ...menuPageContent, buildPricing: e.target.value })} 
+                      placeholder="Pricing (Black)" 
+                    />
+                    <textarea 
+                      className="w-full bg-zinc-900 p-4 rounded-xl text-xs h-16 outline-none" 
+                      value={menuPageContent.buildPricingSubtext} 
+                      onChange={(e) => setMenuPageContent({ ...menuPageContent, buildPricingSubtext: e.target.value })} 
+                      placeholder="Pricing Subtext (Gray)" 
+                    />
+                    <textarea 
+                      className="w-full bg-zinc-900 p-4 rounded-xl text-xs text-red-500 font-bold h-16 outline-none" 
+                      value={menuPageContent.BuildPricingRedText} 
+                      onChange={(e) => setMenuPageContent({ ...menuPageContent, BuildPricingRedText: e.target.value })} 
+                      placeholder="Subtext (Red)" 
+                    />
                   </div>
 
                   <button type="submit" className="w-full bg-yellow-600 p-5 rounded-2xl font-black uppercase text-xs tracking-widest">Save Menu Layout</button>
@@ -276,16 +318,24 @@ export default function AdminDashboard() {
               </div>
             )}
 
-            {/* (Keep views for website and hours as they are...) */}
+            {/* VIEW: WEBSITE */}
             {view === "website" && (
               <div className="max-w-2xl text-left">
                 <h1 className="text-4xl font-black mb-10 italic uppercase text-blue-500">Home Landing Page</h1>
-                <form onSubmit={handleUpdateGlobalContent} className="space-y-8 bg-zinc-900/50 p-6 md:p-10 rounded-[40px] border border-zinc-800">
+                <form onSubmit={handleUpdateGlobalContent} onKeyDown={handleFormKeyDown} className="space-y-8 bg-zinc-900/50 p-6 md:p-10 rounded-[40px] border border-zinc-800">
                   <div className="space-y-4">
                     <label className="text-[10px] font-black uppercase text-zinc-500">Hero Main Title</label>
-                    <input className="w-full bg-zinc-800 p-4 rounded-xl font-bold text-sm" value={siteContent.heroTitle} onChange={(e) => setSiteContent({ ...siteContent, heroTitle: e.target.value })} />
+                    <textarea 
+                      className="w-full bg-zinc-800 p-4 rounded-xl font-bold text-sm h-16 outline-none" 
+                      value={siteContent.heroTitle} 
+                      onChange={(e) => setSiteContent({ ...siteContent, heroTitle: e.target.value })} 
+                    />
                     <label className="text-[10px] font-black uppercase text-zinc-500">Hero Subtitle</label>
-                    <textarea className="w-full bg-zinc-800 p-4 rounded-xl text-sm h-28" value={siteContent.heroSubtitle} onChange={(e) => setSiteContent({ ...siteContent, heroSubtitle: e.target.value })} />
+                    <textarea 
+                      className="w-full bg-zinc-800 p-4 rounded-xl text-sm h-28" 
+                      value={siteContent.heroSubtitle} 
+                      onChange={(e) => setSiteContent({ ...siteContent, heroSubtitle: e.target.value })} 
+                    />
                   </div>
                   <div className="p-6 bg-zinc-800 rounded-3xl space-y-4">
                     <div className="flex justify-between items-center text-left">
@@ -294,7 +344,11 @@ export default function AdminDashboard() {
                         {siteContent.showModal ? "Active" : "Hidden"}
                       </button>
                     </div>
-                    <input className="w-full bg-zinc-900 p-4 rounded-xl text-xs italic" value={siteContent.LaunchModal} onChange={(e) => setSiteContent({ ...siteContent, LaunchModal: e.target.value })} />
+                    <textarea 
+                      className="w-full bg-zinc-900 p-4 rounded-xl text-xs italic h-20" 
+                      value={siteContent.LaunchModal} 
+                      onChange={(e) => setSiteContent({ ...siteContent, LaunchModal: e.target.value })} 
+                    />
                     <div className="flex items-center gap-4 bg-zinc-950 p-4 rounded-xl">
                       <img src={siteContent.LaunchModalImage || ""} className="w-12 h-12 rounded object-cover" />
                       <input type="file" onChange={(e) => handleImageUpload(e, "launch-modal")} className="text-[10px]" />
@@ -305,13 +359,18 @@ export default function AdminDashboard() {
               </div>
             )}
 
+            {/* VIEW: HOURS */}
             {view === "hours" && (
               <div className="max-w-2xl text-left">
                 <h1 className="text-4xl font-black mb-10 italic uppercase text-orange-500">Store Hours</h1>
-                <form onSubmit={handleUpdateGlobalContent} className="space-y-8 bg-zinc-900/50 p-6 md:p-10 rounded-[40px] border border-zinc-800">
+                <form onSubmit={handleUpdateGlobalContent} onKeyDown={handleFormKeyDown} className="space-y-8 bg-zinc-900/50 p-6 md:p-10 rounded-[40px] border border-zinc-800">
                   <div>
                     <label className="text-[10px] font-black uppercase text-zinc-500">Heading Text</label>
-                    <textarea className="w-full bg-zinc-800 p-4 rounded-xl text-sm h-20 mt-2" value={hoursContent.heading} onChange={(e) => setHoursContent({ ...hoursContent, heading: e.target.value })} />
+                    <textarea 
+                      className="w-full bg-zinc-800 p-4 rounded-xl text-sm h-20 mt-2" 
+                      value={hoursContent.heading} 
+                      onChange={(e) => setHoursContent({ ...hoursContent, heading: e.target.value })} 
+                    />
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {Object.keys(hoursContent).filter(k => k !== 'heading').map((day) => (
@@ -338,7 +397,12 @@ export default function AdminDashboard() {
               <div className="space-y-4">
                 <input required className="w-full bg-zinc-800 p-4 rounded-xl font-bold outline-none" value={editingItem?.name || ""} onChange={(e) => setEditingItem({ ...editingItem, name: e.target.value })} placeholder="Item Name" />
                 <input required className="w-full bg-zinc-800 p-4 rounded-xl font-bold text-red-500 outline-none" value={editingItem?.price || ""} onChange={(e) => setEditingItem({ ...editingItem, price: e.target.value })} placeholder="Price" />
-                <textarea className="w-full bg-zinc-800 p-4 rounded-xl text-sm h-24 outline-none resize-none" value={editingItem?.desc || ""} onChange={(e) => setEditingItem({ ...editingItem, desc: e.target.value })} placeholder="Description..." />
+                <textarea 
+                  className="w-full bg-zinc-800 p-4 rounded-xl text-sm h-24 outline-none resize-none" 
+                  value={editingItem?.desc || ""} 
+                  onChange={(e) => setEditingItem({ ...editingItem, desc: e.target.value })} 
+                  placeholder="Description..." 
+                />
                 <div className="flex items-center gap-4 bg-zinc-950 p-4 rounded-xl border border-zinc-800">
                   <img src={editingItem?.imageURL || ""} className="w-12 h-12 rounded-lg object-cover" />
                   <input type="file" onChange={(e) => handleImageUpload(e, "menu-item")} className="text-[10px] w-full" />
