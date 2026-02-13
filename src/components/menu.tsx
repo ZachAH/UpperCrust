@@ -31,7 +31,7 @@ const MenuListItem = ({ item }: { item: any }) => (
       </div>
 
       {item.desc && (
-        <p className="text-zinc-500 text-[10px] md:text-[11px] leading-snug mt-1 max-w-[95%] italic line-clamp-2">
+        <p className="text-zinc-500 text-[10px] md:text-[11px] leading-snug mt-1 max-w-[95%] italic whitespace-pre-line">
           {item.desc}
         </p>
       )}
@@ -188,7 +188,7 @@ export default function Menu() {
 
         {/* BUILD YOUR OWN PIE - NOW DYNAMIC */}
         <div className="bg-zinc-900/30 rounded-[40px] p-10 mb-16 border border-zinc-800 backdrop-blur-sm text-center">
-          <h3 className="text-3xl font-black text-yellow-500 mb-4 uppercase italic">
+          <h3 className="text-3xl font-black text-yellow-500 mb-4 uppercase italic whitespace-pre-line">
             {pageContent?.buildTitle || "Build Your Own Pie"}
           </h3>
           <p className="text-gray-400 mb-8 max-w-md mx-auto whitespace-pre-line">
@@ -229,7 +229,7 @@ export default function Menu() {
 
               <div className="p-7">
                 <h4 className="text-xl font-black text-yellow-400 mb-2 uppercase tracking-tight">{pizza.name}</h4>
-                <p className="text-zinc-400 text-xs leading-relaxed mb-6 min-h-[48px] italic">{pizza.desc}</p>
+                <p className="text-zinc-400 text-xs leading-relaxed mb-6 min-h-[48px] italic whitespace-pre-line">{pizza.desc}</p>
                 <div className="flex items-center justify-between">
                   <span className="text-white font-black">{pizza.price}</span>
                 </div>

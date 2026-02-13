@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase"; 
 
-// Updated to match the exact keys shown in your Firestore screenshot
+// Updated to match the exact keys with Sunday first
 interface HoursData {
+  "Sunday::": string;
   "Monday::": string;
   "Tuesday::": string;
   "Wednesday::": string;
   Thursday: string;
   Friday: string;
   Saturday: string;
-  "Sunday::": string;
   heading: string;
 }
 
@@ -40,15 +40,15 @@ export default function StoreHours() {
 
   if (loading) return <div className="py-20 text-center text-white bg-black">Loading...</div>;
 
-  // Mapping the clean UI labels to the specific Firestore keys
+  // Mapping the clean UI labels to the specific Firestore keys - NOW STARTING WITH SUNDAY
   const daysMap = [
-    { label: "Monday", key: "Monday" as keyof HoursData },
-    { label: "Tuesday", key: "Tuesday" as keyof HoursData },
-    { label: "Wednesday", key: "Wednesday" as keyof HoursData },
-    { label: "Thursday", key: "Thursday" as keyof HoursData },
-    { label: "Friday", key: "Friday" as keyof HoursData },
-    { label: "Saturday", key: "Saturday" as keyof HoursData },
-    { label: "Sunday", key: "Sunday" as keyof HoursData },
+    { label: "Sunday", key: "Sunday:" as keyof HoursData },
+    { label: "Monday", key: "Monday:" as keyof HoursData },
+    { label: "Tuesday", key: "Tuesday:" as keyof HoursData },
+    { label: "Wednesday", key: "Wednesday:" as keyof HoursData },
+    { label: "Thursday", key: "Thursday:" as keyof HoursData },
+    { label: "Friday", key: "Friday:" as keyof HoursData },
+    { label: "Saturday", key: "Saturday:" as keyof HoursData },
   ];
 
   return (
@@ -59,7 +59,7 @@ export default function StoreHours() {
         </h2>
 
         <p className="text-gray-300 mb-12 text-xl max-w-3xl mx-auto">
-          {hoursData?.heading || "Stop in and enjoy Milwaukee’s favorite local pizza — dine-in, carryout, or delivery."}
+          {hoursData?.heading || "Stop in and enjoy Milwaukee's favorite local pizza — dine-in, carryout, or delivery."}
         </p>
 
         <div className="grid md:grid-cols-2 gap-8">
