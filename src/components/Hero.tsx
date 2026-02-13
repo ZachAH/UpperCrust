@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../lib/firebase.ts"; 
+import { db } from "../lib/firebase.ts";
 import LaunchModal from "./LaunchModal";
 
 export default function Hero() {
@@ -51,21 +51,21 @@ export default function Hero() {
   const heroImage = content?.heroImageURL;
   const heroTitle = content?.heroTitle || "Proudly serving Milwaukee's best hand-tossed pizza — and so much more.";
   const heroSubtitle = content?.heroSubtitle || "Conveniently located where Milwaukee meets Whitefish Bay and Shorewood...";
-  
+
   // Modal Data
   const modalMessage = content?.LaunchModal || "";
   const modalImage = content?.LaunchModalImage; // <--- NEW: Pulls the image field from Firestore
-  
+
   // Logic: Use showModal from Admin, default to true if missing
-  const isModalVisible = content?.showModal !== false; 
+  const isModalVisible = content?.showModal !== false;
 
   return (
     <>
       {/* Dynamic Launch Modal - Now passing the imageUrl prop */}
       {isModalVisible && modalMessage && (
-        <LaunchModal 
-          message={modalMessage} 
-          imageUrl={modalImage} 
+        <LaunchModal
+          message={modalMessage}
+          imageUrl={modalImage}
         />
       )}
 
@@ -83,7 +83,7 @@ export default function Hero() {
         className="relative h-screen flex items-center justify-center bg-cover bg-center overflow-hidden hero-bg"
         style={{
           backgroundImage: `url('${heroImage}')`,
-          backgroundPositionY: `${offset}px`, 
+          backgroundPositionY: `${offset}px`,
         }}
       >
         {/* Overlays */}
@@ -124,20 +124,27 @@ export default function Hero() {
 
         {/* Google Maps Card */}
         <div className="hidden md:block absolute bottom-6 right-6 z-10 bg-white/95 rounded-2xl shadow-2xl overflow-hidden w-64 lg:w-80 border border-zinc-200 p-1">
-          <iframe
-            title="Upper Crust Pizza Location"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2913.840748117967!2d-87.90685762343944!3d43.107849187515025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8805193910f8a927%3A0x6336e1b8b2e5927c!2sUpper%20Crust%20Pizza!5e0!3m2!1sen!2sus!4v1715800000000!5m2!1sen!2sus"
-            width="100%"
-            height="160"
-            style={{ border: 0, borderRadius: '12px' }}
-            allowFullScreen
-            loading="lazy"
-          ></iframe>
+          <a 
+            href="https://www.google.com/maps/search/?api=1&query=Upper+Crust+Pizza+249+E+Hampton+Ave+Whitefish+Bay+WI"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block cursor-pointer hover:opacity-90 transition-opacity"
+          >
+            <iframe
+              title="Upper Crust Pizza Location"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2913.840748117967!2d-87.90685762343944!3d43.107849187515025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8805193910f8a927%3A0x6336e1b8b2e5927c!2sUpper%20Crust%20Pizza!5e0!3m2!1sen!2sus!4v1715800000000!5m2!1sen!2sus"
+              width="100%"
+              height="160"
+              style={{ border: 0, borderRadius: '12px', pointerEvents: 'none' }}
+              allowFullScreen
+              loading="lazy"
+            ></iframe>
 
-          <div className="p-3 text-gray-800 text-center">
-            <p className="font-black text-sm uppercase italic">Upper Crust Pizza</p>
-            <p className="text-[10px] font-bold text-gray-500">249 E Hampton Ave, Whitefish Bay, WI</p>
-          </div>
+            <div className="p-3 text-gray-800 text-center">
+              <p className="font-black text-sm uppercase italic">Upper Crust Pizza</p>
+              <p className="text-[10px] font-bold text-gray-500">249 E Hampton Ave, Whitefish Bay, WI</p>
+            </div>
+          </a>
         </div>
       </section>
     </>
