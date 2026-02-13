@@ -1,6 +1,6 @@
 import { useEffect, useState, type FormEvent, type ChangeEvent } from "react";
-import { collection, getDocs, query, orderBy, doc, updateDoc, deleteDoc, addDoc, getDoc } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { collection, getDocs, query, orderBy, doc, updateDoc, deleteDoc, addDoc, getDoc, deleteField } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 import { db, auth, storage } from "../lib/firebase";
 import { signOut } from "firebase/auth";
 
@@ -73,8 +73,8 @@ export default function AdminDashboard() {
     } catch (error) { console.error(error); } finally { setLoading(false); }
   };
 
-  useEffect(() => { 
-    fetchData(); 
+  useEffect(() => {
+    fetchData();
     setIsSidebarOpen(false); // Close mobile sidebar when switching views
   }, [activeCategory, view]);
 
@@ -111,10 +111,10 @@ export default function AdminDashboard() {
     e.preventDefault();
     try {
       if (isAddingNew) {
-        await addDoc(collection(db, "menu", activeCategory, "items"), { 
-          ...editingItem, 
-          order: items.length + 1, 
-          available: editingItem.available ?? true 
+        await addDoc(collection(db, "menu", activeCategory, "items"), {
+          ...editingItem,
+          order: items.length + 1,
+          available: editingItem.available ?? true
         });
       } else {
         await updateDoc(doc(db, "menu", activeCategory, "items", editingItem.id), editingItem);
@@ -150,6 +150,43 @@ export default function AdminDashboard() {
     }
   };
 
+  const handleDeleteImage = async (item: any) => {
+    if (!item.imageURL) return;
+
+    if (!window.confirm("Remove this image permanently?")) return;
+
+    try {
+      // 1️ Get storage path from URL
+      const decodedURL = decodeURIComponent(item.imageURL);
+      const pathStart = decodedURL.indexOf("/o/") + 3;
+      const pathEnd = decodedURL.indexOf("?");
+      const filePath = decodedURL.substring(pathStart, pathEnd);
+
+      // 2️ Delete from Storage
+      const fileRef = ref(storage, filePath);
+      await deleteObject(fileRef);
+
+      // 3️ Remove from Firestore
+      await updateDoc(
+        doc(db, "menu", activeCategory, "items", item.id),
+        { imageURL: deleteField() }
+      );
+
+      // 4️ Update UI instantly
+      setItems(prev =>
+        prev.map(i =>
+          i.id === item.id ? { ...i, imageURL: "" } : i
+        )
+      );
+
+      triggerNotify();
+    } catch (error) {
+      console.error(error);
+      alert("Failed to fully remove image.");
+    }
+  };
+
+
   const triggerNotify = () => { setShowSavedMessage(true); setTimeout(() => setShowSavedMessage(false), 3000); };
 
   return (
@@ -157,8 +194,8 @@ export default function AdminDashboard() {
       {/* MOBILE HEADER - REMOVED NAVIGATION ITEMS */}
       <header className="lg:hidden fixed top-0 left-0 right-0 z-[60] bg-zinc-950 border-b border-zinc-800 px-6 py-4 flex items-center justify-between">
         <h1 className="text-xl font-black uppercase italic tracking-tighter text-red-600">UC Admin</h1>
-        <button 
-          onClick={() => setIsSidebarOpen(!isSidebarOpen)} 
+        <button
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
           className="bg-zinc-800 active:scale-95 transition-all px-4 py-2 rounded-xl font-bold text-[10px] uppercase tracking-widest border border-zinc-700 shadow-lg"
         >
           {isSidebarOpen ? "Close" : "Menu"}
@@ -181,14 +218,14 @@ export default function AdminDashboard() {
             <button onClick={() => setView("website")} className={`w-full p-4 rounded-2xl font-black uppercase text-[10px] tracking-widest transition-all text-left ${view === "website" ? "bg-blue-600 shadow-lg shadow-blue-900/20" : "bg-zinc-900 hover:bg-zinc-800 border border-zinc-800"}`}>Website Content</button>
             <button onClick={() => setView("hours")} className={`w-full p-4 rounded-2xl font-black uppercase text-[10px] tracking-widest transition-all text-left ${view === "hours" ? "bg-orange-600 shadow-lg shadow-orange-900/20" : "bg-zinc-900 hover:bg-zinc-800 border border-zinc-800"}`}>Store Hours</button>
           </nav>
-          
+
           <button onClick={() => signOut(auth)} className="bg-zinc-900 border border-zinc-800 hover:bg-red-950/30 hover:border-red-900/50 w-full p-4 rounded-2xl font-black uppercase text-[10px] tracking-widest transition-all text-zinc-400 mt-auto">Sign Out</button>
         </aside>
 
         {/* Backdrop for mobile sidebar - prevents clicks on content while menu is open */}
         {isSidebarOpen && (
-          <div 
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[65] lg:hidden" 
+          <div
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[65] lg:hidden"
             onClick={() => setIsSidebarOpen(false)}
           />
         )}
@@ -222,12 +259,27 @@ export default function AdminDashboard() {
                     {items.map((item) => (
                       <div key={item.id} className="bg-zinc-950 border border-zinc-900 p-5 md:p-6 rounded-[32px] flex flex-col md:flex-row items-start md:items-center gap-6 transition-all hover:bg-zinc-900/30">
                         <div className="relative shrink-0">
+                          {item.imageURL && (
+                            <button
+                              onClick={() => handleDeleteImage(item)}
+                              className="absolute -top-2 -right-2 bg-red-600 hover:bg-red-700 text-white text-[8px] font-black px-2 py-1 rounded-full shadow-lg transition-all active:scale-90"
+                            >
+                              ✕
+                            </button>
+                          )}
+
                           {item.imageURL ? (
-                            <img src={item.imageURL} className="w-20 h-20 md:w-24 md:h-24 rounded-2xl object-cover border border-zinc-800 shadow-xl" />
+                            <img
+                              src={item.imageURL}
+                              className="w-20 h-20 md:w-24 md:h-24 rounded-2xl object-cover border border-zinc-800 shadow-xl"
+                            />
                           ) : (
-                            <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-[10px] font-black text-zinc-600 uppercase">No Img</div>
+                            <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-[10px] font-black text-zinc-600 uppercase">
+                              No Img
+                            </div>
                           )}
                         </div>
+
 
                         <div className="flex-1 min-w-0">
                           <h3 className="font-black text-yellow-400 uppercase tracking-tight text-xl mb-1">{item.name}</h3>
@@ -317,7 +369,7 @@ export default function AdminDashboard() {
                         </button>
                       </div>
                       <textarea className="w-full bg-zinc-900 border border-zinc-800 p-5 rounded-2xl text-xs italic h-32 outline-none" value={siteContent.LaunchModal} onChange={(e) => setSiteContent({ ...siteContent, LaunchModal: e.target.value })} placeholder="Enter promo text..." />
-                      
+
                       <div className="flex flex-col sm:flex-row items-center gap-6 bg-zinc-900 p-6 rounded-2xl border border-zinc-800">
                         <div className="w-24 h-24 rounded-2xl bg-zinc-800 overflow-hidden shrink-0 border border-zinc-700 shadow-inner">
                           {siteContent.LaunchModalImage && <img src={siteContent.LaunchModalImage} className="w-full h-full object-cover" />}
@@ -366,23 +418,23 @@ export default function AdminDashboard() {
                 <h2 className="text-3xl font-black italic uppercase tracking-tighter">{isAddingNew ? "New Item" : "Edit Item"}</h2>
                 <button type="button" onClick={() => setIsModalOpen(false)} className="bg-zinc-900 w-10 h-10 rounded-full flex items-center justify-center text-zinc-500 border border-zinc-800">×</button>
               </div>
-              
+
               <div className="space-y-5">
                 <div className="space-y-1">
                   <label className="text-[9px] font-black text-zinc-500 uppercase ml-1">Dish Name</label>
                   <input required className="w-full bg-zinc-900 border border-zinc-800 p-4 rounded-xl font-bold outline-none focus:border-red-600 text-[16px]" value={editingItem?.name || ""} onChange={(e) => setEditingItem({ ...editingItem, name: e.target.value })} />
                 </div>
-                
+
                 <div className="space-y-1">
                   <label className="text-[9px] font-black text-zinc-500 uppercase ml-1">Price</label>
                   <input required className="w-full bg-zinc-900 border border-zinc-800 p-4 rounded-xl font-bold text-red-500 outline-none text-[16px]" value={editingItem?.price || ""} onChange={(e) => setEditingItem({ ...editingItem, price: e.target.value })} />
                 </div>
-                
+
                 <div className="space-y-1 relative">
                   <label className="text-[9px] font-black text-zinc-500 uppercase ml-1">Description</label>
-                  <textarea 
-                    className="w-full bg-zinc-900 border border-zinc-800 p-4 rounded-xl text-sm h-32 outline-none resize-none focus:border-red-600" 
-                    value={editingItem?.desc || ""} 
+                  <textarea
+                    className="w-full bg-zinc-900 border border-zinc-800 p-4 rounded-xl text-sm h-32 outline-none resize-none focus:border-red-600"
+                    value={editingItem?.desc || ""}
                     onChange={(e) => {
                       if (e.target.value.length <= 185) setEditingItem({ ...editingItem, desc: e.target.value });
                     }}
@@ -390,7 +442,7 @@ export default function AdminDashboard() {
                   />
                   <span className="absolute bottom-3 right-4 text-[9px] font-black text-zinc-600">{editingItem?.desc?.length || 0}/185</span>
                 </div>
-                
+
                 <div className="space-y-2">
                   <label className="text-[9px] font-black text-zinc-500 uppercase ml-1">Image Asset</label>
                   <div className="flex items-center gap-6 bg-zinc-900 border border-zinc-800 p-5 rounded-2xl">

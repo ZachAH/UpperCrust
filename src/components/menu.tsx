@@ -274,7 +274,7 @@ export default function Menu() {
 
       {/* BURGERS & CHICKEN */}
       <div id="burgers" className="max-w-5xl mx-auto mb-24 scroll-mt-28">
-        <h4 className="text-3xl font-black text-yellow-400 text-center mb-12 uppercase italic tracking-tighter">Burgers & Chicken</h4>
+        <h4 className="text-3xl font-black text-yellow-400 text-center mb-12 uppercase italic tracking-tighter">Burgers & Chicken Sandwhiches</h4>
         <div className="grid sm:grid-cols-2 gap-x-16 gap-y-12 px-4">
           <div>
             <h4 className="text-sm font-black text-zinc-600 mb-6 uppercase tracking-[0.2em] border-l-2 border-red-600 pl-4">Burgers</h4>

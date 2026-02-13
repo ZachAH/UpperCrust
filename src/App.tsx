@@ -1,18 +1,14 @@
 import { Suspense, lazy, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/Header";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 // Lazy-loaded pages for code splitting
 const Home = lazy(() => import("./pages/Home"));
 const MenuPage = lazy(() => import("./pages/MenuPage"));
 const HoursPage = lazy(() => import("./pages/HoursPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
-// Components (Functional wrappers)
-import { ProtectedRoute } from "./components/ProtectedRoute";
-
-// Pages (Lazy loaded for performance)
-const Login = lazy(() => import("./pages/login")); // Ensure it is lowercase 'l'
-
+const Login = lazy(() => import("./pages/login")); 
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 
 function App() {
@@ -23,9 +19,13 @@ function App() {
     window.scrollTo(0, 0);
   }, [pathname]);
 
+  // Check if we are on the admin page to hide the public header
+  const isAdminPage = pathname.startsWith("/admin");
+
   return (
     <>
-      <Header />
+      {/* Only show the public header if we ARE NOT on the admin dashboard */}
+      {!isAdminPage && <Header />}
 
       <Suspense fallback={<div className="page-loader">Loading...</div>}>
         <Routes>
