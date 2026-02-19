@@ -388,15 +388,27 @@ export default function AdminDashboard() {
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div className="space-y-2">
                           <label className="text-[10px] font-black uppercase text-white tracking-widest ml-1">Pricing</label>
-                          <input className="w-full bg-zinc-900 border border-zinc-800 p-4 rounded-xl font-bold text-sm outline-none text-white" value={menuPageContent.buildPricing} onChange={(e) => setMenuPageContent({ ...menuPageContent, buildPricing: e.target.value })} />
+                          <textarea
+                            className="w-full bg-zinc-900 border border-zinc-800 p-4 rounded-xl font-bold text-sm h-24 outline-none text-white resize-none"
+                            value={menuPageContent.buildPricing}
+                            onChange={(e) => setMenuPageContent({ ...menuPageContent, buildPricing: e.target.value })}
+                          />
                         </div>
                         <div className="space-y-2">
                           <label className="text-[10px] font-black uppercase text-white tracking-widest ml-1">Subtext</label>
-                          <input className="w-full bg-zinc-900 border border-zinc-800 p-4 rounded-xl text-sm outline-none text-white" value={menuPageContent.buildPricingSubtext} onChange={(e) => setMenuPageContent({ ...menuPageContent, buildPricingSubtext: e.target.value })} />
+                          <textarea
+                            className="w-full bg-zinc-900 border border-zinc-800 p-4 rounded-xl text-sm h-24 outline-none text-white resize-none"
+                            value={menuPageContent.buildPricingSubtext}
+                            onChange={(e) => setMenuPageContent({ ...menuPageContent, buildPricingSubtext: e.target.value })}
+                          />
                         </div>
                         <div className="space-y-2">
                           <label className="text-[10px] font-black uppercase text-white tracking-widest ml-1">Red Accent</label>
-                          <input className="w-full bg-zinc-900 border border-zinc-800 p-4 rounded-xl font-bold text-red-500 text-sm outline-none" value={menuPageContent.BuildPricingRedText} onChange={(e) => setMenuPageContent({ ...menuPageContent, BuildPricingRedText: e.target.value })} />
+                          <textarea
+                            className="w-full bg-zinc-900 border border-zinc-800 p-4 rounded-xl font-bold text-red-500 text-sm h-24 outline-none resize-none"
+                            value={menuPageContent.BuildPricingRedText}
+                            onChange={(e) => setMenuPageContent({ ...menuPageContent, BuildPricingRedText: e.target.value })}
+                          />
                         </div>
                       </div>
                     </div>
