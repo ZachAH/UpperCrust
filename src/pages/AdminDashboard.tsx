@@ -283,7 +283,7 @@ export default function AdminDashboard() {
                   <div className="mb-6 md:mb-10">
                     <h1 className="text-3xl md:text-4xl lg:text-5xl font-black mb-4 md:mb-6 italic uppercase text-red-600 tracking-tighter">Menu Items</h1>
                     <p className="text-xs md:text-sm text-white uppercase tracking-wider mb-6 md:mb-8">Update Your Digital Inventory</p>
-                    
+
                     {/* Add New Button */}
                     <button onClick={() => { setIsAddingNew(true); setEditingItem({}); setIsModalOpen(true); }} className="w-full md:w-auto px-6 md:px-10 py-4 md:py-5 bg-red-600 hover:bg-red-700 rounded-2xl md:rounded-3xl font-black uppercase text-xs md:text-sm tracking-wider shadow-xl transition-all">
                       + Add New Item
@@ -342,11 +342,11 @@ export default function AdminDashboard() {
                 <div className="max-w-4xl animate-fadeInUp">
                   <h1 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 md:mb-10 italic uppercase text-yellow-600 tracking-tighter">Menu Page Layout</h1>
                   <form onSubmit={handleUpdateGlobalContent} onKeyDown={handleFormKeyDown} className="space-y-6 md:space-y-8 bg-zinc-900/20 p-4 md:p-6 lg:p-10 rounded-3xl md:rounded-[48px] border border-zinc-900">
-                    
+
                     {/* Hero Section */}
                     <div className="p-4 md:p-6 lg:p-8 bg-zinc-950 rounded-2xl md:rounded-[32px] border border-zinc-800 space-y-4 md:space-y-6">
                       <p className="text-[10px] font-black text-yellow-400 uppercase tracking-[0.2em]">Menu Hero</p>
-                      
+
                       <div className="space-y-2">
                         <label className="text-[10px] font-black uppercase text-white tracking-widest ml-1">Main Title</label>
                         <textarea className="w-full bg-zinc-900 border border-zinc-800 p-4 md:p-5 rounded-xl md:rounded-2xl font-bold text-sm h-20 md:h-24 outline-none text-white" value={menuPageContent.menuTitle} onChange={(e) => setMenuPageContent({ ...menuPageContent, menuTitle: e.target.value })} />
@@ -374,7 +374,7 @@ export default function AdminDashboard() {
                     {/* Build Section */}
                     <div className="p-4 md:p-6 lg:p-8 bg-zinc-950 rounded-2xl md:rounded-[32px] border border-zinc-800 space-y-4 md:space-y-6">
                       <p className="text-[10px] font-black text-yellow-400 uppercase tracking-[0.2em]">Build Your Own</p>
-                      
+
                       <div className="space-y-2">
                         <label className="text-[10px] font-black uppercase text-white tracking-widest ml-1">Build Title</label>
                         <textarea className="w-full bg-zinc-900 border border-zinc-800 p-4 md:p-5 rounded-xl md:rounded-2xl font-bold text-sm h-20 md:h-24 outline-none text-white" value={menuPageContent.buildTitle} onChange={(e) => setMenuPageContent({ ...menuPageContent, buildTitle: e.target.value })} />
@@ -449,21 +449,54 @@ export default function AdminDashboard() {
               {/* VIEW: HOURS */}
               {view === "hours" && (
                 <div className="max-w-4xl animate-fadeInUp">
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 md:mb-10 italic uppercase text-orange-500 tracking-tighter">Store Hours</h1>
-                  <form onSubmit={handleUpdateGlobalContent} onKeyDown={handleFormKeyDown} className="space-y-6 md:space-y-8 bg-zinc-900/20 p-4 md:p-6 lg:p-10 rounded-3xl md:rounded-[48px] border border-zinc-900">
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 md:mb-10 italic uppercase text-orange-500 tracking-tighter">
+                    Store Hours
+                  </h1>
+                  <form
+                    onSubmit={handleUpdateGlobalContent}
+                    onKeyDown={handleFormKeyDown}
+                    className="space-y-6 md:space-y-8 bg-zinc-900/20 p-4 md:p-6 lg:p-10 rounded-3xl md:rounded-[48px] border border-zinc-900"
+                  >
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase text-white tracking-widest ml-1">Section Heading</label>
-                      <textarea className="w-full bg-zinc-950 border border-zinc-800 p-4 md:p-5 rounded-xl md:rounded-2xl text-sm h-20 md:h-24 outline-none focus:border-orange-500/50 transition-colors text-white" value={hoursContent.heading} onChange={(e) => setHoursContent({ ...hoursContent, heading: e.target.value })} />
+                      <label className="text-[10px] font-black uppercase text-white tracking-widest ml-1">
+                        Section Heading
+                      </label>
+                      <textarea
+                        className="w-full bg-zinc-950 border border-zinc-800 p-4 md:p-5 rounded-xl md:rounded-2xl text-sm h-20 md:h-24 outline-none focus:border-orange-500/50 transition-colors text-white"
+                        value={hoursContent.heading}
+                        onChange={(e) => setHoursContent({ ...hoursContent, heading: e.target.value })}
+                      />
                     </div>
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {Object.keys(hoursContent).filter(k => k !== 'heading').map((day) => (
+                      {[
+                        "Sunday:",
+                        "Monday:",
+                        "Tuesday:",
+                        "Wednesday:",
+                        "Thursday:",
+                        "Friday:",
+                        "Saturday:",
+                      ].map((day) => (
                         <div key={day} className="space-y-2">
-                          <label className="text-[10px] font-black uppercase text-white tracking-widest ml-1">{day.replace(":", "")}</label>
-                          <input className="w-full bg-zinc-950 border border-zinc-800 p-4 md:p-5 rounded-xl font-bold text-sm outline-none focus:border-zinc-700 text-white" value={hoursContent[day]} onChange={(e) => setHoursContent({ ...hoursContent, [day]: e.target.value })} />
+                          <label className="text-[10px] font-black uppercase text-white tracking-widest ml-1">
+                            {day.replace(":", "")}
+                          </label>
+                          <input
+                            className="w-full bg-zinc-950 border border-zinc-800 p-4 md:p-5 rounded-xl font-bold text-sm outline-none focus:border-orange-500/50 transition-colors text-white"
+                            value={hoursContent[day] || ""}
+                            onChange={(e) => setHoursContent({ ...hoursContent, [day]: e.target.value })}
+                          />
                         </div>
                       ))}
                     </div>
-                    <button type="submit" className="w-full bg-orange-600 hover:bg-orange-700 p-5 md:p-6 rounded-2xl md:rounded-3xl font-black uppercase text-xs tracking-[0.2em] shadow-xl transition-all">Update Live Hours</button>
+
+                    <button
+                      type="submit"
+                      className="w-full bg-orange-600 hover:bg-orange-700 p-5 md:p-6 rounded-2xl md:rounded-3xl font-black uppercase text-xs tracking-[0.2em] shadow-xl transition-all"
+                    >
+                      Update Live Hours
+                    </button>
                   </form>
                 </div>
               )}
@@ -513,9 +546,9 @@ export default function AdminDashboard() {
                     <div className="flex-1 space-y-2">
                       <input type="file" onChange={(e) => handleImageUpload(e, "menu-item")} className="text-[10px] w-full file:bg-zinc-800 file:text-white file:rounded-lg file:border-0 file:px-4 file:py-2" />
                       {editingItem?.imageURL && (
-                        <button 
-                          type="button" 
-                          onClick={handleDeleteImage} 
+                        <button
+                          type="button"
+                          onClick={handleDeleteImage}
                           className="w-full px-4 py-2 bg-red-900/30 hover:bg-red-900/50 rounded-lg text-red-400 text-[10px] font-black uppercase border border-red-900/50 transition-all"
                         >
                           🗑️ Delete Image
