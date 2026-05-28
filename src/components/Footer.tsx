@@ -1,30 +1,22 @@
 export default function Footer() {
   return (
-    <footer className="bg-black text-gray-400 text-center py-6">
-      <p>© 2025 Upper Crust Pizza. All rights reserved.</p>
-
-      <div className="mt-2 flex flex-col items-center gap-2">
+    <footer className="border-t border-zinc-800/80 bg-zinc-950 text-zinc-500">
+      <div className="max-w-6xl mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-1.5 text-center sm:text-left text-xs">
+        <p className="text-zinc-400">
+          © 2026 Upper Crust Pizza. All rights reserved.
+        </p>
         <p>
-          Website by{" "}
+          Made by{" "}
           <a
-            href="https://zhowellportfolio.netlify.app/"
+            href="https://zachhowell.dev/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-yellow-400 hover:text-yellow-300 font-semibold transition"
+            className="text-zinc-400 hover:text-yellow-500 transition-colors"
           >
-            Zach Howell
-          </a>{" "}
-          🍕
+            ZH Web Solutions
+          </a>
         </p>
-
-        <div className="flex gap-4 items-center justify-center mt-1">
-          <img loading="lazy" src="/react.png" alt="React" className="w-7 h-7" />
-          <img loading="lazy" src="/vite.svg" alt="Vite" className="w-7 h-7" />
-          <img loading="lazy" src="/tailwind.png" alt="TailwindCSS" className="w-7 h-7" />
-        </div>
       </div>
     </footer>
-
-
   );
 }
