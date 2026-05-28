@@ -1,6 +1,7 @@
 import { Suspense, lazy, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/Header";
+import PageSEO from "./components/PageSEO";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
 // Lazy-loaded pages for code splitting
@@ -24,6 +25,7 @@ function App() {
 
   return (
     <>
+      <PageSEO />
       {/* Only show the public header if we ARE NOT on the admin dashboard */}
       {!isAdminPage && <Header />}
 

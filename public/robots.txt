@@ -1,6 +1,11 @@
-# Allow all search engines to crawl everything
+# Upper Crust Pizza — https://uppercrustpizza.netlify.app
+
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /login
 
-# Sitemap file
+# AI / LLM context (see https://llmstxt.org)
+# https://uppercrustpizza.netlify.app/llms.txt
+
 Sitemap: https://uppercrustpizza.netlify.app/sitemap.xml

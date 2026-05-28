@@ -1,0 +1,47 @@
+# Upper Crust Pizza
+
+> Family-owned pizzeria in Whitefish Bay, Wisconsin since 1987. Hand-tossed Wisconsin-style pizza with online ordering, pickup, and local delivery to the Milwaukee North Shore and surrounding neighborhoods.
+
+## Business
+
+- **Name:** Upper Crust Pizza
+- **Type:** Local pizza restaurant (dine-in neighborhood spot, pickup, delivery)
+- **Address:** 249 East Hampton Avenue, Whitefish Bay, WI 53217, United States
+- **Phone:** (414) 332-6820
+- **Website:** https://uppercrustpizza.netlify.app/
+- **Online ordering:** https://uppercrust.hungerrush.com/Order/
+
+## Service area (delivery & pickup)
+
+Upper Crust Pizza primarily serves customers in and near Whitefish Bay, including:
+
+- Whitefish Bay, WI
+- Shorewood, WI
+- Fox Point, WI
+- Bayside, WI
+- Glendale, WI
+- River Hills, WI
+- Milwaukee North Shore / East Side areas
+
+Delivery availability may vary by address; customers should confirm at checkout when ordering online.
+
+## Site pages
+
+- [Home](https://uppercrustpizza.netlify.app/): Overview, reviews, order CTA
+- [Menu](https://uppercrustpizza.netlify.app/menu): Pizzas, appetizers, and more
+- [Hours & location](https://uppercrustpizza.netlify.app/hours): Store hours and address
+- [Contact](https://uppercrustpizza.netlify.app/contact): Phone and visit information
+
+## Ordering
+
+Place orders online at https://uppercrust.hungerrush.com/Order/ for the fastest pickup or delivery experience.
+
+## Contact
+
+For questions about hours, catering, or your order, call **(414) 332-6820** or visit the restaurant at the address above during business hours.
+
+## Crawling
+
+- Sitemap: https://uppercrustpizza.netlify.app/sitemap.xml
+- Robots: https://uppercrustpizza.netlify.app/robots.txt
+- Staff-only paths (`/login`, `/admin`) are not intended for public indexing.
